@@ -13,9 +13,9 @@ Please click the green "Clone or download" button, then click "Download ZIP" but
 ### The files for this product and their introduction are as follows
 Name | Description
 -- | --
-Code | Project code
 Datasheet | Datasheet
 Readme.md | Instructions
+Code | Project code
 Tutorial.pdf | User Manual
 Picture | Picture resource
 InstallationPackage | Installation packages required for the project
