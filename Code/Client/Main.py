@@ -647,8 +647,8 @@ class mywindow(QMainWindow,Ui_Client):
         if face_x!=0 and face_y!=0:
             offset_x=float(face_x/400-0.5)*2
             offset_y=float(face_y/300-0.5)*2
-            delta_degree_x = 4.5* offset_x
-            delta_degree_y = -4.5 * offset_y
+            delta_degree_x = 4* offset_x
+            delta_degree_y = -4 * offset_y
             self.servo1=self.servo1+delta_degree_x
             self.servo2=self.servo2+delta_degree_y
             if offset_x > -0.15 and offset_y >-0.15 and offset_x < 0.15 and offset_y <0.15:
