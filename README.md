@@ -10,7 +10,7 @@
 
 	Run following command to download all the files in this repository.
 
-	`git clone https://github.com/Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi.git`
+	`git clone https://github.com/Freenove/Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi.git`
 
 * **Manually download in browser**
 
