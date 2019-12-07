@@ -90,11 +90,12 @@ class Server:
                         self.connection.flush()
                         stream.seek(0)
                         b = stream.read()
-                        lengthBin = struct.pack('L', len(b))
+                        length=len(b)
+                        if length >5120000:
+                            continue
+                        lengthBin = struct.pack('L', length)
                         self.connection.write(lengthBin)
                         self.connection.write(b)
-                        if time.time() - start > 600:
-                            break
                         stream.seek(0)
                         stream.truncate()
                     except :
