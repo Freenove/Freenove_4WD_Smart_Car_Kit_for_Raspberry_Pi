@@ -125,12 +125,12 @@ if __name__ == '__main__':
     print ('Program is starting ... ')
     try:
         while True:
-            print "Chaser animation"
+            print ("Chaser animation")
             led.colorWipe(led.strip, Color(255,0, 0))  # Red wipe
             led.colorWipe(led.strip, Color(0, 255, 0))  # Green wipe
             led.colorWipe(led.strip, Color(0, 0, 255))  # Blue wipe
             led.theaterChaseRainbow(led.strip)
-            print "Rainbow animation"
+            print ("Rainbow animation")
             led.rainbow(led.strip)
             led.rainbowCycle(led.strip)
             led.colorWipe(led.strip, Color(0,0,0),10)

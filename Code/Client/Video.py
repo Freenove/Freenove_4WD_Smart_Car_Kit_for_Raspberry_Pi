@@ -42,18 +42,18 @@ class VideoStreaming:
         return bValid
 
     def face_detect(self,img):
-        if sys.platform.startswith('win'):
+        if sys.platform.startswith('win') or sys.platform.startswith('darwin'):
             gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
             faces = self.face_cascade.detectMultiScale(gray,1.3,5)
             if len(faces)>0 :
                 for (x,y,w,h) in faces:
                     self.face_x=float(x+w/2.0)
                     self.face_y=float(y+h/2.0)
-                    img = cv2.circle(img, (x+w/2,y+h/2), (w+h)/4, (0, 255, 0), 2)
+                    img= cv2.circle(img, (int(self.face_x),int(self.face_y)), int((w+h)/4), (0, 255, 0), 2)
             else:
                 self.face_x=0
                 self.face_y=0
-        cv2.imwrite('video.jpg', img)
+        cv2.imwrite('video.jpg',img)
         
     def streaming(self,ip):
         stream_bytes = b' '
@@ -66,24 +66,25 @@ class VideoStreaming:
         while True:
             try:
                 stream_bytes= self.connection.read(4) 
-                leng=struct.unpack('L', stream_bytes[:4])
+                leng=struct.unpack('<L', stream_bytes[:4])
                 jpg=self.connection.read(leng[0])
                 if self.IsValidImage4Bytes(jpg):
                             image = cv2.imdecode(np.frombuffer(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
                             if self.video_Flag:
                                 self.face_detect(image)
                                 self.video_Flag=False
-            except:
+            except Exception as e:
+                print (e)
                 break
                   
     def sendData(self,s):
         if self.connect_Flag:
-            self.client_socket1.send(s)
+            self.client_socket1.send(s.encode('utf-8'))
 
     def recvData(self):
         data=""
         try:
-            data=self.client_socket1.recv(1024)
+            data=self.client_socket1.recv(1024).decode('utf-8')
         except:
             pass
         return data
@@ -92,9 +93,9 @@ class VideoStreaming:
         try:
             self.client_socket1.connect((ip, 5000))
             self.connect_Flag=True
-            print "Connecttion Successful !"
-        except Exception, e:
-            print "Connect to server Faild!: Server IP is right? Server is opend?"
+            print ("Connecttion Successful !")
+        except Exception as e:
+            print ("Connect to server Faild!: Server IP is right? Server is opend?")
             self.connect_Flag=False
 
 if __name__ == '__main__':

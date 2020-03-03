@@ -5,15 +5,15 @@ import struct
 import time
 import picamera
 import sys,getopt
-from threading import Thread
-from server_ui import Ui_server_ui
-from PyQt4.QtCore import *
 from Thread import *
-from PyQt4 import  QtGui, QtCore
-from PyQt4.QtGui import *
-from PyQt4.QtCore import pyqtSignature
-from PyQt4.QtGui import (QApplication, QMainWindow, QGraphicsScene)
+from threading import Thread
 from server import Server
+from server_ui import Ui_server_ui
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+
 
 class mywindow(QMainWindow,Ui_server_ui):
     
@@ -50,7 +50,7 @@ class mywindow(QMainWindow,Ui_server_ui):
         self.opts,self.args = getopt.getopt(sys.argv[1:],"tn")
         for o,a in self.opts:
             if o in ('-t'):
-                print "Open TCP"
+                print ("Open TCP")
                 self.TCP_Server.StartTcpServer()
                 self.ReadData=Thread(target=self.TCP_Server.readdata)
                 self.SendVideo=Thread(target=self.TCP_Server.sendvideo)
@@ -77,7 +77,7 @@ class mywindow(QMainWindow,Ui_server_ui):
             self.TCP_Server.StopTcpServer()
         except:
             pass
-        print "Close TCP" 
+        print ("Close TCP")
         QCoreApplication.instance().quit()
         os._exit(0)
     def on_pushButton(self):
@@ -85,7 +85,7 @@ class mywindow(QMainWindow,Ui_server_ui):
             self.label.setText("Server On")
             self.Button_Server.setText("Off")
             self.TCP_Server.tcp_Flag = True
-            print "Open TCP"
+            print ("Open TCP")
             self.TCP_Server.StartTcpServer()
             self.SendVideo=Thread(target=self.TCP_Server.sendvideo)
             self.ReadData=Thread(target=self.TCP_Server.readdata)
@@ -106,7 +106,7 @@ class mywindow(QMainWindow,Ui_server_ui):
                 pass
             
             self.TCP_Server.StopTcpServer()
-            print "Close TCP" 
+            print ("Close TCP")
             
 if __name__ == '__main__':
     app = QApplication(sys.argv)

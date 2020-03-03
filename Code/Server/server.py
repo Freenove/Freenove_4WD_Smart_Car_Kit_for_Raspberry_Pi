@@ -39,8 +39,10 @@ class Server:
         self.intervalChar='#'
     def get_interface_ip(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        return socket.inet_ntoa(fcntl.ioctl(s.fileno(), 0x8915, struct.pack('256s',
-                                "wlan0"[:15]))[20:24])
+        return socket.inet_ntoa(fcntl.ioctl(s.fileno(),
+                                            0x8915,
+                                            struct.pack('256s',b'wlan0'[:15])
+                                            )[20:24])
     def StartTcpServer(self):
         HOST=str(self.get_interface_ip())
         self.server_socket1 = socket.socket()
@@ -58,8 +60,8 @@ class Server:
         try:
             self.connection.close()
             self.connection1.close()
-        except Exception ,  e:
-            print '\n'+"No client connection"
+        except Exception as e:
+            print ('\n'+"No client connection")
          
     def Reset(self):
         self.StopTcpServer()
@@ -68,23 +70,24 @@ class Server:
         self.ReadData=Thread(target=self.readdata)
         self.SendVideo.start()
         self.ReadData.start()
-        
+    def send(self,data):
+        self.connection1.send(data.encode('utf-8'))    
     def sendvideo(self):
         try:
             self.connection,self.client_address = self.server_socket.accept()
-            self.connection=self.connection.makefile('rb')
+            self.connection=self.connection.makefile('wb')
         except:
             pass
         self.server_socket.close()
         try:
             with picamera.PiCamera() as camera:
                 camera.resolution = (400,300)      # pi camera resolution
-                camera.framerate = 30               # 15 frames/sec
+                camera.framerate = 15               # 15 frames/sec
                 time.sleep(2)                       # give 2 secs for camera to initilize
                 start = time.time()
                 stream = io.BytesIO()
                 # send jpeg format video stream
-                print "Start transmit ... "
+                print ("Start transmit ... ")
                 for foo in camera.capture_continuous(stream, 'jpeg', use_video_port = True):
                     try:
                         self.connection.flush()
@@ -98,8 +101,9 @@ class Server:
                         self.connection.write(b)
                         stream.seek(0)
                         stream.truncate()
-                    except :
-                        print "End transmit ... " 
+                    except Exception as e:
+                        print(e)
+                        print ("End transmit ... " )
                         break
         except:
             #print "Camera unintall"
@@ -127,14 +131,14 @@ class Server:
     def readdata(self):
             try:
                 self.connection1,self.client_address1 = self.server_socket1.accept()
-                print "Client connection successful !"
+                print ("Client connection successful !")
             except:
-                print "Client connect failed"
+                print ("Client connect failed")
             restCmd=""
             self.server_socket1.close()
             while True:
                 try:
-                    AllData=restCmd+self.connection1.recv(1024)
+                    AllData=restCmd+self.connection1.recv(1024).decode('utf-8')
                 except:
                     if self.tcp_Flag:
                         self.Reset()
@@ -249,7 +253,7 @@ class Server:
                     elif cmd.CMD_POWER in data:
                         ADC_Power=self.adc.recvADC(2)*3
                         try:
-                            self.connection1.send(cmd.CMD_POWER+'#'+str(ADC_Power)+'\n')
+                            self.send(cmd.CMD_POWER+'#'+str(ADC_Power)+'\n')
                         except:
                             pass
             self.StopTcpServer()    
@@ -258,7 +262,7 @@ class Server:
             ADC_Ultrasonic=self.ultrasonic.get_distance()
             if ADC_Ultrasonic==self.ultrasonic.get_distance():
                 try:
-                    self.connection1.send(cmd.CMD_SONIC+"#"+str(ADC_Ultrasonic)+'\n')
+                    self.send(cmd.CMD_SONIC+"#"+str(ADC_Ultrasonic)+'\n')
                 except:
                     self.sonic=False
             self.ultrasonicTimer = threading.Timer(0.13,self.sendUltrasonic)
@@ -268,7 +272,7 @@ class Server:
             ADC_Light1=self.adc.recvADC(0)
             ADC_Light2=self.adc.recvADC(1) 
             try:
-                self.connection1.send(cmd.CMD_LIGHT+'#'+str(ADC_Light1)+'#'+str(ADC_Light2)+'\n')
+                self.send(cmd.CMD_LIGHT+'#'+str(ADC_Light1)+'#'+str(ADC_Light2)+'\n')
             except:
                 self.Light=False
             self.lightTimer = threading.Timer(0.17,self.sendLight)
@@ -292,4 +296,4 @@ class Server:
             else:
                 self.buzzer.run('0')
 if __name__=='__main__':
-    passS
+    pass

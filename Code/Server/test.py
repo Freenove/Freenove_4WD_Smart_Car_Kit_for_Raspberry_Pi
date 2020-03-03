@@ -11,13 +11,13 @@ def test_Led():
         led.ledIndex(0x20,0,0,255)      #blue
         led.ledIndex(0x40,128,0,128)    #purple
         led.ledIndex(0x80,255,255,255)  #white'''
-        print "The LED has been lit, the color is red orange yellow green cyan-blue blue white"
+        print ("The LED has been lit, the color is red orange yellow green cyan-blue blue white")
         time.sleep(3)               #wait 3s
         led.colorWipe(led.strip, Color(0,0,0))  #turn off the light
-        print "\nEnd of program"
+        print ("\nEnd of program")
     except KeyboardInterrupt:
         led.colorWipe(led.strip, Color(0,0,0))  #turn off the light
-        print "\nEnd of program"
+        print ("\nEnd of program")
 
         
         
@@ -26,22 +26,22 @@ PWM=Motor()
 def test_Motor(): 
     try:
         PWM.setMotorModel(1000,1000,1000,1000)       #Forward
-        print "The car is moving forward"
+        print ("The car is moving forward")
         time.sleep(1)
         PWM.setMotorModel(-1000,-1000,-1000,-1000)   #Back
-        print "The car is going backwards"
+        print ("The car is going backwards")
         time.sleep(1)
         PWM.setMotorModel(-1500,-1500,2000,2000)       #Left 
-        print "The car is turning left"
+        print ("The car is turning left")
         time.sleep(1)
         PWM.setMotorModel(2000,2000,-1500,-1500)       #Right 
-        print "The car is turning right"  
+        print ("The car is turning right")  
         time.sleep(1)
         PWM.setMotorModel(0,0,0,0)                   #Stop
-        print "\nEnd of program"
+        print ("\nEnd of program")
     except KeyboardInterrupt:
         PWM.setMotorModel(0,0,0,0)
-        print "\nEnd of program"
+        print ("\nEnd of program")
 
 
 from Ultrasonic import *
@@ -53,7 +53,7 @@ def test_Ultrasonic():
             print ("Obstacle distance is "+str(data)+"CM")
             time.sleep(1)
     except KeyboardInterrupt:
-        print "\nEnd of program"
+        print ("\nEnd of program")
 
 
 from Line_Tracking import *
@@ -61,13 +61,13 @@ def test_Infrared():
     try:
         while True:
             if GPIO.input(IR01)!=True and GPIO.input(IR02)==True and GPIO.input(IR03)!=True:
-                print 'Middle'
+                print ('Middle')
             elif GPIO.input(IR01)!=True and GPIO.input(IR02)!=True and GPIO.input(IR03)==True:
-                print 'Right'
+                print ('Right')
             elif GPIO.input(IR01)==True and GPIO.input(IR02)!=True and GPIO.input(IR03)!=True:
-                print 'Left'
+                print ('Left')
     except KeyboardInterrupt:
-        print "\nEnd of program"
+        print ("\nEnd of program")
 
 
 from servo import *
@@ -90,7 +90,7 @@ def test_Servo():
     except KeyboardInterrupt:
         pwm.setServoPwm('0',90)
         pwm.setServoPwm('1',90)
-        print "\nEnd of program"
+        print ("\nEnd of program")
         
         
 from ADC import *
@@ -105,9 +105,9 @@ def test_Adc():
             Power=adc.recvADC(2)
             print ("The battery voltage is "+str(Power*3)+"V")
             time.sleep(1)
-            print '\n'
+            print ('\n')
     except KeyboardInterrupt:
-        print "\nEnd of program"
+        print ("\nEnd of program")
 
 from Buzzer import *
 buzzer=Buzzer()
@@ -115,21 +115,21 @@ def test_Buzzer():
     try:
         buzzer.run('1')
         time.sleep(1)
-        print "1S"
+        print ("1S")
         time.sleep(1)
-        print "2S"
+        print ("2S")
         time.sleep(1)
-        print "3S"
+        print ("3S")
         buzzer.run('0')
-        print "\nEnd of program"
+        print ("\nEnd of program")
     except KeyboardInterrupt:
         buzzer.run('0')
-        print "\nEnd of program"
+        print ("\nEnd of program")
         
 import cv2
 def test_Camera():
         try:
-            print "\nOpen camera"
+            print ("\nOpen camera")
             capturing_Flag = True
             cap = cv2.VideoCapture(0)
             while(capturing_Flag):
@@ -138,7 +138,7 @@ def test_Camera():
                 cv2.waitKey(5)
             cv2.destroyAllWindows()
         except KeyboardInterrupt:
-                print "\nClose camera"
+                print ("\nClose camera")
                 capturing_Flag = False
         
 # Main program logic follows:
@@ -147,7 +147,7 @@ if __name__ == '__main__':
     print ('Program is starting ... ')
     import sys
     if len(sys.argv)<2:
-        print "Parameter error: Please assign the device"
+        print ("Parameter error: Please assign the device")
         exit() 
     if sys.argv[1] == 'Led':
         test_Led()

@@ -15,12 +15,10 @@ from Command import COMMAND as cmd
 from Thread import *
 from Client_Ui import Ui_Client
 from Video import *
-from PyQt4.QtCore import *
-from PyQt4 import  QtGui, QtCore
-from PyQt4.QtGui import *
-from PyQt4.QtCore import pyqtSignature
-from PyQt4.QtGui import (QApplication, QMainWindow, QGraphicsScene)
-   
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import * 
 class mywindow(QMainWindow,Ui_Client):
     def __init__(self):
         global timer
@@ -147,8 +145,8 @@ class mywindow(QMainWindow,Ui_Client):
         
         self.Window_Min.clicked.connect(self.windowMinimumed)
         self.Window_Close.clicked.connect(self.close)
-        timer = QTimer(self)
-        self.connect(timer, SIGNAL("timeout()"), self.time)
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.time)
     def mousePressEvent(self, event):
         if event.button()==Qt.LeftButton:
             self.m_drag=True
@@ -323,10 +321,10 @@ class mywindow(QMainWindow,Ui_Client):
 
     def on_btn_video(self):
         if self.Btn_Video.text()=='Open Video':
-            timer.start(34)
+            self.timer.start(34)
             self.Btn_Video.setText('Close Video')
         elif self.Btn_Video.text()=='Close Video':
-            timer.stop()
+            self.timer.stop()
             self.Btn_Video.setText('Open Video')
     def on_btn_Up(self):
         self.servo2=self.servo2+10
@@ -490,20 +488,19 @@ class mywindow(QMainWindow,Ui_Client):
     def on_btn_Mode(self,Mode):
         if Mode.text() == "M-Free":
             if Mode.isChecked() == True:
-                timer.start(34)
+                self.timer.start(34)
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'one'+self.endChar)
-                
         if Mode.text() == "M-Light":
             if Mode.isChecked() == True:
-                timer.stop()
+                self.timer.stop()
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'two'+self.endChar)
         if Mode.text() == "M-Sonic":
             if Mode.isChecked() == True:
-                timer.stop()
+                self.timer.stop()
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'three'+self.endChar)    
         if Mode.text() == "M-Line":
             if Mode.isChecked() == True:
-                timer.stop()
+                self.timer.stop()
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'four'+self.endChar)
          
                                   
@@ -515,12 +512,12 @@ class mywindow(QMainWindow,Ui_Client):
                 self.streaming=Thread(target=self.TCP.streaming,args=(self.h,))
                 self.streaming.start()
             except:
-                print 'video error'
+                print ('video error')
             try:
                 self.recv=Thread(target=self.recvmassage)
                 self.recv.start()
             except:
-                print 'recv error'
+                print ('recv error')
             self.Btn_Connect.setText( "Disconnect")
             print ('Server address:'+str(self.h)+'\n')
         elif self.Btn_Connect.text()=="Disconnect":
@@ -535,7 +532,7 @@ class mywindow(QMainWindow,Ui_Client):
 
 
     def close(self):
-        timer.stop()
+        self.timer.stop()
         try:
             stop_thread(self.recv)
             stop_thread(self.streaming)
@@ -623,11 +620,15 @@ class mywindow(QMainWindow,Ui_Client):
                 self.VSlider_Servo2.setValue(self.servo2)
     def time(self):
         self.TCP.video_Flag=False
-        if  self.is_valid_jpg('video.jpg'):
-            self.label_Video.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8('video.jpg')))
-            if self.Btn_Tracking_Faces.text()=="Tracing-Off":
-                    self.find_Face(self.TCP.face_x,self.TCP.face_y)
+        try:
+            if  self.is_valid_jpg('video.jpg'):
+                self.label_Video.setPixmap(QPixmap('video.jpg'))
+                if self.Btn_Tracking_Faces.text()=="Tracing-Off":
+                        self.find_Face(self.TCP.face_x,self.TCP.face_y)
+        except Exception as e:
+            print(e)
         self.TCP.video_Flag=True
+        
             
 if __name__ == '__main__':
     app = QApplication(sys.argv)
