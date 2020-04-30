@@ -129,6 +129,7 @@ class Server:
             pass
         
     def readdata(self):
+        try:
             try:
                 self.connection1,self.client_address1 = self.server_socket1.accept()
                 print ("Client connection successful !")
@@ -143,6 +144,7 @@ class Server:
                     if self.tcp_Flag:
                         self.Reset()
                     break
+                print(AllData)
                 if len(AllData) < 5:
                     restCmd=AllData
                     if restCmd=='' and self.tcp_Flag:
@@ -256,7 +258,9 @@ class Server:
                             self.send(cmd.CMD_POWER+'#'+str(ADC_Power)+'\n')
                         except:
                             pass
-            self.StopTcpServer()    
+        except Exception as e: 
+            print(e)
+        self.StopTcpServer()    
     def sendUltrasonic(self):
         if self.sonic==True:
             ADC_Ultrasonic=self.ultrasonic.get_distance()
