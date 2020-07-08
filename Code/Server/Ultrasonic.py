@@ -3,21 +3,22 @@ from Motor import *
 import RPi.GPIO as GPIO
 from servo import *
 from PCA9685 import PCA9685
-GPIO.setwarnings(False)
-trigger_pin = 27
-echo_pin = 22
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(trigger_pin,GPIO.OUT)
-GPIO.setup(echo_pin,GPIO.IN)
 class Ultrasonic:
+    def __init__(self):
+        GPIO.setwarnings(False)
+        self.trigger_pin = 27
+        self.echo_pin = 22
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.trigger_pin,GPIO.OUT)
+        GPIO.setup(self.echo_pin,GPIO.IN)
     def send_trigger_pulse(self):
-        GPIO.output(trigger_pin,True)
+        GPIO.output(self.trigger_pin,True)
         time.sleep(0.00015)
-        GPIO.output(trigger_pin,False)
+        GPIO.output(self.trigger_pin,False)
 
     def wait_for_echo(self,value,timeout):
         count = timeout
-        while GPIO.input(echo_pin) != value and count>0:
+        while GPIO.input(self.echo_pin) != value and count>0:
             count = count-1
      
     def get_distance(self):

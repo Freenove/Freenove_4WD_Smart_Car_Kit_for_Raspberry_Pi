@@ -488,19 +488,19 @@ class mywindow(QMainWindow,Ui_Client):
     def on_btn_Mode(self,Mode):
         if Mode.text() == "M-Free":
             if Mode.isChecked() == True:
-                self.timer.start(34)
+                #self.timer.start(34)
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'one'+self.endChar)
         if Mode.text() == "M-Light":
             if Mode.isChecked() == True:
-                self.timer.stop()
+                #self.timer.stop()
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'two'+self.endChar)
         if Mode.text() == "M-Sonic":
             if Mode.isChecked() == True:
-                self.timer.stop()
+                #self.timer.stop()
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'three'+self.endChar)    
         if Mode.text() == "M-Line":
             if Mode.isChecked() == True:
-                self.timer.stop()
+                #self.timer.stop()
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'four'+self.endChar)
          
                                   
