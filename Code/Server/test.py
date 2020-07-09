@@ -57,14 +57,15 @@ def test_Ultrasonic():
 
 
 from Line_Tracking import *
+line=Line_Tracking()
 def test_Infrared():
     try:
         while True:
-            if GPIO.input(IR01)!=True and GPIO.input(IR02)==True and GPIO.input(IR03)!=True:
+            if GPIO.input(line.IR01)!=True and GPIO.input(line.IR02)==True and GPIO.input(line.IR03)!=True:
                 print ('Middle')
-            elif GPIO.input(IR01)!=True and GPIO.input(IR02)!=True and GPIO.input(IR03)==True:
+            elif GPIO.input(line.IR01)!=True and GPIO.input(line.IR02)!=True and GPIO.input(line.IR03)==True:
                 print ('Right')
-            elif GPIO.input(IR01)==True and GPIO.input(IR02)!=True and GPIO.input(IR03)!=True:
+            elif GPIO.input(line.IR01)==True and GPIO.input(line.IR02)!=True and GPIO.input(line.IR03)!=True:
                 print ('Left')
     except KeyboardInterrupt:
         print ("\nEnd of program")
