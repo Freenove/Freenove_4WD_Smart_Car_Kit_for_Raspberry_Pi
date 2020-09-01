@@ -126,22 +126,7 @@ def test_Buzzer():
     except KeyboardInterrupt:
         buzzer.run('0')
         print ("\nEnd of program")
-        
-import cv2
-def test_Camera():
-        try:
-            print ("\nOpen camera")
-            capturing_Flag = True
-            cap = cv2.VideoCapture(0)
-            while(capturing_Flag):
-                ret, frame = cap.read()
-                cv2.imshow("Capture", frame)
-                cv2.waitKey(5)
-            cv2.destroyAllWindows()
-        except KeyboardInterrupt:
-                print ("\nClose camera")
-                capturing_Flag = False
-        
+           
 # Main program logic follows:
 if __name__ == '__main__':
 
@@ -163,9 +148,7 @@ if __name__ == '__main__':
     elif sys.argv[1] == 'ADC':   
         test_Adc()  
     elif sys.argv[1] == 'Buzzer':   
-        test_Buzzer() 
-    elif sys.argv[1] == 'Camera':  
-        test_Camera() 
+        test_Buzzer()  
 
         
         
