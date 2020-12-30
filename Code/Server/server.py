@@ -6,7 +6,7 @@ import struct
 import time
 import picamera
 import fcntl
-import  sys
+import sys
 import threading
 from Motor import *
 from servo import *
@@ -31,19 +31,22 @@ class Server:
         self.adc=Adc()
         self.light=Light()
         self.infrared=Line_Tracking()
-        self.tcp_Flag = True
+        self.tcp_Flag=True
         self.sonic=False
         self.Light=False
         self.Mode = 'one'
         self.endChar='\n'
         self.intervalChar='#'
+
     def get_interface_ip(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         return socket.inet_ntoa(fcntl.ioctl(s.fileno(),
                                             0x8915,
                                             struct.pack('256s',b'wlan0'[:15])
                                             )[20:24])
+
     def StartTcpServer(self):
+        self.tcp_Flag=True
         HOST=str(self.get_interface_ip())
         self.server_socket1 = socket.socket()
         self.server_socket1.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEPORT,1)
@@ -55,14 +58,18 @@ class Server:
         self.server_socket.listen(1)
         print('Server address: '+HOST)
         
-        
     def StopTcpServer(self):
+        self.tcp_Flag=False
         try:
             self.connection.close()
             self.connection1.close()
         except Exception as e:
-            print ('\n'+"No client connection")
-         
+            print ("No client connection")
+
+        self.led.colorWipe(led.strip, Color(0,0,0),10)  # clear the leds if they were selected
+        self.servo.setServoPwm('0',90)                  # return the servos to their starting position
+        self.servo.setServoPwm('1',90)
+
     def Reset(self):
         self.StopTcpServer()
         self.StartTcpServer()
@@ -70,8 +77,10 @@ class Server:
         self.ReadData=Thread(target=self.readdata)
         self.SendVideo.start()
         self.ReadData.start()
+
     def send(self,data):
-        self.connection1.send(data.encode('utf-8'))    
+        self.connection1.send(data.encode('utf-8'))
+
     def sendvideo(self):
         try:
             self.connection,self.client_address = self.server_socket.accept()
@@ -81,20 +90,20 @@ class Server:
         self.server_socket.close()
         try:
             with picamera.PiCamera() as camera:
-                camera.resolution = (400,300)      # pi camera resolution
+                camera.resolution = (400,300)       # pi camera resolution
                 camera.framerate = 15               # 15 frames/sec
                 time.sleep(2)                       # give 2 secs for camera to initilize
                 start = time.time()
                 stream = io.BytesIO()
                 # send jpeg format video stream
-                print ("Start transmit ... ")
+                print ("Start video transmit ... ")
                 for foo in camera.capture_continuous(stream, 'jpeg', use_video_port = True):
                     try:
                         self.connection.flush()
                         stream.seek(0)
                         b = stream.read()
                         length=len(b)
-                        if length >5120000:
+                        if length > 5120000:
                             continue
                         lengthBin = struct.pack('L', length)
                         self.connection.write(lengthBin)
@@ -103,7 +112,7 @@ class Server:
                         stream.truncate()
                     except Exception as e:
                         print(e)
-                        print ("End transmit ... " )
+                        print ("End video transmit ... " )
                         break
         except:
             #print "Camera unintall"
@@ -132,17 +141,16 @@ class Server:
         try:
             try:
                 self.connection1,self.client_address1 = self.server_socket1.accept()
-                print ("Client connection successful !")
+                print ("Client connection successful!")
             except:
-                print ("Client connect failed")
+                print ("Client connect failed!")
             restCmd=""
             self.server_socket1.close()
             while True:
                 try:
                     AllData=restCmd+self.connection1.recv(1024).decode('utf-8')
                 except:
-                    if self.tcp_Flag:
-                        self.Reset()
+                    self.Reset()
                     break
                 print(AllData)
                 if len(AllData) < 5:
@@ -260,7 +268,8 @@ class Server:
                             pass
         except Exception as e: 
             print(e)
-        self.StopTcpServer()    
+        self.StopTcpServer()
+
     def sendUltrasonic(self):
         if self.sonic==True:
             ADC_Ultrasonic=self.ultrasonic.get_distance()
@@ -271,6 +280,7 @@ class Server:
                     self.sonic=False
             self.ultrasonicTimer = threading.Timer(0.13,self.sendUltrasonic)
             self.ultrasonicTimer.start()
+
     def sendLight(self):
         if self.Light==True:
             ADC_Light1=self.adc.recvADC(0)
@@ -281,6 +291,7 @@ class Server:
                 self.Light=False
             self.lightTimer = threading.Timer(0.17,self.sendLight)
             self.lightTimer.start()
+
     def Power(self):
         while True:
             ADC_Power=self.adc.recvADC(2)*3
@@ -299,5 +310,8 @@ class Server:
                     time.sleep(0.1)
             else:
                 self.buzzer.run('0')
+
+
 if __name__=='__main__':
-    pass
+    print("This file isn't meant to be invoked on the cli")
+    print("Please run 'sudo python main.py' instead.")
