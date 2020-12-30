@@ -19,10 +19,12 @@ class mywindow(QMainWindow,Ui_server_ui):
     
     def __init__(self):
         self.user_ui=True
+        self.start_tcp=False
         self.TCP_Server=Server()
         self.parseOpt()
 
         if self.user_ui:
+            self.app = QApplication(sys.argv)
             super(mywindow,self).__init__()
             self.setupUi(self)
             self.m_DragPosition=self.pos()
@@ -125,9 +127,8 @@ class mywindow(QMainWindow,Ui_server_ui):
 if __name__ == '__main__':
     myshow=mywindow()
     if myshow.user_ui:
-        app = QApplication(sys.argv)
-        myshow.show();   
-        sys.exit(app.exec_())
+        myshow.show()
+        sys.exit(myshow.app.exec_())
     else:
         try:
             while(True):
