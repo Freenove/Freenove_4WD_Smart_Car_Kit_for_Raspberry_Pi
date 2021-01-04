@@ -27,9 +27,18 @@ class Servo:
 
 # Main program logic follows:
 if __name__ == '__main__':
+    print("Now servos will rotate to 90°.") 
+    print("If they have already been at 90°, nothing will be observed.")
+    print("Please keep the program running when installing the servos.")
+    print("After that, you can press ctrl-C to end the program.")
     pwm=Servo()
-    pwm.setServoPwm('0',90)
-    pwm.setServoPwm('1',90)
+    while True:
+        try :
+            pwm.setServoPwm('0',90)
+            pwm.setServoPwm('1',90)
+        except KeyboardInterrupt:
+            print ("\nEnd of program")
+            break
 
     
 
