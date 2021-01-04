@@ -18,18 +18,34 @@ from PyQt5.QtGui import *
 class mywindow(QMainWindow,Ui_server_ui):
     
     def __init__(self):
-        super(mywindow,self).__init__()
-        self.setupUi(self)
         self.user_ui=True
-        self.m_DragPosition=self.pos()
-        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
-        self.setMouseTracking(True)
-        self.Button_Server.setText("On")
-        self.Button_Server.clicked.connect(self.on_pushButton)
-        self.pushButton_Close.clicked.connect(self.close)
-        self.pushButton_Min.clicked.connect(self.windowMinimumed)
+        self.start_tcp=False
         self.TCP_Server=Server()
         self.parseOpt()
+        if self.user_ui:
+            self.app = QApplication(sys.argv)
+            super(mywindow,self).__init__()
+            self.setupUi(self)
+            self.m_DragPosition=self.pos()
+            self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+            self.setMouseTracking(True)
+            self.Button_Server.setText("On")
+            self.Button_Server.clicked.connect(self.on_pushButton)
+            self.pushButton_Close.clicked.connect(self.close)
+            self.pushButton_Min.clicked.connect(self.windowMinimumed)
+        
+        if self.start_tcp:
+            self.TCP_Server.StartTcpServer()
+            self.ReadData=Thread(target=self.TCP_Server.readdata)
+            self.SendVideo=Thread(target=self.TCP_Server.sendvideo)
+            self.power=Thread(target=self.TCP_Server.Power)
+            self.SendVideo.start()
+            self.ReadData.start()
+            self.power.start()
+            if self.user_ui:
+                self.label.setText("Server On")
+                self.Button_Server.setText("Off")
+                
     def windowMinimumed(self):
         self.showMinimized()
     def mousePressEvent(self, event):
@@ -51,16 +67,7 @@ class mywindow(QMainWindow,Ui_server_ui):
         for o,a in self.opts:
             if o in ('-t'):
                 print ("Open TCP")
-                self.TCP_Server.StartTcpServer()
-                self.ReadData=Thread(target=self.TCP_Server.readdata)
-                self.SendVideo=Thread(target=self.TCP_Server.sendvideo)
-                self.power=Thread(target=self.TCP_Server.Power)
-                self.SendVideo.start()
-                self.ReadData.start()
-                self.power.start()
-                
-                self.label.setText("Server On")
-                self.Button_Server.setText("Off")
+                self.start_tcp=True
             elif o in ('-n'):
                 self.user_ui=False
                         
@@ -78,7 +85,8 @@ class mywindow(QMainWindow,Ui_server_ui):
         except:
             pass
         print ("Close TCP")
-        QCoreApplication.instance().quit()
+        if self.user_ui:
+            QCoreApplication.instance().quit()
         os._exit(0)
     def on_pushButton(self):
         if self.label.text()=="Server Off":
@@ -104,16 +112,14 @@ class mywindow(QMainWindow,Ui_server_ui):
                 stop_thread(self.SendVideo)
             except:
                 pass
-            
             self.TCP_Server.StopTcpServer()
             print ("Close TCP")
             
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
     myshow=mywindow()
     if myshow.user_ui==True:
         myshow.show();   
-        sys.exit(app.exec_())
+        sys.exit(myshow.app.exec_())
     else:
         try:
             while(1):
