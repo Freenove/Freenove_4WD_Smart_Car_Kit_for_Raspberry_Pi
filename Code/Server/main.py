@@ -30,6 +30,7 @@ class mywindow(QMainWindow,Ui_server_ui):
             self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
             self.setMouseTracking(True)
             self.Button_Server.setText("On")
+            self.on_pushButton()
             self.Button_Server.clicked.connect(self.on_pushButton)
             self.pushButton_Close.clicked.connect(self.close)
             self.pushButton_Min.clicked.connect(self.windowMinimumed)
