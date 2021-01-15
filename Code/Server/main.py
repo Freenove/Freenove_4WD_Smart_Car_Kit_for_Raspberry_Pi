@@ -71,7 +71,7 @@ class mywindow(QMainWindow,Ui_server_ui):
     def parseOpt(self):
         self.opts,self.args = getopt.getopt(sys.argv[1:],"tn")
         for o,a in self.opts:
-            if '-n' in o:
+           if '-n' in o:
                 self.user_ui=False
 
             if '-t' in o:
@@ -137,4 +137,3 @@ if __name__ == '__main__':
         except KeyboardInterrupt:
             print(" caught ctrl-c")
             myshow.close()
-
