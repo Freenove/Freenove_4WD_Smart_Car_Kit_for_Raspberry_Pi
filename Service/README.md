@@ -8,7 +8,7 @@ Credit of Leigh Dastey (ldastey@outlook.com).
 
 *INSTALL_DIR below should be replaced throughout to the path of the file on your system*
 
-1. Edit *$INSTALL_DIR*/Service/smart-car-server /etc/init.d/smart-car-server and modify $$INSTALL_DIR$$ to be the path of this file on your system
+1. Edit *$INSTALL_DIR*/Service/smart-car-server and change $INSTALL_DIR to be the path of this file on your system
 2. sudo ln -s *$INSTALL_DIR*/Service/smart-car-server.service /lib/systemd/system/smart-car-server.service  
 3. sudo ln -s *$INSTALL_DIR*/Service/smart-car-server /etc/init.d/smart-car-server
 4. sudo systemctl daemon-reload
