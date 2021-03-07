@@ -1,0 +1,12 @@
+[Unit]
+Description=Pi Smart Car Server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStartPre=/bin/sleep 20
+ExecStart=/bin/bash /etc/init.d/smart-car-server
+
+[Install]
+WantedBy=multi-user.target
