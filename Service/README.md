@@ -6,18 +6,23 @@ Credit of Leigh Dastey (ldastey@outlook.com).
 
 ## SystemD Configuration
 
-*INSTALL_DIR below should be replaced throughout to the path of the file on your system*
+**INSTALL_DIR below should be replaced throughout to the path of the file on your system**
 
-1. Edit *$INSTALL_DIR*/Service/smart-car-server and change $INSTALL_DIR to be the path of this file on your system
-2. sudo ln -s *$INSTALL_DIR*/Service/smart-car-server.service /lib/systemd/system/smart-car-server.service  
-3. sudo ln -s *$INSTALL_DIR*/Service/smart-car-server /etc/init.d/smart-car-server
-4. sudo systemctl daemon-reload
-5. sudo systemctl enable smart-car-server
-6. sudo reboot
+Edit **$INSTALL_DIR**/Service/smart-car-server and change $INSTALL_DIR to be the path of this file on your system
+
+Then run the following commands:
+
+    sudo ln -s $INSTALL_DIR/Service/smart-car-server.service /lib/systemd/system/smart-car-server.service  
+    sudo ln -s $INSTALL_DIR/Service/smart-car-server /etc/init.d/smart-car-server
+    sudo systemctl daemon-reload
+    sudo systemctl enable smart-car-server
+    sudo reboot
 
 When the Pi restarts you will be able to connect client applications (i.e. mobile app) and test you can connect.
 
 ### SystemD Disable Autostart
 
-1. sudo systemctl disable smart-car-server
+To disable the SystemD autostart run 
+
+    sudo systemctl disable smart-car-server
 
