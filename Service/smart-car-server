@@ -13,5 +13,5 @@
 # Short-Description: Pi Smart Car Server
 ### END INIT INFO
 
-sudo /usr/bin/python $$INSTALL_DIR$$/Code/Server/main.py -t -n
+sudo /usr/bin/python $INSTALL_DIR/Code/Server/main.py -t -n
  
