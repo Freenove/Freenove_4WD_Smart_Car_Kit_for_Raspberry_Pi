@@ -164,20 +164,20 @@ class Server:
                     if data==None:
                         continue
                     elif cmd.CMD_MODE in data:
-                        if data[1]=='one':
+                        if data[1]=='one' or data[1]=="1":
                             self.stopMode()
                             self.Mode='one'
-                        elif data[1]=='two':
+                        elif data[1]=='two' or data[1]=="3":
                             self.stopMode()
                             self.Mode='two'
                             self.lightRun=Thread(target=self.light.run)
                             self.lightRun.start()
-                        elif data[1]=='three':
+                        elif data[1]=='three' or data[1]=="4":
                             self.stopMode()
                             self.Mode='three'
                             self.ultrasonicRun=threading.Thread(target=self.ultrasonic.run)
                             self.ultrasonicRun.start()
-                        elif data[1]=='four':
+                        elif data[1]=='four' or data[1]=="2":
                             self.stopMode()
                             self.Mode='four'
                             self.infraredRun=threading.Thread(target=self.infrared.run)
