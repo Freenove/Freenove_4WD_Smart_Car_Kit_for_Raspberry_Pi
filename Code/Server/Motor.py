@@ -24,7 +24,7 @@ class Motor:
             duty4=4095
         elif duty4<-4095:
             duty4=-4095
-        return duty1,duty2,duty3,duty4
+        return -duty1,-duty2,-duty3,-duty4
         
     def left_Upper_Wheel(self,duty):
         if duty>0:
