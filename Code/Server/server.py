@@ -122,7 +122,7 @@ class Server:
             stop_thread(self.lightRun)
             self.PWM.setMotorModel(0,0,0,0)
         except:
-            pass            
+            pass
         try:
             stop_thread(self.ultrasonicRun)
             self.PWM.setMotorModel(0,0,0,0)
