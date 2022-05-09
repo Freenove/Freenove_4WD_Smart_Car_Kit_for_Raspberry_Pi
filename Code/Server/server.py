@@ -8,6 +8,7 @@ import picamera
 import fcntl
 import  sys
 import threading
+import VideoStream
 from Motor import *
 from servo import *
 from Led import *
@@ -80,31 +81,33 @@ class Server:
             pass
         self.server_socket.close()
         try:
-            with picamera.PiCamera() as camera:
-                camera.resolution = (400,300)      # pi camera resolution
-                camera.framerate = 15               # 15 frames/sec
-                time.sleep(2)                       # give 2 secs for camera to initilize
-                start = time.time()
-                stream = io.BytesIO()
-                # send jpeg format video stream
-                print ("Start transmit ... ")
-                for foo in camera.capture_continuous(stream, 'jpeg', use_video_port = True):
-                    try:
-                        self.connection.flush()
-                        stream.seek(0)
-                        b = stream.read()
-                        length=len(b)
-                        if length >5120000:
-                            continue
-                        lengthBin = struct.pack('L', length)
-                        self.connection.write(lengthBin)
-                        self.connection.write(b)
-                        stream.seek(0)
-                        stream.truncate()
-                    except Exception as e:
-                        print(e)
-                        print ("End transmit ... " )
-                        break
+            videostream = VideoStream(resolution=(400,300),framerate=15).start()
+            videostream.process(self.connection)
+            #with picamera.PiCamera() as camera:
+            #    camera.resolution = (400,300)      # pi camera resolution
+            #    camera.framerate = 15               # 15 frames/sec
+            #    time.sleep(2)                       # give 2 secs for camera to initilize
+            #    start = time.time()
+            #    stream = io.BytesIO()
+            #    # send jpeg format video stream
+            #    print ("Start transmit ... ")
+            #    for foo in camera.capture_continuous(stream, 'jpeg', use_video_port = True):
+            #        try:
+            #            self.connection.flush()
+            #            stream.seek(0)
+            #            b = stream.read()
+            #            length=len(b)
+            #            if length >5120000:
+            #                continue
+            #            lengthBin = struct.pack('L', length)
+            #            self.connection.write(lengthBin)
+            #            self.connection.write(b)
+            #            stream.seek(0)
+            #            stream.truncate()
+            #        except Exception as e:
+            #            print(e)
+            #            print ("End transmit ... " )
+            #            break
         except:
             #print "Camera unintall"
             pass
