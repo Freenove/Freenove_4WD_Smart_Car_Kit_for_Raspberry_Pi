@@ -187,28 +187,6 @@ class VideoStream:
             # Draw framerate in corner of frame
             cv2.putText(frame,'FPS: {0:.2f}'.format(frame_rate_calc),(30,50),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,0),2,cv2.LINE_AA)
 
-            start = time.time()
-            stream = io.BytesIO()
-            print("Starting transmit...")
-            data = b''
-            payload_size = struct.calcsize("L")
-            while True:
-                while len(data) < payload_size:
-                    data += conn.recv(4096)
-                packed_msg_size = data[:payload_size]
-
-                data = data[payload_size:]
-                msg_size = struct.unpack("L", packed_msg_size)[0]
-
-                while len(data) < msg_size:
-                    data += conn.recv(4096)
-                frame_data = data[:msg_size]
-                data = data[msg_size:]
-
-                frame=pickle.loads(frame_data)
-                print(frame.size)
-                cv2.imshow('frame', frame)
-                cv2.waitKey(10)
 
             # All the results have been drawn on the frame, so it's time to display it.
             #cv2.imshow('Object detector', frame)
@@ -223,5 +201,5 @@ class VideoStream:
             #    break
 
             # Clean up
-            cv2.destroyAllWindows()
-            videostream.stop()
+           # cv2.destroyAllWindows()
+           # videostream.stop()
