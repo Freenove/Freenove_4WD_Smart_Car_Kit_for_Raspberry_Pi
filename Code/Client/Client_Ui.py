@@ -588,7 +588,7 @@ class Ui_Client(object):
         self.Btn_Mode2.setText(_translate("Client", "M-Light"))
         self.Btn_Mode3.setText(_translate("Client", "M-Sonic"))
         self.Btn_Mode4.setText(_translate("Client", "M-Line"))
-        self.Btn_Tracking_Faces.setText(_translate("Client", "Tracing-On"))
+        self.Btn_Tracking_Faces.setText(_translate("Client", "Find Bottle"))
         self.Ultrasonic.setText(_translate("Client", "Ultrasonic"))
         self.Light.setText(_translate("Client", "Light"))
 
