@@ -3,7 +3,7 @@ import os
 import socket
 import struct
 import time
-import picamera
+import picamera2
 import sys,getopt
 from Thread import *
 from threading import Thread

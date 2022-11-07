@@ -4,7 +4,11 @@ import io
 import socket
 import struct
 import time
-import picamera
+from picamera2 import Picamera2,Preview
+from picamera2.encoders import JpegEncoder
+from picamera2.outputs import FileOutput
+from picamera2.encoders import Quality
+from threading import Condition
 import fcntl
 import  sys
 import threading
@@ -20,6 +24,16 @@ from Line_Tracking import *
 from threading import Timer
 from threading import Thread
 from Command import COMMAND as cmd
+
+class StreamingOutput(io.BufferedIOBase):
+    def __init__(self):
+        self.frame = None
+        self.condition = Condition()
+
+    def write(self, buf):
+        with self.condition:
+            self.frame = buf
+            self.condition.notify_all()
 
 class Server:   
     def __init__(self):
@@ -53,8 +67,7 @@ class Server:
         self.server_socket.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEPORT,1)
         self.server_socket.bind((HOST, 8000))              
         self.server_socket.listen(1)
-        print('Server address: '+HOST)
-        
+        print('Server address: '+HOST)      
         
     def StopTcpServer(self):
         try:
@@ -79,35 +92,27 @@ class Server:
         except:
             pass
         self.server_socket.close()
-        try:
-            with picamera.PiCamera() as camera:
-                camera.resolution = (400,300)      # pi camera resolution
-                camera.framerate = 15               # 15 frames/sec
-                time.sleep(2)                       # give 2 secs for camera to initilize
-                start = time.time()
-                stream = io.BytesIO()
-                # send jpeg format video stream
-                print ("Start transmit ... ")
-                for foo in camera.capture_continuous(stream, 'jpeg', use_video_port = True):
-                    try:
-                        self.connection.flush()
-                        stream.seek(0)
-                        b = stream.read()
-                        length=len(b)
-                        if length >5120000:
-                            continue
-                        lengthBin = struct.pack('L', length)
-                        self.connection.write(lengthBin)
-                        self.connection.write(b)
-                        stream.seek(0)
-                        stream.truncate()
-                    except Exception as e:
-                        print(e)
-                        print ("End transmit ... " )
-                        break
-        except:
-            #print "Camera unintall"
-            pass
+        print ("socket video connected ... ")
+        camera = Picamera2()
+        camera.configure(camera.create_video_configuration(main={"size": (400, 300)}))
+        output = StreamingOutput()
+        encoder = JpegEncoder(q=90)
+        camera.start_recording(encoder, FileOutput(output),quality=Quality.VERY_HIGH) 
+        while True:
+            with output.condition:
+                output.condition.wait()
+                frame = output.frame
+            try:                
+                lenFrame = len(output.frame) 
+                #print("output .length:",lenFrame)
+                lengthBin = struct.pack('<I', lenFrame)
+                self.connection.write(lengthBin)
+                self.connection.write(frame)
+            except Exception as e:
+                camera.stop_recording()
+                camera.close()
+                print ("End transmit ... " )
+                break
                  
     def stopMode(self):
         try:
