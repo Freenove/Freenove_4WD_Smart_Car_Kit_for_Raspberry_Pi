@@ -117,12 +117,17 @@ class mywindow(QMainWindow,Ui_server_ui):
             print ("Close TCP")
             
 if __name__ == '__main__':
-    myshow=mywindow()
-    if myshow.user_ui==True:
-        myshow.show();   
-        sys.exit(myshow.app.exec_())
-    else:
-        try:
+    try:
+        myshow=mywindow()
+        if myshow.user_ui==True:
+            myshow.show();   
+            sys.exit(myshow.app.exec_())
+        else:
+            try:
+                pass
+            except KeyboardInterrupt:
+                myshow.close()
+        while True:
             pass
-        except KeyboardInterrupt:
+    except KeyboardInterrupt:
             myshow.close()
