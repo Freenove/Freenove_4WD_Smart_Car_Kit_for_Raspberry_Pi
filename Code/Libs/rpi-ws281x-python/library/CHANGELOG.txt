@@ -1,0 +1,91 @@
+4.3.4
+
+* New: Added support for Revision 0xa03115 (Pi 4, 1GB v1.5)
+
+4.3.3
+-----
+
+* New: Added support for Revision 0xc03115 (Pi 4, 4GB v1.5)
+* New: Added support for Revision 0xd03115 (Pi 4, 8GB v1.5)
+
+4.3.2
+-----
+
+* New: Added support for Revision 0xc03131 (Pi 400, 4GB v1.1)
+* New: Added support for Revision 0xb03115 (Pi 4, 2GB v1.5)
+
+4.3.1
+-----
+
+* New: Added support for Revision 0x902120 (Pi Zero 2 W v1.0)
+
+4.3.0
+-----
+
+* Switched to upstream jgarff/rpi_ws281x library
+* New: Added support for Revision 0xd03140 (CM4 v1.0 WiFi)
+
+4.2.6
+-----
+
+* New: Added support for Revision 0xc03114 (Pi 4, 4GB v1.4)
+* New: Added support for Revision 0xa03140 (CM4 v1.0 eMMC)
+* New: Added support for Revision 0xb03140 (CM4 v1.0 Lite)
+* New: Added support for Revision 0xc03140 (CM4 v1.0 WiFi)
+
+4.2.5
+-----
+
+* New: Added support for Revision 0xc03130 (Pi 400, 4GB)
+* New: Added support for Revision 0xb03114 (Pi 4, 2GB v1.4)
+
+4.2.4
+-----
+
+* Fix: Fixed rpi_hw_detect for aarch64
+* New: Added support for Revision 0xD03114 (Raspberry Pi Model B - 8GB)
+
+4.2.3
+-----
+
+* Fix: Added support for Pi 4 Rev 1.2 - 0xa03112, 0xb03112, 0xc03112
+
+4.2.2
+-----
+
+* Fix: Fixed Slice support when setting pixels
+* New: Added support for Revision 0xa02083
+* New: Added support for Revision 0xa22083
+
+4.2.1
+-----
+
+* Fix: Added white colour channel to Color()
+
+4.2.0
+-----
+
+* New: Added support for Raspberry Pi 4
+
+4.1.0
+-----
+
+* New: Added support for the Pi 3A+
+* Fix: Bugfix for ARM64 support
+
+4.0.0
+-----
+
+* Warning: Removed "neopixel" module from this library, use "rpi_ws281x" instead, see #8
+
+3.1.0
+-----
+
+* New: Exposed all contents of ws for easy access to strip_type constants
+* Fix: Matched functionality of upstream legacy library by supporting strip_type
+* Note: Default strip type is WS2811_STRIP_GRB
+
+3.0.7
+-----
+
+* New: Added support for Pi 3B+
