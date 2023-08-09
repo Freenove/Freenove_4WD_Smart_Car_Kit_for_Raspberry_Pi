@@ -1,6 +1,7 @@
 import time
 from Motor import *
 from ADC import *
+
 class Light:
     def run(self):
         try:
@@ -12,7 +13,6 @@ class Light:
                 R = self.adc.recvADC(1)
                 if L < 2.99 and R < 2.99 :
                     self.PWM.setMotorModel(600,600,600,600)
-                    
                 elif abs(L-R)<0.15:
                     self.PWM.setMotorModel(0,0,0,0)
                     

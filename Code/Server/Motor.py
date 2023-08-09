@@ -1,9 +1,14 @@
 import time
+import math
 from PCA9685 import PCA9685
+from ADC import *
+
 class Motor:
     def __init__(self):
         self.pwm = PCA9685(0x40, debug=True)
         self.pwm.setPWMFreq(50)
+        self.time_proportion = 3     #Depend on your own car,If you want to get the best out of the rotation mode, change the value by experimenting.
+        self.adc = Adc()
     def duty_range(self,duty1,duty2,duty3,duty4):
         if duty1>4095:
             duty1=4095
@@ -75,7 +80,25 @@ class Motor:
         self.right_Upper_Wheel(duty3)
         self.right_Lower_Wheel(duty4)
             
-            
+    def Rotate(self,n):
+        angle = n
+        bat_compensate =7.5/(self.adc.recvADC(2)*3)
+        while True:
+            W = 2000
+
+            VY = int(2000 * math.cos(math.radians(angle)))
+            VX = -int(2000 * math.sin(math.radians(angle)))
+
+            FR = VY - VX + W
+            FL = VY + VX - W
+            BL = VY - VX - W
+            BR = VY + VX + W
+
+            PWM.setMotorModel(FL, BL, FR, BR)
+            print("rotating")
+            time.sleep(5*self.time_proportion*bat_compensate/1000)
+            angle -= 5
+
 PWM=Motor()          
 def loop(): 
     PWM.setMotorModel(2000,2000,2000,2000)       #Forward

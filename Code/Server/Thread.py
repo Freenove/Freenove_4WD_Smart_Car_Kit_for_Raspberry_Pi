@@ -18,7 +18,7 @@ def _async_raise(tid, exctype):
  
  
 def stop_thread(thread):
-    for i in range(5):
+    for i in range(7):
         _async_raise(thread.ident, SystemExit)
  
  

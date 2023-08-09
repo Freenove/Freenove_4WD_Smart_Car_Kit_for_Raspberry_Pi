@@ -104,18 +104,18 @@ class Led:
     def ledMode(self,n):
         self.mode=n
         while True:
-            if self.mode=='1':
+            if self.mode=='2':
                 self.colorWipe(self.strip, Color(255, 0, 0))  # Red wipe
                 self.colorWipe(self.strip, Color(0, 255, 0))  # Green wipe
                 self.colorWipe(self.strip, Color(0, 0, 255))  # Blue wipe
                 self.colorWipe(self.strip, Color(0,0,0),10)
-            elif self.mode=='2':
+            elif self.mode=='3':
                 self.theaterChaseRainbow(self.strip)
                 self.colorWipe(self.strip, Color(0,0,0),10)
-            elif self.mode=='3':
+            elif self.mode=='4':
                 self.rainbow(self.strip)
                 self.colorWipe(self.strip, Color(0,0,0),10)
-            elif self.mode=='4':
+            elif self.mode=='5':
                 self.rainbowCycle(self.strip)
                 self.colorWipe(self.strip, Color(0,0,0),10)
             else:

@@ -26,6 +26,9 @@ class mywindow(QMainWindow,Ui_Client):
         self.setupUi(self)
         self.endChar='\n'
         self.intervalChar='#'
+        file = open('IP.txt', 'r')
+        self.IP.setText(str(file.readline()))
+        file.close()
         self.h=self.IP.text()
         self.TCP=VideoStreaming()
         self.servo1=90
@@ -39,7 +42,13 @@ class mywindow(QMainWindow,Ui_Client):
         self.Key_A=False
         self.Key_S=False
         self.Key_D=False
+        self.Key_Q=False
+        self.Key_E=False
+        self.Key_Z=False
+        self.Key_X=False
         self.Key_Space=False
+        self.Wheel_Flag = 1
+        self.Rotate_Flag = 1
         self.setFocusPolicy(Qt.StrongFocus)
         self.progress_Power.setMinimum(0)
         self.progress_Power.setMaximum(100)
@@ -127,6 +136,24 @@ class mywindow(QMainWindow,Ui_Client):
         self.Btn_Turn_Right.pressed.connect(self.on_btn_Turn_Right)
         self.Btn_Turn_Right.released.connect(self.on_btn_Stop)
 
+        self.Btn_Move_Left.pressed.connect(self.on_btn_Moveleft)
+        self.Btn_Move_Left.released.connect(self.on_btn_Stop)
+
+        self.Btn_Move_Right.pressed.connect(self.on_btn_Moveright)
+        self.Btn_Move_Right.released.connect(self.on_btn_Stop)
+
+        self.Btn_DiaLeft.pressed.connect(self.on_btn_Dialeft)
+        self.Btn_DiaLeft.released.connect(self.on_btn_Stop)
+
+        self.Btn_DiaRight.pressed.connect(self.on_btn_Diaright)
+        self.Btn_DiaRight.released.connect(self.on_btn_Stop)
+
+        self.Btn_DiaDLeft.pressed.connect(self.on_btn_Diad_left)
+        self.Btn_DiaDLeft.released.connect(self.on_btn_Stop)
+
+        self.Btn_DiaDRight.pressed.connect(self.on_btn_Diad_right)
+        self.Btn_DiaDRight.released.connect(self.on_btn_Stop)
+
         self.Btn_Video.clicked.connect(self.on_btn_video)
 
         self.Btn_Up.clicked.connect(self.on_btn_Up)
@@ -135,8 +162,8 @@ class mywindow(QMainWindow,Ui_Client):
         self.Btn_Home.clicked.connect(self.on_btn_Home)
         self.Btn_Right.clicked.connect(self.on_btn_Right)
         self.Btn_Tracking_Faces.clicked.connect(self.Tracking_Face)
-        
-
+        self.Btn_wheel.clicked.connect(self.on_btn_wheelchange)
+        self.Btn_Rotate.clicked.connect(self.on_btn_rotate)
         self.Btn_Buzzer.pressed.connect(self.on_btn_Buzzer)
         self.Btn_Buzzer.released.connect(self.on_btn_Buzzer)
         
@@ -174,7 +201,7 @@ class mywindow(QMainWindow,Ui_Client):
             self.on_btn_Home()
 
 
-        if(event.key() == Qt.Key_Q):
+        if(event.key() == Qt.Key_R):
             if self.Btn_Mode1.isChecked() == True:
                 self.Btn_Mode2.setChecked(True)
             elif self.Btn_Mode2.isChecked() == True:
@@ -208,6 +235,8 @@ class mywindow(QMainWindow,Ui_Client):
             self.on_btn_Connect()
         if(event.key() == Qt.Key_V):
             self.on_btn_video()
+        if(event.key() == Qt.Key_O):
+            self.on_btn_rotate()
 
             
         if(event.key() == Qt.Key_1):
@@ -261,12 +290,31 @@ class mywindow(QMainWindow,Ui_Client):
             elif event.key() == Qt.Key_S:
                 self.on_btn_BackWard()
                 self.Key_S=True
-            elif event.key() == Qt.Key_A:
+            elif event.modifiers() == Qt.ShiftModifier and event.key() == Qt.Key_A:
                 self.on_btn_Turn_Left()
+                self.Key_A = True
+            elif event.modifiers() == Qt.ShiftModifier and event.key() == Qt.Key_D:
+                self.on_btn_Turn_Right()
+                self.Key_D = True
+            elif event.key() == Qt.Key_A:
+                self.on_btn_Moveleft()
                 self.Key_A=True
             elif event.key() == Qt.Key_D:                  
-                self.on_btn_Turn_Right()
-                self.Key_D=True  
+                self.on_btn_Moveright()
+                self.Key_D=True
+
+            elif event.key() == Qt.Key_Q:
+                self.on_btn_Dialeft()
+                self.Key_Q=True
+            elif event.key() == Qt.Key_E:
+                self.on_btn_Diaright()
+                self.Key_E=True
+            elif event.key() == Qt.Key_Z:
+                self.on_btn_Diad_left()
+                self.Key_Z=True
+            elif event.key() == Qt.Key_X:
+                self.on_btn_Diad_right()
+                self.Key_X=True
             elif event.key() == Qt.Key_Space:  
                 self.on_btn_Buzzer()
                 self.Key_Space=True                
@@ -291,6 +339,22 @@ class mywindow(QMainWindow,Ui_Client):
             if not(event.isAutoRepeat()) and self.Key_D==True:
                 self.on_btn_Stop()
                 self.Key_D=False
+        elif(event.key() == Qt.Key_Q):
+            if not(event.isAutoRepeat()) and self.Key_Q==True:
+                self.on_btn_Stop()
+                self.Key_Q=False
+        elif(event.key() == Qt.Key_E):
+            if not(event.isAutoRepeat()) and self.Key_E==True:
+                self.on_btn_Stop()
+                self.Key_E=False
+        elif(event.key() == Qt.Key_Z):
+            if not(event.isAutoRepeat()) and self.Key_Z==True:
+                self.on_btn_Stop()
+                self.Key_Z=False
+        elif(event.key() == Qt.Key_X):
+            if not(event.isAutoRepeat()) and self.Key_X==True:
+                self.on_btn_Stop()
+                self.Key_X=False
                 
         if(event.key() == Qt.Key_Space):
             if not(event.isAutoRepeat()) and self.Key_Space==True:
@@ -300,24 +364,135 @@ class mywindow(QMainWindow,Ui_Client):
 
         
     def on_btn_ForWard(self):
-        ForWard=self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.endChar
-        self.TCP.sendData(cmd.CMD_MOTOR+ForWard)
+        if self.Wheel_Flag:
+            if self.Rotate_Flag:
+                M_ForWard=self.intervalChar+str(0)+self.intervalChar+str(1500)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+                self.TCP.sendData(cmd.CMD_M_MOTOR+M_ForWard)
+            else:
+                R_ForWard = self.intervalChar + str(0) + self.intervalChar + str(0) + self.intervalChar + str(0) + self.intervalChar + str(1500) + self.endChar
+                self.TCP.sendData(cmd.CMD_CAR_ROTATE + R_ForWard)
+        else:
+            ForWard=self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.endChar
+            self.TCP.sendData(cmd.CMD_MOTOR+ForWard)
 
     def on_btn_Turn_Left(self):
-        Turn_Left=self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.endChar
-        self.TCP.sendData(cmd.CMD_MOTOR+ Turn_Left)
+        if self.Wheel_Flag:
+            M_Turn_Left = self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(90)+self.intervalChar+str(1500)+self.endChar
+            self.TCP.sendData(cmd.CMD_M_MOTOR+M_Turn_Left)
+        else:
+            Turn_Left=self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.endChar
+            self.TCP.sendData(cmd.CMD_MOTOR+ Turn_Left)
 
     def on_btn_BackWard(self):
-        BackWard=self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.endChar
-        self.TCP.sendData(cmd.CMD_MOTOR+BackWard)
+        if self.Wheel_Flag:
+            if self.Rotate_Flag:
+                M_BackWard=self.intervalChar+str(180)+self.intervalChar+str(1500)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+                self.TCP.sendData(cmd.CMD_M_MOTOR+M_BackWard)
+            else:
+                R_BackWard = self.intervalChar + str(0) + self.intervalChar + str(0) + self.intervalChar + str(180) + self.intervalChar + str(1500) + self.endChar
+                self.TCP.sendData(cmd.CMD_CAR_ROTATE + R_BackWard)
+        else:
+            BackWard=self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.endChar
+            self.TCP.sendData(cmd.CMD_MOTOR+BackWard)
 
     def on_btn_Turn_Right(self):
-        Turn_Right=self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.endChar
-        self.TCP.sendData(cmd.CMD_MOTOR+Turn_Right)
-
+        if self.Wheel_Flag:
+            M_Turn_Right = self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(-90)+self.intervalChar+str(1500)+self.endChar
+            self.TCP.sendData(cmd.CMD_M_MOTOR+M_Turn_Right)
+        else:
+            Turn_Right=self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.endChar
+            self.TCP.sendData(cmd.CMD_MOTOR+ Turn_Right)
     def on_btn_Stop(self):
-        Stop=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
-        self.TCP.sendData(cmd.CMD_MOTOR+Stop)
+        if self.Wheel_Flag:
+            if self.Rotate_Flag:
+                M_Stop=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+                self.TCP.sendData(cmd.CMD_M_MOTOR+M_Stop)
+            else:
+                R_Stop = self.intervalChar + str(0) + self.intervalChar + str(0) + self.intervalChar + str(0) + self.intervalChar + str(0) + self.endChar
+                self.TCP.sendData(cmd.CMD_CAR_ROTATE + R_Stop)
+        else:
+            Stop=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+            self.TCP.sendData(cmd.CMD_MOTOR+Stop)
+
+    def on_btn_Moveleft(self):
+        if self.Rotate_Flag:
+            M_Move_Left = self.intervalChar + str(90) + self.intervalChar + str(1500) + self.intervalChar + str(0) + self.intervalChar + str(0) + self.endChar
+            self.TCP.sendData(cmd.CMD_M_MOTOR + M_Move_Left)
+        else:
+            R_Move_Left = self.intervalChar + str(0) + self.intervalChar + str(0) + self.intervalChar + str(90) + self.intervalChar + str(1500) + self.endChar
+            self.TCP.sendData(cmd.CMD_CAR_ROTATE + R_Move_Left)
+
+    def on_btn_Moveright(self):
+        if self.Rotate_Flag:
+            M_Move_Right = self.intervalChar + str(-90) + self.intervalChar + str(1500) + self.intervalChar + str(0) + self.intervalChar + str(0) + self.endChar
+            self.TCP.sendData(cmd.CMD_M_MOTOR + M_Move_Right)
+        else:
+            R_Move_Right = self.intervalChar + str(0) + self.intervalChar + str(0) + self.intervalChar + str(-90) + self.intervalChar + str(1500) + self.endChar
+            self.TCP.sendData(cmd.CMD_CAR_ROTATE + R_Move_Right)
+
+    def on_btn_Dialeft(self):
+        if self.Rotate_Flag:
+            Dialeft=self.intervalChar+str(45)+self.intervalChar+str(1500)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+            self.TCP.sendData(cmd.CMD_M_MOTOR+Dialeft)
+        else:
+            R_Dialeft = self.intervalChar + str(0) + self.intervalChar + str(0) + self.intervalChar + str(135) + self.intervalChar + str(1500) + self.endChar
+            self.TCP.sendData(cmd.CMD_CAR_ROTATE + R_Dialeft)
+
+    def on_btn_Diaright(self):
+        if self.Rotate_Flag:
+            Diaright=self.intervalChar+str(-45)+self.intervalChar+str(1500)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+            self.TCP.sendData(cmd.CMD_M_MOTOR+Diaright)
+        else:
+            R_Diaright= self.intervalChar + str(0) + self.intervalChar + str(0) + self.intervalChar + str(135) + self.intervalChar + str(1500) + self.endChar
+            self.TCP.sendData(cmd.CMD_CAR_ROTATE + R_Diaright)
+    def on_btn_Diad_left(self):
+        if self.Rotate_Flag:
+            Diadleft=self.intervalChar+str(135)+self.intervalChar+str(1500)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+            self.TCP.sendData(cmd.CMD_M_MOTOR+Diadleft)
+        else:
+            R_Diadleft=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(135)+self.intervalChar+str(1500)+self.endChar
+            self.TCP.sendData(cmd.CMD_CAR_ROTATE+R_Diadleft)
+
+    def on_btn_Diad_right(self):
+        if self.Rotate_Flag:
+            Diadright=self.intervalChar+str(-135)+self.intervalChar+str(1500)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+            self.TCP.sendData(cmd.CMD_M_MOTOR+Diadright)
+        else:
+            R_Diadright=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(-135)+self.intervalChar+str(1500)+self.endChar
+            self.TCP.sendData(cmd.CMD_CAR_ROTATE+R_Diadright)
+
+    def on_btn_wheelchange(self):
+        if self.Wheel_Flag:
+            self.Btn_Move_Left.hide()
+            self.Btn_Move_Right.hide()
+            self.Btn_DiaLeft.hide()
+            self.Btn_DiaRight.hide()
+            self.Btn_DiaDLeft.hide()
+            self.Btn_DiaDRight.hide()
+            self.Btn_Rotate.hide()
+            self.Btn_Turn_Left.move(80, 520)
+            self.Btn_Turn_Right.move(300, 520)
+            self.Btn_wheel.setText("Ordinaly_wheels")
+            self.Wheel_Flag = 0
+        else:
+            self.Btn_Move_Left.show()
+            self.Btn_Move_Right.show()
+            self.Btn_DiaLeft.show()
+            self.Btn_DiaRight.show()
+            self.Btn_DiaDLeft.show()
+            self.Btn_DiaDRight.show()
+            self.Btn_Rotate.show()
+            self.Btn_Turn_Left.move(0, 520)
+            self.Btn_Turn_Right.move(380, 520)
+            self.Btn_wheel.setText("Mecanum_wheels")
+            self.Wheel_Flag = 1
+    def on_btn_rotate(self):
+        if self.Rotate_Flag:
+            self.Btn_Rotate.setText("Rotate-Off")
+            self.Rotate_Flag = 0
+        else:
+            self.Btn_Rotate.setText("Rotate-On")
+            self.Rotate_Flag = 1
 
     def on_btn_video(self):
         if self.Btn_Video.text()=='Open Video':
@@ -326,7 +501,7 @@ class mywindow(QMainWindow,Ui_Client):
         elif self.Btn_Video.text()=='Close Video':
             self.timer.stop()
             self.Btn_Video.setText('Open Video')
-    def on_btn_Up(self):
+    def on_btn_Up   (self):
         self.servo2=self.servo2+10
         if self.servo2>=180:
             self.servo2=180
@@ -508,6 +683,9 @@ class mywindow(QMainWindow,Ui_Client):
         if self.Btn_Connect.text() == "Connect":
             self.h=self.IP.text()
             self.TCP.StartTcpClient(self.h,)
+            file = open('IP.txt', 'w')
+            file.write(self.IP.text())
+            file.close()
             try:
                 self.streaming=Thread(target=self.TCP.streaming,args=(self.h,))
                 self.streaming.start()

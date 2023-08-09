@@ -31,12 +31,32 @@ def test_Motor():
         PWM.setMotorModel(-1000,-1000,-1000,-1000)   #Back
         print ("The car is going backwards")
         time.sleep(1)
-        PWM.setMotorModel(-1500,-1500,2000,2000)       #Left 
+        PWM.setMotorModel(-1500,-1500,2000,2000)       #Turn left
         print ("The car is turning left")
         time.sleep(1)
-        PWM.setMotorModel(2000,2000,-1500,-1500)       #Right 
+        PWM.setMotorModel(2000,2000,-1500,-1500)       #Turn right 
         print ("The car is turning right")  
         time.sleep(1)
+        PWM.setMotorModel(-2000,2000,2000,-2000)       #Move left 
+        print ("The car is moving left")  
+        time.sleep(1)
+        PWM.setMotorModel(2000,-2000,-2000,2000)       #Move right 
+        print ("The car is moving right")  
+        time.sleep(1)    
+            
+        PWM.setMotorModel(0,2000,2000,0)       #Move diagonally to the left and forward
+        print ("The car is moving diagonally to the left and forward")  
+        time.sleep(1)
+        PWM.setMotorModel(0,-2000,-2000,0)       #Move diagonally to the right and backward
+        print ("The car is moving diagonally to the right and backward")  
+        time.sleep(1) 
+        PWM.setMotorModel(2000,0,2000,00)       #Move diagonally to the right and forward
+        print ("The car is moving diagonally to the right and forward")  
+        time.sleep(1)
+        PWM.setMotorModel(-2000,0,-2000,0)       #Move diagonally to the left and backward
+        print ("The car is moving diagonally to the left and backward")  
+        time.sleep(1) 
+        
         PWM.setMotorModel(0,0,0,0)                   #Stop
         print ("\nEnd of program")
     except KeyboardInterrupt:
@@ -55,6 +75,12 @@ def test_Ultrasonic():
     except KeyboardInterrupt:
         print ("\nEnd of program")
 
+def car_Rotate():
+    try:
+        while True:
+          PWM.Rotate(0)
+    except KeyboardInterrupt:
+        print ("\nEnd of program")
 
 from Line_Tracking import *
 line=Line_Tracking()
@@ -149,7 +175,8 @@ if __name__ == '__main__':
         test_Adc()  
     elif sys.argv[1] == 'Buzzer':   
         test_Buzzer()  
-
+    elif sys.argv[1] == 'Rotate':
+        car_Rotate()
         
         
         
