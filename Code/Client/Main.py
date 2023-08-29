@@ -35,6 +35,14 @@ class mywindow(QMainWindow,Ui_Client):
         self.servo2=90
         self.label_FineServo2.setText("0")
         self.label_FineServo1.setText("0")
+        self.img = QImage()
+        self.img.load("*.png")
+        self.img.save("*.png")
+        self.img.load("*.jpg")
+        self.img.save("*.jpg")
+        self.setWindowIcon(QIcon('image/logo_Mini.png'))
+        self.label_Video.setPixmap(QPixmap('image/Raspberry_4WD_M_Car.png'))
+        self.W_flag = 0
         self.m_DragPosition=self.pos()
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.setMouseTracking(True)
@@ -473,6 +481,7 @@ class mywindow(QMainWindow,Ui_Client):
             self.Btn_Turn_Left.move(80, 520)
             self.Btn_Turn_Right.move(300, 520)
             self.Btn_wheel.setText("Ordinaly_wheels")
+            self.label_Video.setPixmap(QPixmap('image/Raspberry_4WD_Car.png'))
             self.Wheel_Flag = 0
         else:
             self.Btn_Move_Left.show()
@@ -485,6 +494,7 @@ class mywindow(QMainWindow,Ui_Client):
             self.Btn_Turn_Left.move(0, 520)
             self.Btn_Turn_Right.move(380, 520)
             self.Btn_wheel.setText("Mecanum_wheels")
+            self.label_Video.setPixmap(QPixmap('image/Raspberry_4WD_M_Car.png'))
             self.Wheel_Flag = 1
     def on_btn_rotate(self):
         if self.Rotate_Flag:
@@ -811,7 +821,7 @@ class mywindow(QMainWindow,Ui_Client):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     myshow=mywindow()
-    myshow.show();   
+    myshow.show()
     sys.exit(app.exec_())
     
 
