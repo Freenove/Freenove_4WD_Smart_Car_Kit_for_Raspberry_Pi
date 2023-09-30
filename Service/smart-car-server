@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#
+# Copy this file to /etc/init.d/
+#
+
+### BEGIN INIT INFO
+# Provides:          smart-car-server
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Pi Smart Car Server
+### END INIT INFO
+
+sudo /usr/bin/python $INSTALL_DIR/Code/Server/main.py -t -n
+ 
