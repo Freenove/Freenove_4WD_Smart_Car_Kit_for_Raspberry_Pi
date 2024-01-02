@@ -60,6 +60,24 @@ class Ultrasonic:
         else :
             self.PWM.setMotorModel(600,600,600,600)
                 
+
+    def run2(self):
+        self.pwm=Motor()
+        self.pwm_s = Servo()
+        self.pwm_s.setServoPwm('0', 90)
+        time.sleep(0.2)
+        M = self.get_distance()
+
+        if M < 30:
+            self.pwm_s.setServoPwm('0', 30)
+            time.sleep(0.2)
+            L = self.get_distance()
+            self.pwm_s.setServoPwm('0', 151)
+            time.sleep(0.2)
+            R = self.get_distance()
+            self.run_motor(L, M, R)
+            self.pwm_s.setServoPwm('0', 90)
+
     def run(self):
         self.PWM=Motor()
         self.pwm_S=Servo()
