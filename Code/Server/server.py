@@ -214,7 +214,7 @@ class Server:
                             data2=int(data[2])
                             data3=int(data[3])
                             data4=int(data[4])
-                            if data1==None or data2==None or data2==None or data3==None:
+                            if data1==None or data2==None or data3==None or data4==None:
                                 continue
                             self.PWM.setMotorModel(data1,data2,data3,data4)
                         except:
@@ -237,7 +237,7 @@ class Server:
                             BR = LY + LX + RX
 
 
-                            if data1==None or data2==None or data2==None or data3==None:
+                            if data1==None or data2==None or data3==None or data4==None:
                                 continue
                             self.PWM.setMotorModel(FL,BL,FR,BR)
                         except:
@@ -267,7 +267,7 @@ class Server:
                                 BR = LY + LX + RX
 
 
-                                if data1 == None or data2 == None or data2 == None or data3 == None:
+                                if data1 == None or data2 == None or data3 == None or data4 == None:
                                     continue
                                 self.PWM.setMotorModel(FL, BL, FR, BR)
                             elif self.rotation_flag == False:
@@ -297,7 +297,7 @@ class Server:
                             data2=int(data[2])
                             data3=int(data[3])
                             data4=int(data[4])
-                            if data1==None or data2==None or data2==None or data3==None:
+                            if data1==None or data2==None or data3==None or data4==None:
                                 continue
                             self.led.ledIndex(data1,data2,data3,data4)
                         except:
