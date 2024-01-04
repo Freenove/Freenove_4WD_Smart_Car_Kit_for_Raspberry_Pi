@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>678</width>
+    <width>763</width>
     <height>649</height>
    </rect>
   </property>
@@ -393,7 +393,7 @@ background:qradialgradient(spread:pad,cx:0.5,cy:0.5,radius:0.5,fx:0.5,fy:0.5,sto
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>480</y>
+     <y>475</y>
      <width>75</width>
      <height>30</height>
     </rect>
@@ -415,7 +415,7 @@ background:qradialgradient(spread:pad,cx:0.5,cy:0.5,radius:0.5,fx:0.5,fy:0.5,sto
    <property name="geometry">
     <rect>
      <x>520</x>
-     <y>480</y>
+     <y>475</y>
      <width>75</width>
      <height>30</height>
     </rect>
@@ -459,7 +459,7 @@ background:qradialgradient(spread:pad,cx:0.5,cy:0.5,radius:0.5,fx:0.5,fy:0.5,sto
    <property name="geometry">
     <rect>
      <x>610</x>
-     <y>480</y>
+     <y>475</y>
      <width>75</width>
      <height>30</height>
     </rect>
@@ -1169,36 +1169,6 @@ color: rgb(152,251,152);
     <string>Buzzer</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Btn_Tracking_Faces">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>420</y>
-     <width>75</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Malgun Gothic</family>
-     <pointsize>-1</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton {
-    font-size: 12px;
-}</string>
-   </property>
-   <property name="text">
-    <string>Tracing-On</string>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>14</width>
-     <height>14</height>
-    </size>
-   </property>
-  </widget>
   <widget class="QPushButton" name="Ultrasonic">
    <property name="geometry">
     <rect>
@@ -1325,30 +1295,6 @@ color: rgb(152,251,152);
     <string>↗</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Btn_Rotate">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>420</y>
-     <width>75</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Malgun Gothic</family>
-     <pointsize>-1</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton {
-    font-size: 12px;
-}</string>
-   </property>
-   <property name="text">
-    <string>Rotate-On</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="Btn_Move_Left">
    <property name="geometry">
     <rect>
@@ -1371,30 +1317,6 @@ color: rgb(152,251,152);
     <string>Move Left</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Btn_Move_Right">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>520</y>
-     <width>75</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Malgun Gothic</family>
-     <pointsize>-1</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton {
-    font-size: 12px;
-}</string>
-   </property>
-   <property name="text">
-    <string>Move Right</string>
-   </property>
-  </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
@@ -1410,13 +1332,11 @@ color: rgb(152,251,152);
       <property name="font">
        <font>
         <family>Malgun Gothic</family>
-        <pointsize>-1</pointsize>
+        <pointsize>9</pointsize>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QPushButton {
-    font-size: 12px;
-}</string>
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>Mecanum_wheels</string>
@@ -1476,6 +1396,72 @@ color: rgb(152,251,152);
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="Btn_Tracking_Faces">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>420</y>
+     <width>75</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Malgun Gothic</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>Tracing-On</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Btn_Rotate">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>420</y>
+     <width>75</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Malgun Gothic</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>Rotate-On</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Btn_Move_Right">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>520</y>
+     <width>75</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Malgun Gothic</family>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>Move Right</string>
+   </property>
   </widget>
  </widget>
  <resources/>
