@@ -221,7 +221,7 @@ class Server:
                             data2 = int(data[2])
                             data3 = int(data[3])
                             data4 = int(data[4])
-                            if data1 is None or data2 is None or data2 is None or data3 is None:
+                            if data1 is None or data2 is None or data3 is None or data4 is None:
                                 continue
                             self.PWM.setMotorModel(data1, data2, data3, data4)
                         except:
