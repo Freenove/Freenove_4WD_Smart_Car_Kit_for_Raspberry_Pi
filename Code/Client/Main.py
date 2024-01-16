@@ -862,16 +862,15 @@ class mywindow(QMainWindow, Ui_Client):
             self.Btn_Tracking_Faces.setText("Tracing-Off")
         else:
             self.Btn_Tracking_Faces.setText("Tracing-On")
-
-    def find_Face(self, face_x, face_y):
-        if face_x != 0 and face_y != 0:
-            offset_x = float(face_x / 400 - 0.5) * 2
-            offset_y = float(face_y / 300 - 0.5) * 2
-            delta_degree_x = int(4 * offset_x)
+    def find_Face(self,face_x,face_y):
+        if face_x!=0 and face_y!=0:
+            offset_x=float(face_x/400-0.5)*2
+            offset_y=float(face_y/300-0.5)*2
+            delta_degree_x = int(4* offset_x)
             delta_degree_y = int(-4 * offset_y)
-            self.servo1 = self.servo1 + delta_degree_x
-            self.servo2 = self.servo2 + delta_degree_y
-            if offset_x > -0.15 and offset_y > -0.15 and offset_x < 0.15 and offset_y < 0.15:
+            self.servo1=self.servo1+delta_degree_x
+            self.servo2=self.servo2+delta_degree_y
+            if offset_x > -0.15 and offset_y >-0.15 and offset_x < 0.15 and offset_y <0.15:
                 pass
             else:
                 self.HSlider_Servo1.setValue(self.servo1)
@@ -890,6 +889,7 @@ class mywindow(QMainWindow, Ui_Client):
 
 
 if __name__ == '__main__':
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QApplication(sys.argv)
     myshow = mywindow()
     myshow.show()

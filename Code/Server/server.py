@@ -217,11 +217,11 @@ class Server:
 
                     elif (cmd.CMD_MOTOR in data) and self.Mode == 'one':
                         try:
-                            data1 = int(data[1])
-                            data2 = int(data[2])
-                            data3 = int(data[3])
-                            data4 = int(data[4])
-                            if data1 is None or data2 is None or data3 is None or data4 is None:
+                            data1=int(data[1])
+                            data2=int(data[2])
+                            data3=int(data[3])
+                            data4=int(data[4])
+                            if data1==None or data2==None or data3==None or data4==None:
                                 continue
                             self.PWM.setMotorModel(data1, data2, data3, data4)
                         except:
@@ -243,7 +243,7 @@ class Server:
                             BL = LY - LX - RX
                             BR = LY + LX + RX
 
-                            if data1 is None or data2 is None or data2 is None or data3 is None:
+                            if data1==None or data2==None or data3==None or data4==None:
                                 continue
                             self.PWM.setMotorModel(FL, BL, FR, BR)
                         except:
@@ -272,7 +272,7 @@ class Server:
                                 BL = LY - LX - RX
                                 BR = LY + LX + RX
 
-                                if data1 is None or data2 is None or data2 is None or data3 is None:
+                                if data1 == None or data2 == None or data3 == None or data4 == None:
                                     continue
                                 self.PWM.setMotorModel(FL, BL, FR, BR)
                             elif self.rotation_flag == False:
@@ -298,11 +298,11 @@ class Server:
 
                     elif cmd.CMD_LED in data:
                         try:
-                            data1 = int(data[1])
-                            data2 = int(data[2])
-                            data3 = int(data[3])
-                            data4 = int(data[4])
-                            if data1 is None or data2 is None or data2 is None or data3 is None:
+                            data1=int(data[1])
+                            data2=int(data[2])
+                            data3=int(data[3])
+                            data4=int(data[4])
+                            if data1==None or data2==None or data3==None or data4==None:
                                 continue
                             self.led.ledIndex(data1, data2, data3, data4)
                         except:
