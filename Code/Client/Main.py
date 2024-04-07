@@ -447,8 +447,8 @@ class mywindow(QMainWindow, Ui_Client):
                 -90) + self.intervalChar + str(1500) + self.endChar
             self.TCP.sendData(cmd.CMD_M_MOTOR + M_Turn_Right)
         else:
-            Turn_Right = self.intervalChar + str(-1500) + self.intervalChar + str(-1500) + self.intervalChar + str(
-                1500) + self.intervalChar + str(1500) + self.endChar
+            Turn_Right = self.intervalChar + str(1500) + self.intervalChar + str(1500) + self.intervalChar + str(
+                -1500) + self.intervalChar + str(-1500) + self.endChar
             self.TCP.sendData(cmd.CMD_MOTOR + Turn_Right)
 
     def on_btn_Stop(self):
