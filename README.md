@@ -3,6 +3,8 @@
 > A 4WD smart car kit for Raspberry Pi.
 
 <img src='Picture/icon.png' width='30%'/>
+<br>
+<img src='Picture/icon1.png' width='30%'/>
 
 ### Download
 

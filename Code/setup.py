@@ -21,5 +21,11 @@ for x in range(1,4):
 if flag==0x07:
     print("\nNow the installation is successful.")
 else:
+    if flag&0x01==0x00:
+        print("\napt-get update failed.")
+    if flag&0x02==0x00:
+        print("\nrpi-ws281x-python install failed.")
+    if flag&0x04==0x00:
+        print("\nlibqt5gui5 python3-dev python3-pyqt5 install failed.")
     print ("\nSome libraries have not been installed yet. Please run 'sudo python setup.py' again")
 

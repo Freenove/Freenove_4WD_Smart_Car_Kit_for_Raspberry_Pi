@@ -42,7 +42,7 @@ class VideoStreaming:
         return bValid
 
     def face_detect(self,img):
-        if sys.platform.startswith('win') or sys.platform.startswith('darwin'):
+        if sys.platform.startswith('win') or sys.platform.startswith('darwin') or sys.platform.startswith('linux'):
             gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
             faces = self.face_cascade.detectMultiScale(gray,1.3,5)
             if len(faces)>0 :
