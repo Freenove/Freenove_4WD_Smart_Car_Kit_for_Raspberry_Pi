@@ -28,6 +28,20 @@ class Led:
         color = [Color(G,R,B),Color(G,B,R),Color(R,G,B),Color(R,B,G),Color(B,R,G),Color(B,G,R)]
         if order in Led_type:
             return color[Led_type.index(order)]
+
+    def setPixelColors(self, pixelColors):
+        """
+        Sets the color of specific Pixel LEDs (0-7).
+        The pixels are specified with their respective color
+        in a sequence of tupels (pixelIndex, color).
+        """
+        for pixel, color in pixelColors:
+            if pixel < 0 or pixel >= self.strip.numPixels():
+                continue
+            color=self.LED_TYPR(self.ORDER,color)
+            self.strip.setPixelColor(pixel, color)
+        self.strip.show()
+
     def colorWipe(self,strip, color, wait_ms=50):
         """Wipe color across display a pixel at a time."""
         color=self.LED_TYPR(self.ORDER,color)
@@ -127,6 +141,13 @@ if __name__ == '__main__':
     print ('Program is starting ... ')
     try:
         while True:
+            print ("Color pattern")
+            led.setPixelColors([
+                (0, Color(0 ,0, 0)), (1, Color(0 ,0, 255)),
+                (2, Color(0 ,255, 0)), (3, Color(0 ,255, 255)),
+                (4, Color(255 ,0, 0)), (5, Color(255 ,0, 255)),
+                (6, Color(255 ,255, 0)), (7, Color(255 ,255, 255)) ])
+            time.sleep(1)
             print ("Chaser animation")
             led.colorWipe(led.strip, Color(255,0, 0))  # Red wipe
             led.colorWipe(led.strip, Color(0, 255, 0))  # Green wipe
@@ -138,13 +159,3 @@ if __name__ == '__main__':
             led.colorWipe(led.strip, Color(0,0,0),10)
     except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
         led.colorWipe(led.strip, Color(0,0,0),10)
-
-        
-            
-        
-                    
-
-
-
-
-   
