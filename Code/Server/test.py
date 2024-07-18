@@ -25,10 +25,10 @@ from Motor import *
 PWM=Motor()          
 def test_Motor(): 
     try:
-        PWM.setMotorModel(1000,1000,1000,1000)       #Forward
+        PWM.setMotorModel(1000,1000,1000,1000)         #Forward
         print ("The car is moving forward")
         time.sleep(1)
-        PWM.setMotorModel(-1000,-1000,-1000,-1000)   #Back
+        PWM.setMotorModel(-1000,-1000,-1000,-1000)     #Back
         print ("The car is going backwards")
         time.sleep(1)
         PWM.setMotorModel(-1500,-1500,2000,2000)       #Turn left
@@ -44,20 +44,20 @@ def test_Motor():
         print ("The car is moving right")  
         time.sleep(1)    
             
-        PWM.setMotorModel(0,2000,2000,0)       #Move diagonally to the left and forward
+        PWM.setMotorModel(0,2000,2000,0)         #Move diagonally to the left and forward
         print ("The car is moving diagonally to the left and forward")  
         time.sleep(1)
         PWM.setMotorModel(0,-2000,-2000,0)       #Move diagonally to the right and backward
         print ("The car is moving diagonally to the right and backward")  
         time.sleep(1) 
-        PWM.setMotorModel(2000,0,2000,00)       #Move diagonally to the right and forward
+        PWM.setMotorModel(2000,0,0,2000)         #Move diagonally to the right and forward
         print ("The car is moving diagonally to the right and forward")  
         time.sleep(1)
-        PWM.setMotorModel(-2000,0,-2000,0)       #Move diagonally to the left and backward
+        PWM.setMotorModel(-2000,0,0,-2000)       #Move diagonally to the left and backward
         print ("The car is moving diagonally to the left and backward")  
         time.sleep(1) 
         
-        PWM.setMotorModel(0,0,0,0)                   #Stop
+        PWM.setMotorModel(0,0,0,0)               #Stop
         print ("\nEnd of program")
     except KeyboardInterrupt:
         PWM.setMotorModel(0,0,0,0)
