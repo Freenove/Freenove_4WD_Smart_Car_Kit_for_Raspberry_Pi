@@ -1,5 +1,16 @@
 ## Freenove 4WD Smart Car Kit for Raspberry Pi
 
+### Please select the corresponding code file according to your Raspberry PI
+
+* **Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Server**
+
+	If you are a Raspberry PI 3 or 4, use the code in the above folder.
+	
+* **Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Server-pi5**
+	
+	If you are a Raspberry PI 5, use the code in the above folder.
+
+
 > A 4WD smart car kit for Raspberry Pi.
 
 <img src='Picture/icon.png' width='30%'/>
