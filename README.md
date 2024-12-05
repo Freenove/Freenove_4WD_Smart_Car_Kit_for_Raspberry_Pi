@@ -17,6 +17,14 @@
 <br>
 <img src='Picture/icon1.png' width='30%'/>
 
+### Connection Board Version
+
+| PCB Version | PCB Picture |
+|-|-|
+| V1.0 | <img src='Picture/PCB_V1.0.png' width='45%' alt='V1.0'/> |
+| V2.0 | <img src='Picture/PCB_V2.0.png' width='45%' alt='V2.0'/> |
+
+
 ### Download
 
 * **Use command in console**
