@@ -21,8 +21,8 @@
 
 | PCB Version | PCB Picture |
 |-|-|
-| V1.0 | <div style="text-align: center;"><img src='Picture/PCB_V1.0.png' width='45%' alt='V1.0'/></div> |
-| V2.0 | <div style="text-align: center;"><img src='Picture/PCB_V2.0.png' width='45%' alt='V1.0'/></div> |
+| V1.0 | <div style="text-align: center;"><img src='Picture/PCB_V1.0.png' width='30%' alt='V1.0'/></div> |
+| V2.0 | <div style="text-align: center;"><img src='Picture/PCB_V2.0.png' width='30%' alt='V2.0'/></div> |
 
 
 ### Download
