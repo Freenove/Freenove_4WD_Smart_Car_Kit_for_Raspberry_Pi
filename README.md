@@ -13,16 +13,59 @@
 
 > A 4WD smart car kit for Raspberry Pi.
 
-<img src='Picture/icon.png' width='50%'/>
-<br>
-<img src='Picture/icon1.png' width='50%'/>
+<div style="text-align: center;">
+  <img src='Picture/icon.png' width='45%' style='display:inline-block; margin-right:5px;'/>
+  <img src='Picture/icon1.png' width='40%' style='display:inline-block;'/>
+</div>
 
 ### Connection Board Version
 
-| PCB Version | PCB Picture |
-|-|-|
-| V1.0 | <center><img src='Picture/PCB_V1.0.png' width='30%' alt='V1.0'/></center> |
-| V2.0 | <center><img src='Picture/PCB_V2.0.png' width='30%' alt='V2.0'/></center> |
+## Freenove 4WD Smart Car Kit for Raspberry Pi
+
+### Please select the corresponding code file according to your Raspberry PI
+
+* **Raspberry PI 3 or 4**:
+  Use the code in the `Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Server` folder.
+
+* **Raspberry PI 5**:
+  Use the code in the `Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Server-pi5` folder.
+
+> A 4WD smart car kit for Raspberry Pi.
+
+<div style="text-align: center;">
+  <img src='Picture/icon.png' width='45%' style='display:inline-block; margin-right:5px;'/>
+  <img src='Picture/icon1.png' width='40%' style='display:inline-block;'/>
+</div>
+
+### Connection Board Version
+
+<table>
+  <tr>
+    <th>PCB Version</th>
+    <th>PCB Picture</th>
+  </tr>
+  <tr>
+    <td>V1.0</td>
+    <td align="center">
+      <img src='Picture/PCB_V1.0.png' width='30%' alt='V1.0'/>
+    </td>
+  </tr>
+  <tr>
+    <td>V2.0</td>
+    <td align="center">
+      <img src='Picture/PCB_V2.0.png' width='30%' alt='V2.0'/>
+    </td>
+  </tr>
+</table>
+
+### Download
+
+* **Use command in console**
+
+  Run following command to download all the files in this repository.
+
+  ```bash
+  git clone https://github.com/Freenove/Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi.git
 
 
 ### Download
