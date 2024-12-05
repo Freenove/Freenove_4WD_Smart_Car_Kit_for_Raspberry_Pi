@@ -1,23 +1,36 @@
 import time
 from Motor import *
-import RPi.GPIO as GPIO
+from gpiozero import LineSensor
+IR01 = 14
+IR02 = 15
+IR03 = 23
+IR01_sensor = LineSensor(IR01)
+IR02_sensor = LineSensor(IR02)
+IR03_sensor = LineSensor(IR03)
 class Line_Tracking:
     def __init__(self):
-        self.IR01 = 14
-        self.IR02 = 15
-        self.IR03 = 23
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.IR01,GPIO.IN)
-        GPIO.setup(self.IR02,GPIO.IN)
-        GPIO.setup(self.IR03,GPIO.IN)
+        pass
+
+    def test_Infrared(self):
+        try:
+            while True:
+                if IR01_sensor.value !=True and IR02_sensor.value == True and IR03_sensor.value !=True:
+                    print ('Middle')
+                elif IR01_sensor.value !=True and IR02_sensor.value != True and IR03_sensor.value ==True:
+                    print ('Right')
+                elif IR01_sensor.value ==True and IR02_sensor.value != True and IR03_sensor.value !=True:
+                    print ('Left')
+        except KeyboardInterrupt:
+            print ("\nEnd of program")
+        
     def run(self):
         while True:
             self.LMR=0x00
-            if GPIO.input(self.IR01)==True:
+            if IR01_sensor.value == True:
                 self.LMR=(self.LMR | 4)
-            if GPIO.input(self.IR02)==True:
+            if IR02_sensor.value == True:
                 self.LMR=(self.LMR | 2)
-            if GPIO.input(self.IR03)==True:
+            if IR03_sensor.value == True:
                 self.LMR=(self.LMR | 1)
             if self.LMR==2:
                 PWM.setMotorModel(800,800,800,800)
@@ -38,6 +51,6 @@ infrared=Line_Tracking()
 if __name__ == '__main__':
     print ('Program is starting ... ')
     try:
-        infrared.run()
+        infrared.test_Infrared()
     except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program  will be  executed.
         PWM.setMotorModel(0,0,0,0)

@@ -20,11 +20,8 @@ class mywindow(QMainWindow,Ui_server_ui):
     def __init__(self):
         self.user_ui=True
         self.start_tcp=False
-        self.port = 8000
-        self.parseOpt()
-
         self.TCP_Server=Server()
-
+        self.parseOpt()
         if self.user_ui:
             self.app = QApplication(sys.argv)
             super(mywindow,self).__init__()
@@ -67,15 +64,13 @@ class mywindow(QMainWindow,Ui_server_ui):
         self.m_drag=False
         
     def parseOpt(self):
-        self.opts,self.args = getopt.getopt(sys.argv[1:],"tnp")
+        self.opts,self.args = getopt.getopt(sys.argv[1:],"tn")
         for o,a in self.opts:
             if o in ('-t'):
                 print ("Open TCP")
                 self.start_tcp=True
             elif o in ('-n'):
                 self.user_ui=False
-            elif o in ('-p'):
-                self.port = 5001
                         
     def close(self):
         try:

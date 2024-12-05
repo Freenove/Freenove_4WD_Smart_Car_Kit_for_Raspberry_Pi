@@ -13,13 +13,11 @@ def test_Led():
         led.ledIndex(0x80,255,255,255)  #white'''
         print ("The LED has been lit, the color is red orange yellow green cyan-blue blue white")
         time.sleep(3)               #wait 3s
-        led.colorWipe(led.strip, Color(0,0,0))  #turn off the light
+        led.colorWipe([0,0,0])  #turn off the light
         print ("\nEnd of program")
     except KeyboardInterrupt:
-        led.colorWipe(led.strip, Color(0,0,0))  #turn off the light
-        print ("\nEnd of program")
-
-        
+        led.colorWipe([0,0,0])  #turn off the light
+        print ("\nEnd of program") 
         
 from Motor import *            
 PWM=Motor()          
@@ -86,13 +84,7 @@ from Line_Tracking import *
 line=Line_Tracking()
 def test_Infrared():
     try:
-        while True:
-            if GPIO.input(line.IR01)!=True and GPIO.input(line.IR02)==True and GPIO.input(line.IR03)!=True:
-                print ('Middle')
-            elif GPIO.input(line.IR01)!=True and GPIO.input(line.IR02)!=True and GPIO.input(line.IR03)==True:
-                print ('Right')
-            elif GPIO.input(line.IR01)==True and GPIO.input(line.IR02)!=True and GPIO.input(line.IR03)!=True:
-                print ('Left')
+        line.test_Infrared()
     except KeyboardInterrupt:
         print ("\nEnd of program")
 

@@ -1,16 +1,13 @@
 import time
-import RPi.GPIO as GPIO
+from gpiozero import Buzzer
 from Command import COMMAND as cmd
-GPIO.setwarnings(False)
-Buzzer_Pin = 17
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(Buzzer_Pin,GPIO.OUT)
+buzzer = Buzzer(17)
 class Buzzer:
     def run(self,command):
         if command!="0":
-            GPIO.output(Buzzer_Pin,True)
+            buzzer.on()
         else:
-            GPIO.output(Buzzer_Pin,False)
+            buzzer.off()
 if __name__=='__main__':
     B=Buzzer()
     B.run('1')
