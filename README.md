@@ -13,16 +13,16 @@
 
 > A 4WD smart car kit for Raspberry Pi.
 
-<img src='Picture/icon.png' width='30%'/>
+<img src='Picture/icon.png' width='50%'/>
 <br>
-<img src='Picture/icon1.png' width='30%'/>
+<img src='Picture/icon1.png' width='50%'/>
 
 ### Connection Board Version
 
 | PCB Version | PCB Picture |
 |-|-|
-| V1.0 | <img src='Picture/PCB_V1.0.png' width='45%' alt='V1.0'/> |
-| V2.0 | <img src='Picture/PCB_V2.0.png' width='45%' alt='V2.0'/> |
+| V1.0 | <div style="text-align: center;"><img src='Picture/PCB_V1.0.png' width='45%' alt='V1.0'/></div> |
+| V2.0 | <div style="text-align: center;"><img src='Picture/PCB_V2.0.png' width='45%' alt='V1.0'/></div> |
 
 
 ### Download
