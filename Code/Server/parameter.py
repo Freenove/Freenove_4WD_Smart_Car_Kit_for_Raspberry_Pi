@@ -132,6 +132,7 @@ class ParameterManager:
 if __name__ == '__main__':
     # Entry point of the script
     manager = ParameterManager()
+    manager.deal_with_param()
     if manager.file_exists("params.json") and manager.validate_params("params.json"):
         pcb_version = manager.get_pcb_version()
         print(f"PCB Version: {pcb_version}.0")
