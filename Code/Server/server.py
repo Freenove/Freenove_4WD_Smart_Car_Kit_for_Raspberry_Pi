@@ -125,18 +125,22 @@ class Server:
             self.PWM.setMotorModel(0,0,0,0)
         except:
             pass
+        finally:
+            self.PWM.setMotorModel(0,0,0,0)
         try:
             stop_thread(self.lightRun)
-            self.PWM.setMotorModel(0,0,0,0)
         except:
             pass
+        finally:
+            self.PWM.setMotorModel(0,0,0,0)
         try:
             stop_thread(self.ultrasonicRun)
+        except:
+            pass
+        finally:
             self.PWM.setMotorModel(0,0,0,0)
             self.servo.setServoPwm('0',90)
             self.servo.setServoPwm('1',90)
-        except:
-            pass
         self.sonic=False
         self.Light=False
         self.Line=False         
@@ -179,10 +183,10 @@ class Server:
                     if data==None:
                         continue
                     elif cmd.CMD_MODE in data:
-                        if data[1]=='one' or data[1]=="0":
+                        if data[1]=='one' or data[1]=="1":
                             self.stopMode()
                             self.Mode='one'
-                        elif data[1]=='two' or data[1]=="1":
+                        elif data[1]=='two' or data[1]=="3":
                             self.stopMode()
                             self.Mode='two'
                             self.lightRun=Thread(target=self.light.run)
@@ -190,7 +194,7 @@ class Server:
                             self.Light = True
                             self.lightTimer = threading.Timer(0.3, self.sendLight)
                             self.lightTimer.start()
-                        elif data[1]=='three' or data[1]=="3":
+                        elif data[1]=='three' or data[1]=="4":
                             self.stopMode()
                             self.Mode='three'
                             self.ultrasonicRun=threading.Thread(target=self.ultrasonic.run)
@@ -303,27 +307,13 @@ class Server:
                             pass
                     elif cmd.CMD_LED_MOD in data:
                         self.LedMoD=data[1]
-                        if self.LedMoD== '0':
-                            try:
-                                stop_thread(Led_Mode)
-                            except:
-                                pass
-                        if self.LedMoD == '1':
-                            try:
-                                stop_thread(Led_Mode)
-                            except:
-                                pass
-                            self.led.ledMode(self.LedMoD)
-                            time.sleep(0.1)
-                            self.led.ledMode(self.LedMoD)
-                        else :
-                            try:
-                                stop_thread(Led_Mode)
-                            except:
-                                pass
-                            time.sleep(0.1)
-                            Led_Mode=Thread(target=self.led.ledMode,args=(data[1],))
-                            Led_Mode.start()
+                        try:
+                            stop_thread(self.Led_Run_Mode)
+                        except:
+                            pass
+                        time.sleep(0.1)
+                        self.Led_Run_Mode=Thread(target=self.led.ledMode,args=(data[1],))
+                        self.Led_Run_Mode.start()
                     elif cmd.CMD_SONIC in data:
                         if data[1]=='1':
                             self.sonic=True
