@@ -91,7 +91,7 @@ class Led:
             return
         else:
             led_count = self.strip.get_led_count()
-            for j in range(256):
+            for j in range(0, 256, 5):
                 for q in range(3):
                     for i in range(0, led_count, 3):
                         self.strip.set_led_rgb_data((i+q)%led_count, self.wheel((i+j) % 255))
@@ -115,20 +115,17 @@ class Led:
     def ledMode(self, n):
         self.mode = n
         while True:
-            if self.mode == '2':
+            if self.mode == '1':
                 self.colorWipe([255, 0, 0])  # Red wipe
                 self.colorWipe([0, 255, 0])  # Green wipe
                 self.colorWipe([0, 0, 255])  # Blue wipe
                 self.colorWipe([0, 0, 0], 10)
-            elif self.mode == '3':
+            elif self.mode == '2':
                 self.theaterChaseRainbow()
-                self.colorWipe([0, 0, 0], 10)
-            elif self.mode == '4':
+            elif self.mode == '3':
                 self.rainbow()
-                self.colorWipe([0, 0, 0], 10)
-            elif self.mode == '5':
+            elif self.mode == '4':
                 self.rainbowCycle()
-                self.colorWipe([0, 0, 0], 10)
             else:
                 self.colorWipe([0, 0, 0], 10)
                 break
