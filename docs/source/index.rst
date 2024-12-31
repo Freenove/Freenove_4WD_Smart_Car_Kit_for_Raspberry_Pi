@@ -1,6 +1,9 @@
 ######################################################
-FNK0043-Freenove 4WD Smart Car Kit for Raspberry_Pi
+Freenove 4WD Smart Car Kit for Raspberry_Pi
 ######################################################
+
+FNK0043
+******************************************************
 
 .. toctree::
    :maxdepth: 1
