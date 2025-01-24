@@ -17,7 +17,7 @@ class Ultrasonic:
     
     def run_motor(self,L,M,R):
         if (L < 30 and M < 30 and R <30) or M < 30 :
-            self.PWM.setMotorModel(-1450,-1450,-1450,-1450) # move backwards
+            self.PWM.setMotorModel(-600,-600,-600,-600) # move backwards
             time.sleep(1)   
             # if L < R:
             #     self.PWM.setMotorModel(1450,1450,-1450,-1450) # turn right
@@ -27,10 +27,10 @@ class Ultrasonic:
             #     return
             
             if random.random() < 0.5:
-                self.PWM.setMotorModel(1450,1450,-1450,-1450)
+                self.PWM.setMotorModel(1000,1000,-1000,-1000)
             else:
-                self.PWM.setMotorModel(-1450,-1450,1450,1450)
-                
+                self.PWM.setMotorModel(-1000,-1000,1000,1000)
+
             time.sleep(1)
 
         # elif L < 30 and M < 30:
