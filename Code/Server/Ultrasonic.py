@@ -6,6 +6,7 @@ from PCA9685 import PCA9685
 trigger_pin = 27
 echo_pin    = 22
 sensor = DistanceSensor(echo=echo_pin, trigger=trigger_pin ,max_distance=3)
+step = 2
 class Ultrasonic:
     def __init__(self):        
         pass
@@ -35,11 +36,12 @@ class Ultrasonic:
                 PWM.setMotorModel(-1500,-1500,1500,1500)
         else :
             self.PWM.setMotorModel(600,600,600,600)
-                
     def run(self):
         self.PWM=Motor()
         self.pwm_S=Servo()
-        for i in range(30,151,60):
+        for i in range(30,151,step):
+                if i not in [90, 30, 150]:
+                    continue
                 self.pwm_S.setServoPwm('0',i)
                 time.sleep(0.2)
                 if i==30:
@@ -49,7 +51,23 @@ class Ultrasonic:
                 else:
                     R = self.get_distance()
         while True:
-            for i in range(90,30,-60):
+            for i in range(90,29,-step):
+                if i not in [90, 30, 150]:
+                    continue
+                self.pwm_S.setServoPwm('0',i)
+                time.sleep(0.2)
+                if i==30:
+                    L = self.get_distance()
+                elif i==90:
+                    M = self.get_distance()
+                else:
+                    R = self.get_distance()
+
+                print("first", L, M, R)
+                self.run_motor(L,M,R)
+            for i in range(30,151,step):
+                if i not in [90, 30, 150]:
+                    continue
                 self.pwm_S.setServoPwm('0',i)
                 time.sleep(0.2)
                 if i==30:
@@ -59,17 +77,7 @@ class Ultrasonic:
                 else:
                     R = self.get_distance()
                 self.run_motor(L,M,R)
-            for i in range(30,151,60):
-                self.pwm_S.setServoPwm('0',i)
-                time.sleep(0.2)
-                if i==30:
-                    L = self.get_distance()
-                elif i==90:
-                    M = self.get_distance()
-                else:
-                    R = self.get_distance()
-                self.run_motor(L,M,R)
-        
+                print("second", L, M, R)
             
         
 ultrasonic=Ultrasonic()              
@@ -81,4 +89,3 @@ if __name__ == '__main__':
     except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
         PWM.setMotorModel(0,0,0,0)
         ultrasonic.pwm_S.setServoPwm('0',90)
-
