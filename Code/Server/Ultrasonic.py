@@ -3,10 +3,11 @@ from Motor import *
 from gpiozero import DistanceSensor
 from servo import *
 from PCA9685 import PCA9685
+import random
+
 trigger_pin = 27
 echo_pin    = 22
 sensor = DistanceSensor(echo=echo_pin, trigger=trigger_pin ,max_distance=3)
-step = 2
 class Ultrasonic:
     def __init__(self):        
         pass
@@ -16,68 +17,78 @@ class Ultrasonic:
     
     def run_motor(self,L,M,R):
         if (L < 30 and M < 30 and R <30) or M < 30 :
-            self.PWM.setMotorModel(-1450,-1450,-1450,-1450) 
+            self.PWM.setMotorModel(-1450,-1450,-1450,-1450) # move backwards
             time.sleep(0.1)   
             if L < R:
+                self.PWM.setMotorModel(1450,1450,-1450,-1450) # turn right
+                return
+            elif L > R:
+                self.PWM.setMotorModel(-1450,-1450,1450,1450) # turn left
+                return
+            
+            if random.random() < 0.5:
                 self.PWM.setMotorModel(1450,1450,-1450,-1450)
-            else :
+            else:
                 self.PWM.setMotorModel(-1450,-1450,1450,1450)
+
         elif L < 30 and M < 30:
-            PWM.setMotorModel(1500,1500,-1500,-1500)
+            PWM.setMotorModel(1500,1500,-1500,-1500) # turn right
         elif R < 30 and M < 30:
-            PWM.setMotorModel(-1500,-1500,1500,1500)
+            PWM.setMotorModel(-1500,-1500,1500,1500) # turn left
         elif L < 20 :
-            PWM.setMotorModel(2000,2000,-500,-500)
+            PWM.setMotorModel(2000,2000,-500,-500) # turn right
             if L < 10 :
-                PWM.setMotorModel(1500,1500,-1000,-1000)
+                PWM.setMotorModel(1500,1500,-1000,-1000) # turn very right
         elif R < 20 :
-            PWM.setMotorModel(-500,-500,2000,2000)
+            PWM.setMotorModel(-500,-500,2000,2000) # turn left
             if R < 10 :
-                PWM.setMotorModel(-1500,-1500,1500,1500)
+                PWM.setMotorModel(-1500,-1500,1500,1500) # turn very left
         else :
-            self.PWM.setMotorModel(600,600,600,600)
+            self.PWM.setMotorModel(600,600,600,600) # move forward
+        
+
     def run(self):
         self.PWM=Motor()
         self.pwm_S=Servo()
-        for i in range(30,151,step):
-                if i not in [90, 30, 150]:
-                    continue
-                self.pwm_S.setServoPwm('0',i)
-                time.sleep(0.2)
-                if i==30:
-                    L = self.get_distance()
-                elif i==90:
-                    M = self.get_distance()
-                else:
-                    R = self.get_distance()
+        # for i in range(30,151,60):
+        #         self.pwm_S.setServoPwm('0',i)
+        #         time.sleep(0.2)
+        #         if i==30:
+        #             L = self.get_distance()
+        #         elif i==90:
+        #             M = self.get_distance()
+        #         else:
+        #             R = self.get_distance()
         while True:
-            for i in range(90,29,-step):
-                if i not in [90, 30, 150]:
-                    continue
-                self.pwm_S.setServoPwm('0',i)
-                time.sleep(0.2)
-                if i==30:
-                    L = self.get_distance()
-                elif i==90:
-                    M = self.get_distance()
-                else:
-                    R = self.get_distance()
+            # for i in range(90,30,-60):
+            #     self.pwm_S.setServoPwm('0',i)
+            #     time.sleep(0.2)
+            #     if i==30:
+            #         L = self.get_distance()
+            #     elif i==90:
+            #         M = self.get_distance()
+            #     else:
+            #         R = self.get_distance()
 
-                print("first", L, M, R)
-                self.run_motor(L,M,R)
-            for i in range(30,151,step):
-                if i not in [90, 30, 150]:
-                    continue
-                self.pwm_S.setServoPwm('0',i)
-                time.sleep(0.2)
-                if i==30:
-                    L = self.get_distance()
-                elif i==90:
-                    M = self.get_distance()
-                else:
-                    R = self.get_distance()
-                self.run_motor(L,M,R)
-                print("second", L, M, R)
+            #     print("first", L, M, R)
+            #     self.run_motor(L,M,R)
+            # for i in range(30,151,60):
+            #     self.pwm_S.setServoPwm('0',i)
+            #     time.sleep(0.2)
+            #     if i==30:
+            #         L = self.get_distance()
+            #     elif i==90:
+            #         M = self.get_distance()
+            #     else:
+            #         R = self.get_distance()
+            #     self.run_motor(L,M,R)
+            #     print("second", L, M, R)
+            self.pwm_S.setServoPwm('0', 90)
+            time.sleep(0.2)
+            M = self.get_distance()
+            
+            self.run_motor(300,M,300)
+            
             
         
 ultrasonic=Ultrasonic()              
