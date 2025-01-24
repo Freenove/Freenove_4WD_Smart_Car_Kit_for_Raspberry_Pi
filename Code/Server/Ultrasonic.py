@@ -18,31 +18,33 @@ class Ultrasonic:
     def run_motor(self,L,M,R):
         if (L < 30 and M < 30 and R <30) or M < 30 :
             self.PWM.setMotorModel(-1450,-1450,-1450,-1450) # move backwards
-            time.sleep(0.1)   
-            if L < R:
-                self.PWM.setMotorModel(1450,1450,-1450,-1450) # turn right
-                return
-            elif L > R:
-                self.PWM.setMotorModel(-1450,-1450,1450,1450) # turn left
-                return
+            time.sleep(1)   
+            # if L < R:
+            #     self.PWM.setMotorModel(1450,1450,-1450,-1450) # turn right
+            #     return
+            # elif L > R:
+            #     self.PWM.setMotorModel(-1450,-1450,1450,1450) # turn left
+            #     return
             
             if random.random() < 0.5:
                 self.PWM.setMotorModel(1450,1450,-1450,-1450)
             else:
                 self.PWM.setMotorModel(-1450,-1450,1450,1450)
+                
+            time.sleep(1)
 
-        elif L < 30 and M < 30:
-            PWM.setMotorModel(1500,1500,-1500,-1500) # turn right
-        elif R < 30 and M < 30:
-            PWM.setMotorModel(-1500,-1500,1500,1500) # turn left
-        elif L < 20 :
-            PWM.setMotorModel(2000,2000,-500,-500) # turn right
-            if L < 10 :
-                PWM.setMotorModel(1500,1500,-1000,-1000) # turn very right
-        elif R < 20 :
-            PWM.setMotorModel(-500,-500,2000,2000) # turn left
-            if R < 10 :
-                PWM.setMotorModel(-1500,-1500,1500,1500) # turn very left
+        # elif L < 30 and M < 30:
+        #     PWM.setMotorModel(1500,1500,-1500,-1500) # turn right
+        # elif R < 30 and M < 30:
+        #     PWM.setMotorModel(-1500,-1500,1500,1500) # turn left
+        # elif L < 20 :
+        #     PWM.setMotorModel(2000,2000,-500,-500) # turn right
+        #     if L < 10 :
+        #         PWM.setMotorModel(1500,1500,-1000,-1000) # turn very right
+        # elif R < 20 :
+        #     PWM.setMotorModel(-500,-500,2000,2000) # turn left
+        #     if R < 10 :
+        #         PWM.setMotorModel(-1500,-1500,1500,1500) # turn very left
         else :
             self.PWM.setMotorModel(600,600,600,600) # move forward
         
