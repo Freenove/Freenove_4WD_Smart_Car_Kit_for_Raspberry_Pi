@@ -90,6 +90,7 @@ class Ultrasonic:
             time.sleep(0.2)
             M = self.get_distance()
             
+            print(M)
             self.run_motor(300,M,300)
             
             
