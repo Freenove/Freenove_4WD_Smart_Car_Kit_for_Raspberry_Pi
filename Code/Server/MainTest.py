@@ -13,7 +13,7 @@ echo_pin    = 22
 sensor = DistanceSensor(echo=echo_pin, trigger=trigger_pin ,max_distance=3)
 class Ultrasonic:
     def __init__(self):        
-        self.move = move()
+        self.move = move.Move()
     def get_distance(self):
         distance_cm = sensor.distance * 100
         return  int(distance_cm)
