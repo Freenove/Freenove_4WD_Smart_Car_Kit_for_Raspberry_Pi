@@ -25,3 +25,6 @@ class Move:
     def left(self):
         self.PWM.setMotorModel(-600,-600,600,600)
         time.sleep(1)
+    
+    def stop(self):
+        self.PWM.setMotorModel(0, 0, 0, 0)

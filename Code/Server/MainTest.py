@@ -5,6 +5,7 @@ from servo import *
 from PCA9685 import PCA9685
 import random
 import move
+import sys
 
 REVERSE_THRESHOLD = 60
 
@@ -22,18 +23,29 @@ class Ultrasonic:
         if M < REVERSE_THRESHOLD :
             self.move.back()
             if random.random() < 0.5:
+                print("right")
                 self.move.right()
             else:
+                print("left")
                 self.move.left()
 
         else :
             self.move.forward()
         
 
-    def run(self):
-        self.PWM=Motor()
+    def run(self, args):
         self.pwm_S=Servo()
         self.pwm_S.setServoPwm('0', 90)
+
+        if len(args) > 2:
+            if args[1] == 'r':
+                for _ in range(int(args[2])):
+                    self.move.right()
+            
+            if args[1] == 'l':
+                for _ in range(int(args[2])):
+                    self.move.left()
+
         while True:
             M = self.get_distance()
             
@@ -45,10 +57,16 @@ class Ultrasonic:
         
 ultrasonic=Ultrasonic()              
 # Main program logic follows:
+
+# command line: sudo python MainTest.py <l/r/None> <num>
+
+"""
+l/r/None refers to if you want to move right or left at the beginning. the number is how many times
+"""
 if __name__ == '__main__':
     print ('Program is starting ... ')
     try:
-        ultrasonic.run()
+        ultrasonic.run(sys.argv)
     except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
-        PWM.setMotorModel(0,0,0,0)
+        ultrasonic.move.stop()
         ultrasonic.pwm_S.setServoPwm('0',90)
