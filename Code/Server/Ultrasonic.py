@@ -53,6 +53,7 @@ class Ultrasonic:
     def run(self):
         self.PWM=Motor()
         self.pwm_S=Servo()
+        self.pwm_S.setServoPwm('0', 90)
         # for i in range(30,151,60):
         #         self.pwm_S.setServoPwm('0',i)
         #         time.sleep(0.2)
@@ -86,12 +87,11 @@ class Ultrasonic:
             #         R = self.get_distance()
             #     self.run_motor(L,M,R)
             #     print("second", L, M, R)
-            self.pwm_S.setServoPwm('0', 90)
             time.sleep(0.2)
             M = self.get_distance()
             
             print(M)
-            self.run_motor(300,M,300)
+            # self.run_motor(300,M,300)
             
             
         
