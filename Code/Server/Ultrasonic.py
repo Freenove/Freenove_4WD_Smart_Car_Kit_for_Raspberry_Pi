@@ -5,6 +5,8 @@ from servo import *
 from PCA9685 import PCA9685
 import random
 
+REVERSE_THRESHOLD = 60
+
 trigger_pin = 27
 echo_pin    = 22
 sensor = DistanceSensor(echo=echo_pin, trigger=trigger_pin ,max_distance=3)
@@ -15,8 +17,8 @@ class Ultrasonic:
         distance_cm = sensor.distance * 100
         return  int(distance_cm)
     
-    def run_motor(self,L,M,R):
-        if (L < 30 and M < 30 and R <30) or M < 30 :
+    def run_motor(self, M):
+        if M < REVERSE_THRESHOLD :
             self.PWM.setMotorModel(-600,-600,-600,-600) # move backwards
             time.sleep(0.2)   
             # if L < R:
@@ -91,7 +93,7 @@ class Ultrasonic:
             M = self.get_distance()
             
             print(M)
-            # self.run_motor(300,M,300)
+            self.run_motor(M)
             
             
         
