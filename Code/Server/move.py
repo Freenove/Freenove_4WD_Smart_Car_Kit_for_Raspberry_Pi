@@ -20,11 +20,11 @@ class Move:
         time.sleep(SLEEP_TIME)
     
     def right(self):
-        self.PWM.setMotorModel(600,600,-600,-600)
+        self.PWM.setMotorModel(1600,1600,-1600,-1600)
         time.sleep(SLEEP_TIME * 10)
     
     def left(self):
-        self.PWM.setMotorModel(-600,-600,600,600)
+        self.PWM.setMotorModel(-1600,-1600,1600,1600)
         time.sleep(SLEEP_TIME * 10)
     
     def stop(self):
