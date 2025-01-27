@@ -5,7 +5,7 @@ from servo import *
 from PCA9685 import PCA9685
 import random
 
-SLEEP_TIME = 0.5
+SLEEP_TIME = 0.1
 
 class Move:
     def __init__(self):        
@@ -21,11 +21,11 @@ class Move:
     
     def right(self):
         self.PWM.setMotorModel(600,600,-600,-600)
-        time.sleep(SLEEP_TIME)
+        time.sleep(SLEEP_TIME * 10)
     
     def left(self):
         self.PWM.setMotorModel(-600,-600,600,600)
-        time.sleep(SLEEP_TIME)
+        time.sleep(SLEEP_TIME * 10)
     
     def stop(self):
         self.PWM.setMotorModel(0, 0, 0, 0)

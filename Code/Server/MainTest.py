@@ -39,10 +39,12 @@ class Ultrasonic:
 
         if len(args) > 2:
             if args[1] == 'r':
+                print("r")
                 for _ in range(int(args[2])):
                     self.move.right()
             
             if args[1] == 'l':
+                print("l")
                 for _ in range(int(args[2])):
                     self.move.left()
 
