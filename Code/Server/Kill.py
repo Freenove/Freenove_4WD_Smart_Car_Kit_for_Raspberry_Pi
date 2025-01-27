@@ -13,5 +13,5 @@ PWM = Motor()
 PWM.setMotorModel(0, 0, 0, 0)
 
 servo = Servo()
-servo.setServoPwm('0', 0)
-servo.setServoPwm('1', 0)
+servo.setServoPwm('0', 90)
+servo.setServoPwm('1', 90)
