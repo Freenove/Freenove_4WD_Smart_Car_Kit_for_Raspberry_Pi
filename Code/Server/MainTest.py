@@ -51,6 +51,7 @@ class Ultrasonic:
         while True:
             M = self.get_distance()
             
+            
             print(M)
             self.run_motor(M)
             time.sleep(0.2)
