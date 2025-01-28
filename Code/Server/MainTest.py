@@ -51,7 +51,7 @@ class Ultrasonic:
         while True:
             tot = []
             for angle in [60, 75, 90, 105, 120]:
-                self.pwm_S.setServoPwm('0', i)
+                self.pwm_S.setServoPwm('0', angle)
                 tot.append(self.get_distance())
             
             self.pwm_S.setServoPwm('0', 90)
