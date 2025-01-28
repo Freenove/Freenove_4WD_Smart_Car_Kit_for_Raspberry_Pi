@@ -24,10 +24,10 @@ class Ultrasonic:
             self.move.back()
             if random.random() < 0.5:
                 print("right")
-                self.move.right()
+                self.move.right(random.randint(0, 360))
             else:
                 print("left")
-                self.move.left()
+                self.move.left(random.randint(0, 360))
 
         else :
             self.move.forward()
