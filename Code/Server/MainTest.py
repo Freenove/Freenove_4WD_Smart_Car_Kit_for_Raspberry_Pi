@@ -49,8 +49,14 @@ class Ultrasonic:
                     self.move.left()
 
         while True:
-            M = self.get_distance()
+            tot = []
+            for angle in [60, 75, 90, 105, 120]:
+                self.pwm_S.setServoPwm('0', i)
+                tot.append(self.get_distance())
             
+            self.pwm_S.setServoPwm('0', 90)
+
+            M = max(tot)
             
             print(M)
             self.run_motor(M)
