@@ -16,12 +16,12 @@ class Move:
     
     def back(self):
         self.PWM.setMotorModel(-FORWARD_BACKWARD_SPEED,-FORWARD_BACKWARD_SPEED,-FORWARD_BACKWARD_SPEED,-FORWARD_BACKWARD_SPEED)
-        time.sleep(SLEEP_TIME * 10)
+        time.sleep(SLEEP_TIME * 7)
         self.stop()
     
     def forward(self):
         self.PWM.setMotorModel(FORWARD_BACKWARD_SPEED,FORWARD_BACKWARD_SPEED,FORWARD_BACKWARD_SPEED,FORWARD_BACKWARD_SPEED)
-        time.sleep(SLEEP_TIME * 10)
+        time.sleep(SLEEP_TIME * 7)
         self.stop()
     
     def right(self, deg = 90):
