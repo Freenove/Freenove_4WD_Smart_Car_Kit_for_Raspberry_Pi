@@ -7,7 +7,7 @@ import random
 import move
 import sys
 
-REVERSE_THRESHOLD = 30
+REVERSE_THRESHOLD = 45
 
 trigger_pin = 27
 echo_pin    = 22
