@@ -32,6 +32,8 @@ class Ultrasonic:
         else :
             self.move.forward()
         
+        self.move.stop()
+        
 
     def run(self, args):
         self.pwm_S=Servo()
