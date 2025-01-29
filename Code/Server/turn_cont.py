@@ -2,7 +2,7 @@ import move
 import sys
 import time
 
-m = move()
+m = move.Move()
 
 if sys.argv[1] == 'r':
     m.lot_right()
