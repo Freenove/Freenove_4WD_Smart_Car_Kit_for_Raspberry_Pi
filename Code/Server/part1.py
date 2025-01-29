@@ -12,7 +12,7 @@ REVERSE_THRESHOLD = 45
 trigger_pin = 27
 echo_pin    = 22
 sensor = DistanceSensor(echo=echo_pin, trigger=trigger_pin ,max_distance=3)
-class Ultrasonic:
+class Part1:
     def __init__(self):        
         self.move = move.Move()
     def get_distance(self):
@@ -23,11 +23,11 @@ class Ultrasonic:
         if M < REVERSE_THRESHOLD :
             self.move.back()
             if random.random() < 0.5:
-                val = random.randint(75, 360)
+                val = random.randint(75, 180)
                 print("right", val)
                 self.move.right(val)
             else:
-                val = random.randint(75, 360)
+                val = random.randint(75, 180)
                 print("left", val)
                 self.move.left(val)
 
@@ -40,17 +40,6 @@ class Ultrasonic:
         self.pwm_S=Servo()
         self.pwm_S.setServoPwm('0', 90)
 
-        if len(args) > 2:
-            if args[1] == 'r':
-                print("r")
-                for _ in range(int(args[2])):
-                    self.move.right()
-            
-            if args[1] == 'l':
-                print("l")
-                for _ in range(int(args[2])):
-                    self.move.left()
-
         while True:
             tot = []
             for angle in [60, 75, 90, 105, 120]:
@@ -60,7 +49,7 @@ class Ultrasonic:
             
             self.pwm_S.setServoPwm('0', 90)
 
-            M = max(tot)
+            M = min(tot)
             
             print(M)
             self.run_motor(M)
@@ -68,7 +57,7 @@ class Ultrasonic:
             
             
         
-ultrasonic=Ultrasonic()              
+ultrasonic=Part1()              
 # Main program logic follows:
 
 # command line: sudo python MainTest.py <l/r/None> <num>
