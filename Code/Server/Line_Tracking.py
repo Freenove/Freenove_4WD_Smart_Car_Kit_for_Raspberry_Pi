@@ -20,6 +20,8 @@ class Line_Tracking:
                     print ('Right')
                 elif IR01_sensor.value ==True and IR02_sensor.value != True and IR03_sensor.value !=True:
                     print ('Left')
+                else:
+                    print(IR01_sensor.value, IR02_sensor.value, IR03_sensor.value)
         except KeyboardInterrupt:
             print ("\nEnd of program")
         
