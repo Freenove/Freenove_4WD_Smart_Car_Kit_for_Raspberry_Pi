@@ -37,3 +37,10 @@ class Move:
     def stop(self):
         self.PWM.setMotorModel(0, 0, 0, 0)
         time.sleep(SLEEP_TIME)
+    
+    def lot_right(self):
+        self.PWM.setMotorModel(TURN_SPEED,TURN_SPEED,-TURN_SPEED,-TURN_SPEED)
+    
+    def lot_left(self):
+        self.PWM.setMotorModel(-TURN_SPEED,-TURN_SPEED,TURN_SPEED,TURN_SPEED)
+
