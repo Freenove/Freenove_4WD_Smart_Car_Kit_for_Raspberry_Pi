@@ -53,6 +53,6 @@ infrared=Line_Tracking()
 if __name__ == '__main__':
     print ('Program is starting ... ')
     try:
-        infrared.test_Infrared()
+        infrared.run()
     except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program  will be  executed.
         PWM.setMotorModel(0,0,0,0)
