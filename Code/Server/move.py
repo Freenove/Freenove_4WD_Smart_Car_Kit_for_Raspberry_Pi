@@ -8,7 +8,7 @@ import random
 SLEEP_TIME = 0.1
 
 FORWARD_BACKWARD_SPEED = 1000
-TURN_SPEED = 1600
+TURN_SPEED = 1600 * 0.7
 
 class Move:
     def __init__(self):        

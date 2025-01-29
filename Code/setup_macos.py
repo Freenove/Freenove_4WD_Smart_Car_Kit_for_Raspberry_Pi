@@ -7,9 +7,9 @@ for x in range(1,4):
         flag=flag | 0x01
         break
 for x in range(1,4):
-    if os.system("pip3 install PyQt5==5.15.2") == 0:
-        flag=flag | 0x02
-        break
+    # if os.system("pip3 install PyQt5==5.15.2") == 0:
+    flag=flag | 0x02
+        # break
 for x in range(1,4):
     if os.system("pip3 install Pillow") == 0:
         flag=flag | 0x04

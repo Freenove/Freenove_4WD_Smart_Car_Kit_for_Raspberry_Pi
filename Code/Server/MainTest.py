@@ -23,11 +23,13 @@ class Ultrasonic:
         if M < REVERSE_THRESHOLD :
             self.move.back()
             if random.random() < 0.5:
-                print("right")
-                self.move.right(random.randint(0, 360))
+                val = random.randint(75, 360)
+                print("right", val)
+                self.move.right(val)
             else:
-                print("left")
-                self.move.left(random.randint(0, 360))
+                val = random.randint(75, 360)
+                print("left", val)
+                self.move.left(val)
 
         else :
             self.move.forward()
