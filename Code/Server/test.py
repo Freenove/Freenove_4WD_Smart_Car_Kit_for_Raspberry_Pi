@@ -1,153 +1,150 @@
-import time
-from Led import *
-led=Led()
 def test_Led():
+    import time
+    from led import Led
+    led=Led()
     try:
-        led.ledIndex(0x01,255,0,0)      #Red
-        led.ledIndex(0x02,255,125,0)    #orange
-        led.ledIndex(0x04,255,255,0)    #yellow
-        led.ledIndex(0x08,0,255,0)      #green
-        led.ledIndex(0x10,0,255,255)    #cyan-blue
-        led.ledIndex(0x20,0,0,255)      #blue
-        led.ledIndex(0x40,128,0,128)    #purple
-        led.ledIndex(0x80,255,255,255)  #white'''
+        led.ledIndex(0x01, 255,   0,   0)      #Red
+        led.ledIndex(0x02, 255, 125,   0)      #orange
+        led.ledIndex(0x04, 255, 255,   0)      #yellow
+        led.ledIndex(0x08,   0, 255,   0)      #green
+        led.ledIndex(0x10,   0, 255, 255)      #cyan-blue
+        led.ledIndex(0x20,   0,   0, 255)      #blue
+        led.ledIndex(0x40, 128,   0, 128)      #purple
+        led.ledIndex(0x80, 255, 255, 255)      #white
         print ("The LED has been lit, the color is red orange yellow green cyan-blue blue white")
         time.sleep(3)               #wait 3s
-        led.colorWipe([0,0,0])  #turn off the light
+        led.colorBlink(0)  #turn off the light
         print ("\nEnd of program")
     except KeyboardInterrupt:
-        led.colorWipe([0,0,0])  #turn off the light
+        led.colorBlink(0)  #turn off the light
         print ("\nEnd of program") 
         
-from Motor import *            
-PWM=Motor()          
 def test_Motor(): 
+    import time
+    from motor import Ordinary_Car  
+    PWM = Ordinary_Car()    
     try:
-        PWM.setMotorModel(1000,1000,1000,1000)         #Forward
+        PWM.set_motor_model(1000,1000,1000,1000)         #Forward
         print ("The car is moving forward")
         time.sleep(1)
-        PWM.setMotorModel(-1000,-1000,-1000,-1000)     #Back
+        PWM.set_motor_model(-1000,-1000,-1000,-1000)     #Back
         print ("The car is going backwards")
         time.sleep(1)
-        PWM.setMotorModel(-1500,-1500,2000,2000)       #Turn left
+        PWM.set_motor_model(-1500,-1500,2000,2000)       #Turn left
         print ("The car is turning left")
         time.sleep(1)
-        PWM.setMotorModel(2000,2000,-1500,-1500)       #Turn right 
+        PWM.set_motor_model(2000,2000,-1500,-1500)       #Turn right 
         print ("The car is turning right")  
         time.sleep(1)
-        PWM.setMotorModel(-2000,2000,2000,-2000)       #Move left 
-        print ("The car is moving left")  
-        time.sleep(1)
-        PWM.setMotorModel(2000,-2000,-2000,2000)       #Move right 
-        print ("The car is moving right")  
-        time.sleep(1)    
-            
-        PWM.setMotorModel(0,2000,2000,0)         #Move diagonally to the left and forward
-        print ("The car is moving diagonally to the left and forward")  
-        time.sleep(1)
-        PWM.setMotorModel(0,-2000,-2000,0)       #Move diagonally to the right and backward
-        print ("The car is moving diagonally to the right and backward")  
-        time.sleep(1) 
-        PWM.setMotorModel(2000,0,0,2000)         #Move diagonally to the right and forward
-        print ("The car is moving diagonally to the right and forward")  
-        time.sleep(1)
-        PWM.setMotorModel(-2000,0,0,-2000)       #Move diagonally to the left and backward
-        print ("The car is moving diagonally to the left and backward")  
-        time.sleep(1) 
-        
-        PWM.setMotorModel(0,0,0,0)               #Stop
+        PWM.set_motor_model(0,0,0,0)                     #Stop
         print ("\nEnd of program")
     except KeyboardInterrupt:
-        PWM.setMotorModel(0,0,0,0)
         print ("\nEnd of program")
+    finally:
+        PWM.close() # Close the PWM instance
 
-
-from Ultrasonic import *
-ultrasonic=Ultrasonic()                
 def test_Ultrasonic():
+    import time
+    from ultrasonic import Ultrasonic
+    # Initialize the Ultrasonic instance with default pin numbers and max distance
+    ultrasonic = Ultrasonic()
     try:
+        print("Program is starting ...")
         while True:
-            data=ultrasonic.get_distance()   #Get the value
-            print ("Obstacle distance is "+str(data)+"CM")
-            time.sleep(1)
-    except KeyboardInterrupt:
-        print ("\nEnd of program")
+            distance = ultrasonic.get_distance()  # Get the distance measurement in centimeters
+            if distance is not None:
+                print(f"Ultrasonic distance: {distance}cm")  # Print the distance measurement
+            time.sleep(0.5)  # Wait for 0.5 seconds
+    except KeyboardInterrupt:  # Handle keyboard interrupt (Ctrl+C)
+        ultrasonic.close()
+    finally:
+        print("\nEnd of program")  # Print an end message
 
-def car_Rotate():
-    try:
-        while True:
-          PWM.Rotate(0)
-    except KeyboardInterrupt:
-        print ("\nEnd of program")
-
-from Line_Tracking import *
-line=Line_Tracking()
 def test_Infrared():
+    from infrared import Infrared
+    # Create an Infrared object
+    infrared = Infrared()
     try:
-        line.test_Infrared()
+        # Continuously read and print the combined value of all infrared sensors
+        while True:
+            ir1_value = infrared.read_one_infrared(1)
+            ir2_value = infrared.read_one_infrared(2)
+            ir3_value = infrared.read_one_infrared(3)
+            if ir1_value != 1 and ir2_value == 1 and ir3_value != 1:
+                print ('Middle')
+            elif ir1_value != 1 and ir2_value != 1 and ir3_value == 1:
+                print ('Right')
+            elif ir1_value == 1 and ir2_value != 1 and ir3_value != 1:
+                print ('Left')
     except KeyboardInterrupt:
-        print ("\nEnd of program")
+        # Close the Infrared object and print a message when interrupted
+        infrared.close()
+        print("\nEnd of program")
 
-
-from servo import *
-pwm=Servo()
 def test_Servo():
+    import time
+    from servo import Servo
+    servo = Servo()
     try:
+        print ("Program is starting ...")
         while True:
             for i in range(50,110,1):
-                pwm.setServoPwm('0',i)
+                servo.set_servo_pwm('0',i)
                 time.sleep(0.01)
             for i in range(110,50,-1):
-                pwm.setServoPwm('0',i)
+                servo.set_servo_pwm('0',i)
                 time.sleep(0.01)
             for i in range(80,150,1):
-                pwm.setServoPwm('1',i)
+                servo.set_servo_pwm('1',i)
                 time.sleep(0.01)
             for i in range(150,80,-1):
-                pwm.setServoPwm('1',i)
+                servo.set_servo_pwm('1',i)
                 time.sleep(0.01)   
     except KeyboardInterrupt:
-        pwm.setServoPwm('0',90)
-        pwm.setServoPwm('1',90)
+        servo.set_servo_pwm('0',90)
+        servo.set_servo_pwm('1',90)
+    finally:
         print ("\nEnd of program")
         
-        
-from ADC import *
-adc=Adc()
 def test_Adc():
+    import time
+    from adc import ADC
+    adc = ADC()
     try:
+        print ("Program is starting ...")
         while True:
-            Left_IDR=adc.recvADC(0)
+            Left_IDR = adc.read_adc(0)
             print ("The photoresistor voltage on the left is "+str(Left_IDR)+"V")
-            Right_IDR=adc.recvADC(1)
+            Right_IDR = adc.read_adc(1)
             print ("The photoresistor voltage on the right is "+str(Right_IDR)+"V")
-            Power=adc.recvADC(2)
-            print ("The battery voltage is "+str(Power*3)+"V")
+            Power = adc.read_adc(2) * (3 if adc.pcb_version == 1 else 2)
+            print ("The battery voltage is "+str(Power)+"V")
             time.sleep(1)
             print ('\n')
     except KeyboardInterrupt:
         print ("\nEnd of program")
 
-from Buzzer import *
-buzzer=Buzzer()
 def test_Buzzer():
+    import time
+    from buzzer import Buzzer
+    buzzer = Buzzer()
     try:
-        buzzer.run('1')
+        print ("Program is starting ...")
+        buzzer.set_state(True)
         time.sleep(1)
         print ("1S")
         time.sleep(1)
         print ("2S")
         time.sleep(1)
         print ("3S")
-        buzzer.run('0')
-        print ("\nEnd of program")
+        buzzer.set_state(False)
     except KeyboardInterrupt:
-        buzzer.run('0')
+        buzzer.set_state(False)
+    finally:
         print ("\nEnd of program")
            
 # Main program logic follows:
 if __name__ == '__main__':
-
     print ('Program is starting ... ')
     import sys
     if len(sys.argv)<2:
@@ -167,9 +164,6 @@ if __name__ == '__main__':
         test_Adc()  
     elif sys.argv[1] == 'Buzzer':   
         test_Buzzer()  
-    elif sys.argv[1] == 'Rotate':
-        car_Rotate()
-        
         
         
         

@@ -2,39 +2,41 @@ import time
 from rpi_ws281x import Adafruit_NeoPixel, Color
 
 class Freenove_RPI_WS281X:
-    def __init__(self, led_count=4, bright=255, sequence="RGB"):
-        # Initialize the LED strip with default parameters
+    def __init__(self, led_count: int = 4, brightness: int = 255, sequence: str = "RGB"):
+        """Initialize the LED strip with default parameters."""
         self.set_led_type(sequence)
         self.set_led_count(led_count)
-        self.set_led_brightness(bright)
+        self.set_led_brightness(brightness)
         self.led_begin()
         self.set_all_led_color(0, 0, 0)
 
-    def led_begin(self):
-        # Initialize the NeoPixel strip
-        self.strip = Adafruit_NeoPixel(self.get_led_count(), 18, 800000, 10, False, self.led_brightness, 0)
+    def led_begin(self) -> None:
+        """Initialize the NeoPixel strip."""
+        self.strip = Adafruit_NeoPixel(
+            self.get_led_count(), 18, 800000, 10, False, self.led_brightness, 0
+        )
         self.led_init_state = 0 if self.strip.begin() else 1
 
-    def check_rpi_ws281x_state(self):
-        # Check the initialization state of the NeoPixel strip
+    def check_rpi_ws281x_state(self) -> int:
+        """Check the initialization state of the NeoPixel strip."""
         return self.led_init_state
 
-    def led_close(self):
-        # Turn off all LEDs
+    def led_close(self) -> None:
+        """Turn off all LEDs."""
         self.set_all_led_rgb([0, 0, 0])
 
-    def set_led_count(self, count):
-        # Set the number of LEDs in the strip
+    def set_led_count(self, count: int) -> None:
+        """Set the number of LEDs in the strip."""
         self.led_count = count
         self.led_color = [0, 0, 0] * self.led_count
         self.led_original_color = [0, 0, 0] * self.led_count
 
-    def get_led_count(self):
-        # Get the number of LEDs in the strip
+    def get_led_count(self) -> int:
+        """Get the number of LEDs in the strip."""
         return self.led_count
 
-    def set_led_type(self, rgb_type):
-        # Set the RGB sequence type for the LEDs
+    def set_led_type(self, rgb_type: str) -> int:
+        """Set the RGB sequence type for the LEDs."""
         try:
             led_type = ['RGB', 'RBG', 'GRB', 'GBR', 'BRG', 'BGR']
             led_type_offset = [0x06, 0x09, 0x12, 0x21, 0x18, 0x24]
@@ -49,14 +51,14 @@ class Freenove_RPI_WS281X:
             self.led_blue_offset = 2
             return -1
 
-    def set_led_brightness(self, brightness):
-        # Set the brightness of the LEDs
+    def set_led_brightness(self, brightness: int) -> None:
+        """Set the brightness of the LEDs."""
         self.led_brightness = brightness
         for i in range(self.get_led_count()):
             self.set_led_rgb_data(i, self.led_original_color)
 
-    def set_ledpixel(self, index, r, g, b):
-        # Set the color of a specific LED
+    def set_led_pixel(self, index: int, r: int, g: int, b: int) -> None:
+        """Set the color of a specific LED."""
         p = [0, 0, 0]
         p[self.led_red_offset] = round(r * self.led_brightness / 255)
         p[self.led_green_offset] = round(g * self.led_brightness / 255)
@@ -67,65 +69,67 @@ class Freenove_RPI_WS281X:
         for i in range(3):
             self.led_color[index * 3 + i] = p[i]
 
-    def set_led_color_data(self, index, r, g, b):
-        # Set the color data of a specific LED
-        self.set_ledpixel(index, r, g, b)
+    def set_led_color_data(self, index: int, r: int, g: int, b: int) -> None:
+        """Set the color data of a specific LED."""
+        self.set_led_pixel(index, r, g, b)
 
-    def set_led_rgb_data(self, index, color):
-        # Set the RGB data of a specific LED
-        self.set_ledpixel(index, color[0], color[1], color[2])
+    def set_led_rgb_data(self, index: int, color: list) -> None:
+        """Set the RGB data of a specific LED."""
+        self.set_led_pixel(index, color[0], color[1], color[2])
 
-    def set_led_color(self, index, r, g, b):
-        # Set the color of a specific LED and update the display
-        self.set_ledpixel(index, r, g, b)
+    def set_led_color(self, index: int, r: int, g: int, b: int) -> None:
+        """Set the color of a specific LED and update the display."""
+        self.set_led_pixel(index, r, g, b)
         self.show()
 
-    def set_led_rgb(self, index, color):
-        # Set the RGB color of a specific LED and update the display
+    def set_led_rgb(self, index: int, color: list) -> None:
+        """Set the RGB color of a specific LED and update the display."""
         self.set_led_rgb_data(index, color)
         self.show()
 
-    def set_all_led_color_data(self, r, g, b):
-        # Set the color data of all LEDs
+    def set_all_led_color_data(self, r: int, g: int, b: int) -> None:
+        """Set the color data of all LEDs."""
         for i in range(self.get_led_count()):
             self.set_led_color_data(i, r, g, b)
 
-    def set_all_led_rgb_data(self, color):
-        # Set the RGB data of all LEDs
+    def set_all_led_rgb_data(self, color: list) -> None:
+        """Set the RGB data of all LEDs."""
         for i in range(self.get_led_count()):
             self.set_led_rgb_data(i, color)
 
-    def set_all_led_color(self, r, g, b):
-        # Set the color of all LEDs and update the display
+    def set_all_led_color(self, r: int, g: int, b: int) -> None:
+        """Set the color of all LEDs and update the display."""
         for i in range(self.get_led_count()):
             self.set_led_color_data(i, r, g, b)
         self.show()
 
-    def set_all_led_rgb(self, color):
-        # Set the RGB color of all LEDs and update the display
+    def set_all_led_rgb(self, color: list) -> None:
+        """Set the RGB color of all LEDs and update the display."""
         for i in range(self.get_led_count()):
             self.set_led_rgb_data(i, color)
         self.show()
 
-    def show(self):
-        # Update the LED strip with the current color data
+    def show(self) -> None:
+        """Update the LED strip with the current color data."""
         for i in range(self.get_led_count()):
-            self.strip.setPixelColor(i, Color(self.led_color[i * 3], self.led_color[i * 3 + 1], self.led_color[i * 3 + 2]))
+            self.strip.setPixelColor(
+                i, Color(self.led_color[i * 3], self.led_color[i * 3 + 1], self.led_color[i * 3 + 2])
+            )
         self.strip.show()
 
-    def wheel(self, pos):
-        # Generate a color wheel value based on the position
+    def wheel(self, pos: int) -> list:
+        """Generate a color wheel value based on the position."""
         if pos < 85:
-            return [(255 - pos * 3), (pos * 3), 0]
+            return [255 - pos * 3, pos * 3, 0]
         elif pos < 170:
-            pos = pos - 85
-            return [0, (255 - pos * 3), (pos * 3)]
+            pos -= 85
+            return [0, 255 - pos * 3, pos * 3]
         else:
-            pos = pos - 170
-            return [(pos * 3), 0, (255 - pos * 3)]
+            pos -= 170
+            return [pos * 3, 0, 255 - pos * 3]
 
-    def hsv2rgb(self, h, s, v):
-        # Convert HSV to RGB
+    def hsv2rgb(self, h: int, s: int, v: int) -> list:
+        """Convert HSV to RGB."""
         h = h % 360
         rgb_max = round(v * 2.55)
         rgb_min = round(rgb_max * (100 - s) / 100)
@@ -159,10 +163,7 @@ class Freenove_RPI_WS281X:
         return [r, g, b]
 
 if __name__ == '__main__':
-    import time
-    import os
-    led = Freenove_RPI_WS281X(4, 255, "RGB")
-
+    led = FreenoveRPIWS281X(4, 255, "RGB")
     try:
         if led.check_rpi_ws281x_state() != 0:
             led.set_led_count(4)
@@ -182,8 +183,8 @@ if __name__ == '__main__':
             led.set_led_brightness(20)
             while True:
                 for j in range(255):
-                    for i in range(led.led_count):
-                        led.set_led_rgb_data(i, led.wheel((round(i * 255 / led.led_count) + j) % 256))
+                    for i in range(led.get_led_count()):
+                        led.set_led_rgb_data(i, led.wheel((round(i * 255 / led.get_led_count()) + j) % 256))
                     led.show()
                     time.sleep(0.002)
         else:

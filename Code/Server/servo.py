@@ -1,50 +1,41 @@
-import time
-from PCA9685 import PCA9685
+from pca9685 import PCA9685
+
 class Servo:
     def __init__(self):
-        self.PwmServo = PCA9685(0x40, debug=True)
-        self.PwmServo.setPWMFreq(50)
-        self.PwmServo.setServoPulse(8,1500)
-        self.PwmServo.setServoPulse(9,1500)
-    def setServoPwm(self,channel,angle,error=10):
-        angle=int(angle)
-        if channel=='0':
-            self.PwmServo.setServoPulse(8,2500-int((angle+error)/0.09))
-        elif channel=='1':
-            self.PwmServo.setServoPulse(9,500+int((angle+error)/0.09))
-        elif channel=='2':
-            self.PwmServo.setServoPulse(10,500+int((angle+error)/0.09))
-        elif channel=='3':
-            self.PwmServo.setServoPulse(11,500+int((angle+error)/0.09))
-        elif channel=='4':
-            self.PwmServo.setServoPulse(12,500+int((angle+error)/0.09))
-        elif channel=='5':
-            self.PwmServo.setServoPulse(13,500+int((angle+error)/0.09))
-        elif channel=='6':
-            self.PwmServo.setServoPulse(14,500+int((angle+error)/0.09))
-        elif channel=='7':
-            self.PwmServo.setServoPulse(15,500+int((angle+error)/0.09))
+        self.pwm_frequency = 50
+        self.initial_pulse = 1500
+        self.pwm_channel_map = {
+            '0': 8,
+            '1': 9,
+            '2': 10,
+            '3': 11,
+            '4': 12,
+            '5': 13,
+            '6': 14,
+            '7': 15
+        }
+        self.pwm_servo = PCA9685(0x40, debug=True)
+        self.pwm_servo.set_pwm_freq(self.pwm_frequency)
+        for channel in self.pwm_channel_map.values():
+            self.pwm_servo.set_servo_pulse(channel, self.initial_pulse)
+
+    def set_servo_pwm(self, channel: str, angle: int, error: int = 10) -> None:
+        angle = int(angle)
+        if channel not in self.pwm_channel_map:
+            raise ValueError(f"Invalid channel: {channel}. Valid channels are {list(self.pwm_channel_map.keys())}.")
+        pulse = 2500 - int((angle + error) / 0.09) if channel == '0' else 500 + int((angle + error) / 0.09)
+        self.pwm_servo.set_servo_pulse(self.pwm_channel_map[channel], pulse)
 
 # Main program logic follows:
 if __name__ == '__main__':
-    print("Now servos will rotate to 90°.") 
-    print("If they have already been at 90°, nothing will be observed.")
+    print("Now servos will rotate to 90 degree.") 
+    print("If they have already been at 90 degree, nothing will be observed.")
     print("Please keep the program running when installing the servos.")
     print("After that, you can press ctrl-C to end the program.")
-    pwm=Servo()
-    while True:
-        try :
-            pwm.setServoPwm('0',90)
-            pwm.setServoPwm('1',90)
-        except KeyboardInterrupt:
-            print ("\nEnd of program")
-            break
-
-    
-
-    
-       
-
-
-
-    
+    pwm_servo = Servo()
+    try:
+        while True:
+            pwm_servo.set_servo_pwm('0', 90)
+            pwm_servo.set_servo_pwm('1', 90)
+    except KeyboardInterrupt:
+        print("\nEnd of program")

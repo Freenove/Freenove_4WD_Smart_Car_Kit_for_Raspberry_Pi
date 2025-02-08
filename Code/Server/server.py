@@ -1,400 +1,130 @@
-#!/usr/bin/python 
-# -*- coding: utf-8 -*-
-import io
-import math
-import socket
-import  numpy as np
-import struct
-import time
-from picamera2 import Picamera2,Preview
-from picamera2.encoders import JpegEncoder
-from picamera2.outputs import FileOutput
-from picamera2.encoders import Quality
-from threading import Condition
-import fcntl
-import  sys
-import threading
-from Motor import *
-from servo import *
-from Led import *
-from Buzzer import *
-from ADC import *
-from Thread import *
-from Light import *
-from Ultrasonic import *
-from Line_Tracking import *
-from threading import Timer
-from threading import Thread
-from Command import COMMAND as cmd
-
-class StreamingOutput(io.BufferedIOBase):
-    def __init__(self):
-        self.frame = None
-        self.condition = Condition()
-
-    def write(self, buf):
-        with self.condition:
-            self.frame = buf
-            self.condition.notify_all()
+import socket  # Import the socket module for network communication
+import fcntl   # Import the fcntl module for I/O control
+import struct  # Import the struct module for packing and unpacking data
+from tcp_server import TCPServer  # Import the TCPServer class from the tcp_server module
 
 class Server:
     def __init__(self):
-        self.PWM=Motor()
-        self.servo=Servo()
-        self.led=Led()
-        self.ultrasonic=Ultrasonic()
-        self.buzzer=Buzzer()
-        self.adc=Adc()
-        self.light=Light()
-        self.infrared=Line_Tracking()
-        self.tcp_Flag = True
-        self.sonic=False
-        self.Light=False
-        self.Light=False
-        self.Line=False
-        self.Mode = 'one'
-        self.endChar='\n'
-        self.intervalChar='#'
-        self.rotation_flag = False
-    def get_interface_ip(self):
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        return socket.inet_ntoa(fcntl.ioctl(s.fileno(),
-                                            0x8915,
-                                            struct.pack('256s',b'wlan0'[:15])
-                                            )[20:24])
-    def StartTcpServer(self):
-        HOST=str(self.get_interface_ip())
-        self.server_socket1 = socket.socket()
-        self.server_socket1.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEPORT,1)
-        self.server_socket1.bind((HOST, 5000))
-        self.server_socket1.listen(1)
-        self.server_socket = socket.socket()
-        self.server_socket.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEPORT,1)
-        self.server_socket.bind((HOST, 8000))
-        self.server_socket.listen(1)
-        print('Server address: '+HOST)
+        """Initialize the TankServer class."""
+        self.ip_address = self.get_interface_ip()  # Get the IP address of the network interface
+        self.command_server = TCPServer()          # Initialize the command server
+        self.video_server = TCPServer()            # Initialize the video server
+        self.command_server_is_busy = False        # Flag to indicate whether the command server is busy
+        self.video_server_is_busy = False          # Flag to indicate whether the video server is busy
 
-    def StopTcpServer(self):
+    def get_interface_ip(self) -> str:
+        """Get the IP address of the wlan0 interface."""
         try:
-            self.connection.close()
-            self.connection1.close()
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # Create a UDP socket
+            ip = socket.inet_ntoa(fcntl.ioctl(
+                s.fileno(),
+                0x8915,  # SIOCGIFADDR
+                struct.pack('256s', b'wlan0'[:15])
+            )[20:24])
+            return ip
         except Exception as e:
-            print ('\n'+"No client connection")
+            print(f"Error getting IP address: {e}")
+            return "127.0.0.1"  # Default to localhost if an error occurs
 
-    def Reset(self):
-        self.StopTcpServer()
-        self.StartTcpServer()
-        self.SendVideo=Thread(target=self.sendvideo)
-        self.ReadData=Thread(target=self.readdata)
-        self.SendVideo.start()
-        self.ReadData.start()
-    def send(self,data):
-        self.connection1.send(data.encode('utf-8'))
-    def sendvideo(self):
+    def start_tcp_servers(self, command_port: int = 5000, video_port: int = 8000, max_clients: int = 1, listen_count: int = 1) -> None:
+        """Start the TCP servers on specified ports."""
         try:
-            self.connection,self.client_address = self.server_socket.accept()
-            self.connection=self.connection.makefile('wb')
-        except:
-            pass
-        self.server_socket.close()
-        print ("socket video connected ... ")
-        camera = Picamera2()
-        camera.configure(camera.create_video_configuration(main={"size": (400, 300)}))
-        output = StreamingOutput()
-        encoder = JpegEncoder(q=90)
-        camera.start_recording(encoder, FileOutput(output),quality=Quality.VERY_HIGH)
-        while True:
-            with output.condition:
-                output.condition.wait()
-                frame = output.frame
-            try:
-                lenFrame = len(output.frame)
-                #print("output .length:",lenFrame)
-                lengthBin = struct.pack('<I', lenFrame)
-                self.connection.write(lengthBin)
-                self.connection.write(frame)
-            except Exception as e:
-                camera.stop_recording()
-                camera.close()
-                print ("End transmit ... " )
-                break
+            self.command_server.start(self.ip_address, command_port, max_clients, listen_count)  # Start the command server
+            self.video_server.start(self.ip_address, video_port, max_clients, listen_count)      # Start the video server
+        except Exception as e:
+            print(f"Error starting TCP servers: {e}")
 
-    def stopMode(self):
+    def stop_tcp_servers(self) -> None:
+        """Stop the TCP servers."""
         try:
-            stop_thread(self.infraredRun)
-            self.PWM.setMotorModel(0,0,0,0)
-        except:
-            pass
-        finally:
-            self.PWM.setMotorModel(0,0,0,0)
+            self.command_server.close()  # Close the command server
+            self.video_server.close()    # Close the video server
+        except Exception as e:
+            print(f"Error stopping TCP servers: {e}")
+
+    def set_command_server_busy(self, state: bool) -> None:
+        """Set the busy state of the command server."""
+        self.command_server_is_busy = state
+
+    def set_video_server_busy(self, state: bool) -> None:
+        """Set the busy state of the video server."""
+        self.video_server_is_busy = state
+
+    def get_command_server_busy(self) -> bool:
+        """Get the busy state of the command server."""
+        return self.command_server_is_busy
+
+    def get_video_server_busy(self) -> bool:
+        """Get the busy state of the video server."""
+        return self.video_server_is_busy
+
+    def send_data_to_command_client(self, data: bytes, ip_address: str = None) -> None:
+        """Send data to the command server client(s)."""
+        self.set_command_server_busy(True)
         try:
-            stop_thread(self.lightRun)
-        except:
-            pass
-        finally:
-            self.PWM.setMotorModel(0,0,0,0)
-        try:
-            stop_thread(self.ultrasonicRun)
-        except:
-            pass
-        finally:
-            self.PWM.setMotorModel(0,0,0,0)
-            self.servo.setServoPwm('0',90)
-            self.servo.setServoPwm('1',90)
-        self.sonic=False
-        self.Light=False
-        self.Line=False         
-        self.send('CMD_MODE'+'#1'+'#'+'0'+'#'+'0'+'\n')
-        self.send('CMD_MODE'+'#3'+'#'+'0'+'\n')
-        self.send('CMD_MODE'+'#2'+'#'+'000'+'\n')           
-    def readdata(self):
-        try:
-            try:
-                self.connection1,self.client_address1 = self.server_socket1.accept()
-                print ("Client connection successful !")
-            except:
-                print ("Client connect failed")
-            restCmd=""
-            self.server_socket1.close()
-            while True:
-                try:
-                    AllData=restCmd+self.connection1.recv(1024).decode('utf-8')
-                except:
-                    if self.tcp_Flag:
-                        self.Reset()
-                    break
-                print(AllData)
-                if len(AllData) < 5:
-                    restCmd=AllData
-                    if restCmd=='' and self.tcp_Flag:
-                        self.Reset()
-                        break
-                restCmd=""
-                if AllData=='':
-                    break
-                else:
-                    cmdArray=AllData.split("\n")
-                    if(cmdArray[-1] != ""):
-                        restCmd=cmdArray[-1]
-                        cmdArray=cmdArray[:-1]
-
-                for oneCmd in cmdArray:
-                    data=oneCmd.split("#")
-                    if data==None:
-                        continue
-                    elif cmd.CMD_MODE in data:
-                        if data[1]=='one' or data[1]=="1":
-                            self.stopMode()
-                            self.Mode='one'
-                        elif data[1]=='two' or data[1]=="3":
-                            self.stopMode()
-                            self.Mode='two'
-                            self.lightRun=Thread(target=self.light.run)
-                            self.lightRun.start()
-                            self.Light = True
-                            self.lightTimer = threading.Timer(0.3, self.sendLight)
-                            self.lightTimer.start()
-                        elif data[1]=='three' or data[1]=="4":
-                            self.stopMode()
-                            self.Mode='three'
-                            self.ultrasonicRun=threading.Thread(target=self.ultrasonic.run)
-                            self.ultrasonicRun.start()
-                            self.sonic=True
-                            self.ultrasonicTimer = threading.Timer(0.2,self.sendUltrasonic)
-                            self.ultrasonicTimer.start()
-                        elif data[1]=='four' or data[1]=="2":
-                            self.stopMode()
-                            self.Mode='four'
-                            self.infraredRun=threading.Thread(target=self.infrared.run)
-                            self.infraredRun.start()
-                            self.Line=True
-                            self.lineTimer = threading.Timer(0.4,self.sendLine)
-                            self.lineTimer.start()
-
-                    elif (cmd.CMD_MOTOR in data) and self.Mode=='one':
-                        try:
-                            data1=int(data[1])
-                            data2=int(data[2])
-                            data3=int(data[3])
-                            data4=int(data[4])
-                            if data1==None or data2==None or data2==None or data3==None:
-                                continue
-                            self.PWM.setMotorModel(data1,data2,data3,data4)
-                        except:
-                            pass
-                    elif (cmd.CMD_M_MOTOR in data) and self.Mode=='one':
-                        try:
-                            data1=int(data[1])
-                            data2=int(data[2])
-                            data3=int(data[3])
-                            data4=int(data[4])
-
-                            LX = -int((data2 * math.sin(math.radians(data1))))
-                            LY = int(data2 * math.cos(math.radians(data1)))
-                            RX = int(data4 * math.sin(math.radians(data3)))
-                            RY = int(data4 * math.cos(math.radians(data3)))
-
-                            FR = LY - LX + RX
-                            FL = LY + LX - RX
-                            BL = LY - LX - RX
-                            BR = LY + LX + RX
-
-
-                            if data1==None or data2==None or data2==None or data3==None:
-                                continue
-                            self.PWM.setMotorModel(FL,BL,FR,BR)
-                        except:
-                            pass
-                    elif (cmd.CMD_CAR_ROTATE in data) and self.Mode == 'one':
-                        try:
-
-                            data1 = int(data[1])
-                            data2 = int(data[2])
-                            data3 = int(data[3])
-                            data4 = int(data[4])
-                            set_angle = data3
-                            if data4 == 0:
-                                try:
-                                    stop_thread(Rotate_Mode)
-                                    self.rotation_flag = False
-                                except:
-                                    pass
-                                LX = -int((data2 * math.sin(math.radians(data1))))
-                                LY = int(data2 * math.cos(math.radians(data1)))
-                                RX = int(data4 * math.sin(math.radians(data3)))
-                                RY = int(data4 * math.cos(math.radians(data3)))
-
-                                FR = LY - LX + RX
-                                FL = LY + LX - RX
-                                BL = LY - LX - RX
-                                BR = LY + LX + RX
-
-
-                                if data1 == None or data2 == None or data2 == None or data3 == None:
-                                    continue
-                                self.PWM.setMotorModel(FL, BL, FR, BR)
-                            elif self.rotation_flag == False:
-                                self.angle = data[3]
-                                try:
-                                    stop_thread(Rotate_Mode)
-                                except:
-                                    pass
-                                self.rotation_flag = True
-                                Rotate_Mode = Thread(target=self.PWM.Rotate, args=(data3,))
-                                Rotate_Mode.start()
-                        except:
-                            pass
-                    elif cmd.CMD_SERVO in data:
-                        try:
-                            data1 = data[1]
-                            data2 = int(data[2])
-                            if data1 == None or data2 == None:
-                                continue
-                            self.servo.setServoPwm(data1,data2)
-                        except:
-                            pass
-
-                    elif cmd.CMD_LED in data:
-                        try:
-                            data1=int(data[1])
-                            data2=int(data[2])
-                            data3=int(data[3])
-                            data4=int(data[4])
-                            if data1==None or data2==None or data3==None or data4==None:
-                                continue
-                            self.led.ledIndex(data1,data2,data3,data4)
-                        except:
-                            pass
-                    elif cmd.CMD_LED_MOD in data:
-                        self.LedMoD=data[1]
-                        try:
-                            stop_thread(self.Led_Run_Mode)
-                        except:
-                            pass
-                        time.sleep(0.1)
-                        self.Led_Run_Mode=Thread(target=self.led.ledMode,args=(data[1],))
-                        self.Led_Run_Mode.start()
-                    elif cmd.CMD_SONIC in data:
-                        if data[1]=='1':
-                            self.sonic=True
-                            self.ultrasonicTimer = threading.Timer(0.5,self.sendUltrasonic)
-                            self.ultrasonicTimer.start()
-                        else:
-                            self.sonic=False
-                    elif cmd.CMD_BUZZER in data:
-                        try:
-                            self.buzzer.run(data[1])
-                        except:
-                            pass
-                    elif cmd.CMD_LIGHT in data:
-                        if data[1]=='1':
-                            self.Light=True
-                            self.lightTimer = threading.Timer(0.3,self.sendLight)
-                            self.lightTimer.start()
-                        else:
-                            self.Light=False
-                    elif cmd.CMD_POWER in data:
-                        ADC_Power=self.adc.recvADC(2)*3
-                        try:
-                            self.send(cmd.CMD_POWER+'#'+str(round(ADC_Power, 2))+'\n')
-                        except:
-                            pass
+            if ip_address is not None:
+                self.command_server.send_to_client(ip_address, data)  # Send data to a specific client
+            else:
+                self.command_server.send_to_all_client(data)         # Send data to all connected clients of the command server
         except Exception as e:
             print(e)
-        self.StopTcpServer()
-    def sendUltrasonic(self):
-        if self.sonic==True:
-            ADC_Ultrasonic=self.ultrasonic.get_distance()
-            #print('distanse: '+str(ADC_Ultrasonic))
-            try:
-                self.send(cmd.CMD_MODE+"#"+"3"+"#"+str(ADC_Ultrasonic)+'\n')
-            except:
-                self.sonic=False
-            self.ultrasonicTimer = threading.Timer(0.23,self.sendUltrasonic)
-            self.ultrasonicTimer.start()
-    def sendLight(self):
-        if self.Light==True:
-            ADC_Light1=self.adc.recvADC(0)
-            ADC_Light2=self.adc.recvADC(1)
-            try:
-                self.send("CMD_MODE#1"+'#'+str(ADC_Light1)+'#'+str(ADC_Light2)+'\n')
-            except:
-                self.Light=False
-            self.lightTimer = threading.Timer(0.17,self.sendLight)
-            self.lightTimer.start()
-    def sendLine(self):
-        if self.Line==True:
-            Line1= IR01_sensor.value
-            Line2= IR02_sensor.value
-            Line3= IR03_sensor.value
-            try:
-                self.send("CMD_MODE#2"+'#'+str(Line1)+str(Line2)+str(Line3)+'\n')
-            except:
-                self.Line=False
-            self.LineTimer = threading.Timer(0.20,self.sendLine)
-            self.LineTimer.start()
-    def Power(self):
-        while True:
-            ADC_Power=self.adc.recvADC(2)*3
-            try:
-                self.send(cmd.CMD_POWER+'#'+str(round(ADC_Power, 2))+'\n')
-            except:
-                pass
-            time.sleep(3)
-            if ADC_Power < 6.5:
-                for i in range(4):
-                    self.buzzer.run('1')
-                    time.sleep(0.1)
-                    self.buzzer.run('0')
-                    time.sleep(0.1)
-            elif ADC_Power< 7:
-                for i in range(2):
-                    self.buzzer.run('1')
-                    time.sleep(0.1)
-                    self.buzzer.run('0')
-                    time.sleep(0.1)
-            else:
-                self.buzzer.run('0')
-if __name__=='__main__':
-    pass
+        finally:
+            self.set_command_server_busy(False)
 
+    def send_data_to_video_client(self, data: bytes, ip_address: str = None) -> None:
+        """Send data to the video server client(s)."""
+        self.set_video_server_busy(True)
+        try:
+            if ip_address is not None:
+                self.video_server.send_to_client(ip_address, data)  # Send data to a specific client
+            else:
+                self.video_server.send_to_all_client(data)         # Send data to all connected clients of the video server
+        finally:
+            self.set_video_server_busy(False)
+
+    def read_data_from_command_server(self) -> 'queue.Queue':
+        """Read data from the command server's message queue."""
+        return self.command_server.message_queue
+
+    def read_data_from_video_server(self) -> 'queue.Queue':
+        """Read data from the video server's message queue."""
+        return self.video_server.message_queue
+
+    def is_command_server_connected(self) -> bool:
+        """Check if the command server has any active connections."""
+        return self.command_server.active_connections > 0
+
+    def is_video_server_connected(self) -> bool:
+        """Check if the video server has any active connections."""
+        return self.video_server.active_connections > 0
+
+    def get_command_server_client_ips(self) -> list:
+        """Get the list of client IP addresses connected to the command server."""
+        return self.command_server.get_client_ips()
+
+    def get_video_server_client_ips(self) -> list:
+        """Get the list of client IP addresses connected to the video server."""
+        return self.video_server.get_client_ips()
+
+if __name__ == '__main__':
+    print('Program is starting ... ')  # Print a message indicating the start of the program
+    server = Server()              # Create an instance of the TankServer class
+    server.start_tcp_servers(5003, 8003)  # Start the TCP servers on specified ports
+
+    try:
+        while True:
+            cmd_queue = server.read_data_from_command_server()  # Get the command server's message queue
+            if cmd_queue.qsize() > 0:  # Check if there are messages in the queue
+                client_address, message = cmd_queue.get()  # Get a message from the queue
+                print(client_address, message)  # Print the client address and message
+                server.send_data_to_command_client(message, client_address)  # Send the message back to the client
+
+            video_queue = server.read_data_from_video_server()  # Get the video server's message queue
+            if video_queue.qsize() > 0:  # Check if there are messages in the queue
+                client_address, message = video_queue.get()  # Get a message from the queue
+                print(client_address, message)  # Print the client address and message
+                server.send_data_to_video_client(message, client_address)  # Send the message back to the client
+
+    except KeyboardInterrupt:  # Catch keyboard interrupt
+        print("Received interrupt signal, stopping server...")  # Print interrupt information
+        server.stop_tcp_servers()  # Stop the TCP servers

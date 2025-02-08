@@ -1,84 +1,49 @@
+from gpiozero import DistanceSensor, PWMSoftwareFallback, DistanceSensorNoEcho
+import warnings
 import time
-from Motor import *
-from gpiozero import DistanceSensor
-from servo import *
-from PCA9685 import PCA9685
-trigger_pin = 27
-echo_pin    = 22
-sensor = DistanceSensor(echo=echo_pin, trigger=trigger_pin ,max_distance=3)
-class Ultrasonic:
-    def __init__(self):        
-        pass
-    def get_distance(self):     # get the measurement results of ultrasonic module,with unit: cm
-        distance_cm = sensor.distance * 100
-        return  int(distance_cm)
-    
-    def run_motor(self,L,M,R):
-        if (L < 30 and M < 30 and R <30) or M < 30 :
-            self.PWM.setMotorModel(-1450,-1450,-1450,-1450) 
-            time.sleep(0.1)   
-            if L < R:
-                self.PWM.setMotorModel(1450,1450,-1450,-1450)
-            else :
-                self.PWM.setMotorModel(-1450,-1450,1450,1450)
-        elif L < 30 and M < 30:
-            PWM.setMotorModel(1500,1500,-1500,-1500)
-        elif R < 30 and M < 30:
-            PWM.setMotorModel(-1500,-1500,1500,1500)
-        elif L < 20 :
-            PWM.setMotorModel(2000,2000,-500,-500)
-            if L < 10 :
-                PWM.setMotorModel(1500,1500,-1000,-1000)
-        elif R < 20 :
-            PWM.setMotorModel(-500,-500,2000,2000)
-            if R < 10 :
-                PWM.setMotorModel(-1500,-1500,1500,1500)
-        else :
-            self.PWM.setMotorModel(600,600,600,600)
-                
-    def run(self):
-        self.PWM=Motor()
-        self.pwm_S=Servo()
-        for i in range(30,151,60):
-                self.pwm_S.setServoPwm('0',i)
-                time.sleep(0.2)
-                if i==30:
-                    L = self.get_distance()
-                elif i==90:
-                    M = self.get_distance()
-                else:
-                    R = self.get_distance()
-        while True:
-            for i in range(90,30,-60):
-                self.pwm_S.setServoPwm('0',i)
-                time.sleep(0.2)
-                if i==30:
-                    L = self.get_distance()
-                elif i==90:
-                    M = self.get_distance()
-                else:
-                    R = self.get_distance()
-                self.run_motor(L,M,R)
-            for i in range(30,151,60):
-                self.pwm_S.setServoPwm('0',i)
-                time.sleep(0.2)
-                if i==30:
-                    L = self.get_distance()
-                elif i==90:
-                    M = self.get_distance()
-                else:
-                    R = self.get_distance()
-                self.run_motor(L,M,R)
-        
-            
-        
-ultrasonic=Ultrasonic()              
-# Main program logic follows:
-if __name__ == '__main__':
-    print ('Program is starting ... ')
-    try:
-        ultrasonic.run()
-    except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
-        PWM.setMotorModel(0,0,0,0)
-        ultrasonic.pwm_S.setServoPwm('0',90)
 
+class Ultrasonic:
+    def __init__(self, trigger_pin: int = 27, echo_pin: int = 22, max_distance: float = 3.0):
+        # Initialize the Ultrasonic class and set up the distance sensor.
+        warnings.filterwarnings("ignore", category = DistanceSensorNoEcho)
+        warnings.filterwarnings("ignore", category = PWMSoftwareFallback)  # Ignore PWM software fallback warnings
+        self.trigger_pin = trigger_pin  # Set the trigger pin number
+        self.echo_pin = echo_pin        # Set the echo pin number
+        self.max_distance = max_distance  # Set the maximum distance
+        self.sensor = DistanceSensor(echo=self.echo_pin, trigger=self.trigger_pin, max_distance=self.max_distance)  # Initialize the distance sensor
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def get_distance(self) -> float:
+        """
+        Get the distance measurement from the ultrasonic sensor.
+
+        Returns:
+        float: The distance measurement in centimeters, rounded to one decimal place.
+        """
+        try:
+            distance = self.sensor.distance * 100  # Get the distance in centimeters
+            return round(float(distance), 1)  # Return the distance rounded to one decimal place
+        except RuntimeWarning as e:
+            print(f"Warning: {e}")
+            return None
+
+    def close(self):
+        # Close the distance sensor.
+        self.sensor.close()  # Close the sensor to release resources
+
+if __name__ == '__main__':
+    # Initialize the Ultrasonic instance with default pin numbers and max distance
+    with Ultrasonic() as ultrasonic:
+        try:
+            while True:
+                distance = ultrasonic.get_distance()  # Get the distance measurement in centimeters
+                if distance is not None:
+                    print(f"Ultrasonic distance: {distance}cm")  # Print the distance measurement
+                time.sleep(0.5)  # Wait for 0.5 seconds
+        except KeyboardInterrupt:  # Handle keyboard interrupt (Ctrl+C)
+            print("\nEnd of program")  # Print an end message
