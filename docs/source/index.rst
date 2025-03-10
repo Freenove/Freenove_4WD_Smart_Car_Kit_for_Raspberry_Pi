@@ -1,12 +1,12 @@
 ######################################################
-Freenove 4WD Smart Car Kit for Raspberry_Pi
+FNK0043-Freenove 4WD Smart Car Kit for Raspberry_Pi
 ######################################################
 
 FNK0043
-******************************************************
+********************************
 
 .. toctree::
-   :maxdepth: 1
+   :titlesonly:
    :caption: Welcome
 
    fnk0043/codes/tutorial/Welcome.rst
@@ -14,14 +14,14 @@ FNK0043
    fnk0043/codes/tutorial/Preface.rst
 
 .. toctree::
-   :maxdepth: 1
+   :titlesonly: 
    :caption: Preparation
 
-   fnk0043codes/tutorial/Preparation.rst
+   fnk0043/codes/tutorial/Preparation.rst
    
 .. toctree::
    :numbered:
-   :maxdepth: 1
+   :titlesonly:
    :caption: Projects
     
    fnk0043/codes/tutorial/1_Software_installation.rst
@@ -33,7 +33,7 @@ FNK0043
    fnk0043/codes/tutorial/7_Smart_video_car.rst
 
 .. toctree::
-   :maxdepth: 1
-   :caption: What's Next?
+   :titlesonly:
+   :caption: what_s_next
 
    fnk0043/codes/tutorial/WhatsNext.rst
