@@ -561,5 +561,8 @@ Then please open and check the generated image.jpg under
 
 /Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Server. 
 
+.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_31.png
+    :align: center
+
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_30.png
     :align: center

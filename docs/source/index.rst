@@ -30,32 +30,32 @@ Documentation
 This product provides the following online documents.
 
 .. toctree::
-   :titlesonly:
+   :maxdepth: 1
    :caption: Welcome
 
    fnk0043/codes/tutorial/Welcome.rst
 
 .. toctree::
-   :titlesonly:
+   :maxdepth: 1
    :caption: List
 
    fnk0043/codes/tutorial/List.rst
 
 .. toctree::
-   :titlesonly:
+   :maxdepth: 1
    :caption: Preface
 
    fnk0043/codes/tutorial/Preface.rst
 
 .. toctree::
-   :titlesonly: 
+   :maxdepth: 1
    :caption: Preparation
 
    fnk0043/codes/tutorial/Preparation.rst
    
 .. toctree::
    :numbered:
-   :titlesonly:
+   :maxdepth: 1
    :caption: Projects
     
    fnk0043/codes/tutorial/1_Software_installation.rst
@@ -67,7 +67,7 @@ This product provides the following online documents.
    fnk0043/codes/tutorial/7_Smart_video_car.rst
 
 .. toctree::
-   :titlesonly:
+   :maxdepth: 1
    :caption: What's Next?
 
    fnk0043/codes/tutorial/WhatsNext.rst

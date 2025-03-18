@@ -8,40 +8,18 @@ You can refer to this video: https://youtu.be/3WH4QYPWN-I
 
    <iframe height="500" width="690" src="https://www.youtube.com/embed/3WH4QYPWN-I" frameborder="0" allowfullscreen></iframe>
 
+**If you have any concerns, please feel free to contact us via:** support@freenove.com
+
+The smart video car integrates the previous functions of light tracing, obstacle avoidance, line tracing, video transmission, face detection, LED and so on. And it is built with a server and a client, so it can be controlled remotely. 
+
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_00.png
     :align: center
 
 Server
 ****************************************************************
 
-The server works on the Raspberry Pi and can transmit camera data, ultrasonic data, etc. to the client, and it can also receive commands from the client.
-
-In the Server folder, there is a server.py file which contains main server code. 
-
-**get_interface_ip()** is used to get IP address of the native Raspberry Pi wlan0, without manually modifying the code to set IP parameters. 
-
-**StartTcpServer()** is used to start the TCP service. The channel of port 5000 is mainly used to send and receive commands between the client and the server. The channel of port 8000 is used for the server to transmit the collected camera data to the client. 
-
-**StopTcpServer()** is used to stop the TCP service. 
-
-**sendvideo()** is used to sends the camera data.
-
-Code
-================================================================
-
-
-.. literalinclude:: ../../../freenove_Kit/Code/Server/server.py
-    :linenos: 
-    :language: python
-    :lines: 59-82, 93-120
-
-.. _open server:
-
-Open Server
-================================================================
-
 Step 1 Login Raspberry Pi via VNC viewer 
-----------------------------------------------------------------
+==================================================
 
 :red:`Because server and client use GUI. You need use VNC viewer as remote desktop way.`
 
@@ -109,28 +87,6 @@ The interface is as below:
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_07.png
     :align: center
 
-If you don't like the interface, you can also enter the commands to open the server. It is more convenient.
-
-1.	Use cd command to enter directory where main.py is located:
-
-.. code-block:: console
-
-    $ cd ~/Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Server
-
-2.	Run main.py:
-
-.. code-block:: console
-
-    $ sudo python main.py -t -n
-
-or Run main,py with following command:
-
-.. code-block:: console
-
-    $ sudo python main.py -tn
-
-"-t" means open TCP communication. “-n“ means don't show interface.
-
 Sever Auto Start 
 ----------------------------------------------------------------
 
@@ -157,16 +113,6 @@ Sever Auto Start
     sleep 10
     sudo python main.py
  
-Note that if you are a Raspberry PI 5, use the following contents.
-
-.. code-block:: shell
-
-    #!/bin/sh
-    cd "/home/pi/Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Server-Pi5"
-    pwd	
-    sleep 10
-    sudo python main.py
-
 Press Ctrl + O and then press Enter to save it. Press Ctrl+X to exit.
 
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_08.png
@@ -236,14 +182,15 @@ Part of client code is as below:
 .. literalinclude:: ../../../freenove_Kit/Code/Client/Video.py
     :linenos: 
     :language: python
-    :lines: 1-78
+    :lines: 13-78
     
 Run client on windows system
+===========================================
 
 There are two ways to run Client on Windows.
 
 Option 1 Running executable file directly
-================================================================
+------------------------------------------------
 
 Find the “Client.exe” file in the specified directory, double click it and the Client is opened.
 
@@ -255,7 +202,7 @@ The client interface is shown as below:
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_10.png
     :align: center
 
-After the client opens successfully, you need open the Raspberry Pi and  open server first, then enter the IP address of the Raspberry Pi in the white IP edit box, and then click “Connect” to connect smart car to Raspberry Pi. After the connection is successful, you can click on the controls on the interface to operate the car.
+After the client opens successfully, you need open the Raspberry Pi and :red:`open server first` , then enter the IP address of the Raspberry Pi in the white IP edit box, and then click “Connect” to connect smart car to Raspberry Pi. After the connection is successful, you can click on the controls on the interface to operate the car.
 
 .. note:: 
     
@@ -264,7 +211,7 @@ After the client opens successfully, you need open the Raspberry Pi and  open se
 :red:`If pressing forward but the car moves backward, please refer to page 51 to modify the code.`
 
 Option 2 Install python3 and some related python libraries to run the client 
-================================================================
+-----------------------------------------------------------------------------------------
 
 If you want to modify the client, please follow this section.
 
@@ -352,7 +299,7 @@ Press “win + R” and enter cmd, and click ok. Then enter following commands.
 
 Or enter the unzipped directory Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi\Code\Client. 
 
-And double-click setup_client.py or open it with python3.
+And double-click **setup_client.py** or open it with python3.
 
 Installation will take some time. Just wait patiently. For successful installation, it will prompt "All libraries installed successfully":
 
@@ -383,6 +330,9 @@ Press “win + R” and enter cmd, and click ok. Then enter following commands.
 .. code-block:: console
 
     python Main.py
+
+.. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_50.png
+    :align: center
 
 Or enter the unzipped directory and enter following directory: Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi\Code\Client. And double-click Main.py or open it with python to open the client.
 
@@ -702,9 +652,10 @@ Following the previous step, after the installation is completed, you are now in
 The control way of Raspberry Pi macOS System client is same with Windows (Control).
 
 Run client in Raspberry Pi (Linux system)
+===========================================================
 
 Install Opencv library
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+------------------------------------------------------------
 
 Execute the following commands in the terminal to install Opencv library:
 
@@ -721,7 +672,7 @@ Execute the following commands in the terminal to install Opencv library:
     $ sudo apt-get install -y  python3-pil python3-tk
 
 Run client
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+------------------------------------------------------------
 
 Enter the following commands at the terminal.
 
@@ -762,7 +713,7 @@ If the Raspberry Pi system is stuck for a long time, you need reboot Raspberry P
 
 If you have any concerns, please feel free to contact us with pictures:  
 
-:xx-large:`support@freenove.com`
+`support@freenove.com <support@freenove.com>`_
 
 Android and iOS app
 ****************************************************************
@@ -805,7 +756,7 @@ First, turned on S1 and S2. Then open Raspberry Pi, right click and create a new
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_41.png
     :align: center
 
-Open Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Server in your Raspberry Pi and copy the following 8 files into the Test folder we created. 
+Open Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Server in your Raspberry Pi and copy the following **8 files** into the Test folder we created. 
 
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_42.png
     :align: center
