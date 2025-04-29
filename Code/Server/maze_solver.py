@@ -14,7 +14,7 @@ class Car:
         self.infrared = None
         self.adc = None
         self.car_record_time = time.time()
-        self.car_sonic_servo_angle = 30
+        self.car_sonic_servo_angle = 90
         self.car_sonic_servo_dir = 1
         self.car_sonic_distance = [30, 30, 30]
         self.time_compensate = 3 #Depend on your own car,If you want to get the best out of the rotation mode, change the value by experimenting.
