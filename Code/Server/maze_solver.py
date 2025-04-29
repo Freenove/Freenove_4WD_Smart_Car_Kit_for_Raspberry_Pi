@@ -14,7 +14,7 @@ class Car:
         self.infrared = None
         self.adc = None
         self.car_record_time = time.time()
-        self.car_sonic_servo_angle = 90
+        self.car_sonic_servo_angle = 0
         self.car_sonic_servo_dir = 1
         self.car_sonic_distance = [30, 30, 30]
         self.time_compensate = 3 #Depend on your own car,If you want to get the best out of the rotation mode, change the value by experimenting.
@@ -71,24 +71,24 @@ class Car:
         if (time.time() - self.car_record_time) > 0.2:
             self.car_record_time = time.time()
             self.servo.set_servo_pwm('0', self.car_sonic_servo_angle)
-            if self.car_sonic_servo_angle == 150:
+            if self.car_sonic_servo_angle == 90:
                 self.car_sonic_distance[0] = self.sonic.get_distance()  # Left
-            elif self.car_sonic_servo_angle == 90:
+            elif self.car_sonic_servo_angle == 0:
                 self.car_sonic_distance[1] = self.sonic.get_distance()  # Forward
-            elif self.car_sonic_servo_angle == 30:
+            elif self.car_sonic_servo_angle == -90:
                 self.car_sonic_distance[2] = self.sonic.get_distance()  # Right
 
             print("L:{}, M:{}, R:{}".format(self.car_sonic_distance[0], self.car_sonic_distance[1], self.car_sonic_distance[2]))
             self.run_motor_ultrasonic(self.car_sonic_distance)
 
-            if self.car_sonic_servo_angle >= 150:
+            if self.car_sonic_servo_angle >= 90:
                 self.car_sonic_servo_dir = 0
-            elif self.car_sonic_servo_angle <= 30:
+            elif self.car_sonic_servo_angle <= -90:
                 self.car_sonic_servo_dir = 1
             if self.car_sonic_servo_dir == 1:
-                self.car_sonic_servo_angle += 60
+                self.car_sonic_servo_angle += 90
             elif self.car_sonic_servo_dir == 0:
-                self.car_sonic_servo_angle -= 60
+                self.car_sonic_servo_angle -= 90
     def mode_infrared(self):
         if (time.time() - self.car_record_time) > 0.2:
             self.car_record_time = time.time()
