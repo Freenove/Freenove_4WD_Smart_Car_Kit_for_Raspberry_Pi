@@ -81,7 +81,7 @@ class Car:
             print("L:{}, M:{}, R:{}".format(self.car_sonic_distance[0], self.car_sonic_distance[1], self.car_sonic_distance[2]))
             self.run_motor_ultrasonic(self.car_sonic_distance)
 
-            # Define the sequence of angles: 90 (left) -> 0 (center) -> -90 (right) -> 0 (center) -> 90 (left)
+            # Define the sequence of angles: 90 (left) -> 0 (center) -> -90 (right) -> 0 (center) -> repeat
             if self.car_sonic_servo_angle == 90:
                 self.car_sonic_servo_angle = 0  # Move to center
             elif self.car_sonic_servo_angle == 0:
@@ -92,6 +92,9 @@ class Car:
             elif self.car_sonic_servo_angle == -90:
                 self.car_sonic_servo_angle = 0  # Move to center
                 self.car_sonic_servo_dir = 0  # Change direction to go back to left
+            elif self.car_sonic_servo_angle == 0 and self.car_sonic_servo_dir == 0:
+                self.car_sonic_servo_angle = 90  # Move to left
+                self.car_sonic_servo_dir = 1  # Reset direction for next cycle
 
     def mode_infrared(self):
         if (time.time() - self.car_record_time) > 0.2:
