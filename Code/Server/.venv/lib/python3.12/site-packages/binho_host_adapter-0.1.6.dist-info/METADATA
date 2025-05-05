@@ -1,0 +1,74 @@
+Metadata-Version: 2.1
+Name: binho-host-adapter
+Version: 0.1.6
+Summary: Python Libraries for Binho Multi-Protocol USB Host Adapters
+Home-page: https://binho.io
+Author: Binho LLC
+Author-email: support@binho.io
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: pyserial
+
+# Binho Host Adapter Python Libraries
+
+### Introduction
+
+Cross-platform Python 3.x library for automated control of Binho Multi-Protocol USB Host Adapters. More information about the device can be found at https://www.binho.io
+
+### Dependencies
+
+This library requires [pySerial](https://github.com/pyserial/pyserial) for cross-platform access of the serial port. This library will be installed automatically by pip, however for easy reference, this can be manually installed simply by running the following command:
+```
+pip install pyserial
+```
+
+### Installation
+
+This library can be installed easily with the following command:
+```
+pip install binho-host-adapter
+```
+
+### Example Usage
+
+```python
+from binhoHostAdapter import binhoHostAdapter
+from binhoHostAdapter import binhoUtilities
+
+print("Demo Script with Binho Host Adapter Python Libraries")
+print
+
+devices = binhoUtilities.listAvailableDevices()
+
+if len(devices) == 0:
+	print("No Devices Found!")
+	exit()
+
+elif len(devices) == 1:
+	COMPORT = devices[0]
+	print("Found 1 attached adapter @ " + devices[0])
+	print
+else:
+	COMPORT = devices[0]
+	print("Found more than 1 attached adapter, using first device found on " + COMPORT)
+	print
+
+print("Opening " + COMPORT + "...")
+print
+
+# create the binhoHostAdapter object
+binho = binhoHostAdapter.binhoHostAdapter(COMPORT)
+
+print("Connecting to host adapter...")
+print(binho.getDeviceID())
+print
+```
+### Documentation
+
+The full set of documentation for this python library can be found at https://support.binho.io/python-libraries
+
+

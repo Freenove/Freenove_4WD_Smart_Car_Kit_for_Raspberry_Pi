@@ -1,0 +1,18 @@
+Metadata-Version: 2.2
+Name: Adafruit-Blinka-Raspberry-Pi5-Neopixel
+Version: 1.0.0rc2
+Summary: Control NeoPixel & compatibles on a Pi 5
+Home-page: https://github.com/adafruit/Adafruit_Blinka_Raspberry_Pi5_Neopixel
+Requires-Python: >=3.11
+License-File: LICENSE
+Provides-Extra: docs
+Requires-Dist: sphinx; extra == "docs"
+Requires-Dist: sphinx-rtd-theme; extra == "docs"
+Requires-Dist: sphinxcontrib-jquery; extra == "docs"
+Dynamic: description
+Dynamic: home-page
+Dynamic: provides-extra
+Dynamic: requires-python
+Dynamic: summary
+
+A pio-based driver

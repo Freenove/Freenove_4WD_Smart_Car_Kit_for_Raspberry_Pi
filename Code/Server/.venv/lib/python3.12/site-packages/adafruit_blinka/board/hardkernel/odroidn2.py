@@ -1,0 +1,107 @@
+# SPDX-FileCopyrightText: 2021 Melissa LeBlanc-Williams for Adafruit Industries
+#
+# SPDX-License-Identifier: MIT
+"""Pin definitions for the Odroid N2."""
+
+from adafruit_blinka.microcontroller.amlogic.s922x import pin
+
+GPIOX_0 = pin.GPIO476
+GPIOX_1 = pin.GPIO477
+GPIOX_2 = pin.GPIO478
+GPIOX_3 = pin.GPIO479
+GPIOX_4 = pin.GPIO480
+GPIOX_5 = pin.GPIO481
+GPIOX_6 = pin.GPIO482
+GPIOX_7 = pin.GPIO483
+GPIOX_8 = pin.GPIO484
+GPIOX_9 = pin.GPIO485
+GPIOX_10 = pin.GPIO486
+GPIOX_11 = pin.GPIO487
+GPIOX_12 = pin.GPIO488
+GPIOX_13 = pin.GPIO489
+GPIOX_14 = pin.GPIO490
+GPIOX_15 = pin.GPIO491
+GPIOX_16 = pin.GPIO492
+GPIOX_17 = pin.GPIO493
+GPIOX_18 = pin.GPIO494
+GPIOX_19 = pin.GPIO495
+
+GPIODV_24 = pin.GPIO493
+GPIODV_25 = pin.GPIO494
+GPIODV_26 = pin.GPIO474
+GPIODV_27 = pin.GPIO475
+
+GPIOA_4 = pin.GPIO464
+GPIOA_12 = pin.GPIO472
+GPIOA_13 = pin.GPIO473
+GPIOA_14 = pin.GPIO474
+GPIOA_15 = pin.GPIO475
+
+GPIOA0_0 = pin.GPIO496
+GPIOA0_1 = pin.GPIO497
+GPIOA0_2 = pin.GPIO498
+GPIOA0_3 = pin.GPIO499
+GPIOA0_4 = pin.GPIO500
+GPIOA0_5 = pin.GPIO501
+GPIOA0_6 = pin.GPIO502
+GPIOA0_7 = pin.GPIO503
+GPIOA0_8 = pin.GPIO504
+GPIOA0_9 = pin.GPIO505
+GPIOA0_10 = pin.GPIO506
+GPIOA0_11 = pin.GPIO507
+GPIOA0_12 = pin.GPIO508
+GPIOA0_13 = pin.GPIO509
+GPIOA0_14 = pin.GPIO510
+GPIOA0_15 = pin.GPIO511
+
+for it in pin.i2cPorts:
+    globals()["SCL" + str(it[0])] = it[1]
+    globals()["SDA" + str(it[0])] = it[2]
+
+if pin.i2cPorts:
+    SCL = pin.i2cPorts[0][1]
+    SDA = pin.i2cPorts[0][2]
+
+SCLK = pin.SPI0_SCLK
+MOSI = pin.SPI0_MOSI
+MISO = pin.SPI0_MISO
+CS0 = pin.GPIO486
+CS1 = pin.GPIO464
+SPI_CS0 = CS0  # aliased for backward compatibility
+
+D3 = GPIOX_17
+D5 = GPIOX_18
+D7 = GPIOA_13
+D8 = GPIOX_12
+D10 = GPIOX_13
+D11 = GPIOX_3
+D12 = GPIOX_16
+D13 = GPIOX_4
+D15 = GPIOX_7
+D16 = GPIOX_0
+D18 = GPIOX_1
+D19 = GPIOX_8
+D21 = GPIOX_9
+D22 = GPIOX_2
+D23 = GPIOX_11
+D24 = GPIOX_10
+D26 = GPIOA_4
+D27 = GPIOA_14
+D28 = GPIOA_15
+D29 = GPIOX_14
+D31 = GPIOX_15
+D32 = GPIOA_12
+D33 = GPIOX_5
+D35 = GPIOX_6
+D36 = GPIOX_19
+
+""" ADC """
+A0 = 40
+A1 = 37
+
+""" PWM """
+PWM = D15
+
+""" UART """
+UART0_TX = D8
+UART0_RX = D10
