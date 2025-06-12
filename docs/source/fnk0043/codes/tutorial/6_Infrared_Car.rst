@@ -6,7 +6,7 @@ Chapter 6 Infrared Line Tracking Car
 
 .. raw:: html
 
-   <iframe height="500" width="690" src="https://www.youtube.com/embed/G3Q8xNatXgM" frameborder="0" allowfullscreen></iframe>
+   <iframe style="display: block; margin: 0 auto;" height="421.875" width="750" src="https://www.youtube.com/embed/G3Q8xNatXgM" frameborder="0" allowfullscreen></iframe>
 
 **If you have any concerns, please feel free to contact us via support@freenove.com**
 

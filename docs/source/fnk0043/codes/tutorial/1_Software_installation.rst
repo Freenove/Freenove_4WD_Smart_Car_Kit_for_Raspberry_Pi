@@ -18,7 +18,7 @@ You can refer to this video. https://youtu.be/3VexTFHZUSY
 
 .. raw:: html
 
-   <iframe height="500" width="690" src="https://www.youtube.com/embed/3VexTFHZUSY" frameborder="0" allowfullscreen></iframe>
+   <iframe style="display: block; margin: 0 auto;" height="421.875" width="750" src="https://www.youtube.com/embed/3VexTFHZUSY" frameborder="0" allowfullscreen></iframe>
 
 Step 1 Obtain the Code and Set python3 as Default
 ****************************************************************
