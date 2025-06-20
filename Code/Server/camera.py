@@ -20,7 +20,7 @@ class StreamingOutput(io.BufferedIOBase):
         return len(buf)
 
 class Camera:
-    def __init__(self, preview_size: tuple = (640, 480), hflip: bool = True, vflip: bool = True, stream_size: tuple = (400, 300)):
+    def __init__(self, preview_size: tuple = (640, 480), hflip: bool = False, vflip: bool = False, stream_size: tuple = (400, 300)):
         """Initialize the Camera class."""
         self.camera = Picamera2()  # Initialize the Picamera2 object
         self.transform = Transform(hflip=1 if hflip else 0, vflip=1 if vflip else 0)  # Set the transformation for flipping the image
