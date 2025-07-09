@@ -4,7 +4,7 @@ Chapter 2 Assemble Smart Car
 
 **If you have any concerns, please feel free to contact us via support@freenove.com**
 
-You can refer to this video: https://youtu.be/G3Q8xNatXgM
+You can refer to this video
 
 .. raw:: html
 
@@ -13,7 +13,7 @@ You can refer to this video: https://youtu.be/G3Q8xNatXgM
 Motor, Wheel and Servo arm 
 ****************************************************************
 
-Installation steps:
+Installation steps
 ================================================================
 
 Step 0
@@ -54,6 +54,8 @@ Step 2
 
 Install motor to bracket with M3*30 screw and M3 Nut. 
 
+:red:`Caution: Do not remove the cable tie from the motor; otherwise, the motor cable may become detached.`
+
 Step 3
 ----------------------------------------------------------------
 
@@ -62,13 +64,17 @@ Step 3
 
 The installation of the rest 3 sets of motor is the same. Then connect motor wires to motor ports. If you think the wires are too long, you can tie a knot.
 
+:red:`Caution: Do not remove the cable tie from the motor; otherwise, the motor cable may become detached.`
+
 Step 4
 ----------------------------------------------------------------
 
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_06.png
     :align: center
 
-Install 4 wheels to motor. The mounting hole is not a round hole.
+Install 4 wheels to motor. The mounting hole is **not a round hole**.
+
+:red:`Caution: Do not remove the cable tie from the motor; otherwise, the motor cable may become detached.`
 
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_07.png
     :align: center
@@ -113,6 +119,10 @@ Step 1
 
 Install the connection board as shown in the figure above. Long female header connector should be connected to smart car board and the short one should be connected to Raspberry Pi.
 
+**We have two types of connection boards, but they are installed in the same way.**
+
+:red:`See` :ref:`here <fnk0043/codes/tutorial/list:electronic parts>` :red:`for more information.`
+
 .. note:: 
     
     We have two types of connection boards, but they are installed in the same way.
@@ -152,7 +162,7 @@ Pan Tilt
 
 Finally, install two 18650 batteries. **Please refer to About_Battery.pdf in the unzipped folder.**
 
-:red:`Please push the battery to + ends of battery holder to make the connection good enough.`
+:red:`Please push the battery to + ends of battery holder` **to make the connection good enough.**
 
 Run program
 ================================================================
@@ -232,7 +242,7 @@ Installation steps:
 .. |Chapter2_26| image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_26.png
 .. |Chapter2_27| image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_27.png
 
-Now please refer to :ref:`Wiring Section` to wring ultrasonic sensor and camera frist.
+Now please refer to :ref:`Wiring Section <fnk0043/codes/tutorial/2_assemble_smart_car:wiring section>` to wring ultrasonic sensor and camera frist.
 
 .. list-table:: 
     :width: 100%
@@ -279,9 +289,7 @@ Pay attention to servo wiring.
 
 .. note:: 
 
-    wiring about the ultrasonic and camera module will be introduced later.
-
-.. _Wiring Section:
+    :red:`Wiring about the ultrasonic and camera module will be introduced later.`
 
 Wiring Section
 ================================================================
@@ -289,17 +297,17 @@ Wiring Section
 Camera
 ----------------------------------------------------------------
 
-:blue:`You need shut down Raspberry Pi when wire camera.`
+:combo:`bg-blue x-large:You need shut down Raspberry Pi when wire camera.`
 
 Step 1
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_34.png
     :align: center
     :width: 50%
 
 Step 2
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_35.png
     :align: center
@@ -310,13 +318,13 @@ The :blue:`Blue side` of cable should be toward to Servo.
 Connect one end of cable to camera. Please note the front and back of the cable. 
 
 Step 3
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_36.png
     :align: center
 
 Step 4
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_37.png
     :align: center
@@ -328,17 +336,17 @@ Connect one end of cable to camera. Please note the front and back of the cable.
 Camera for Pi5
 ----------------------------------------------------------------
 
-:blue:`You need shut down Raspberry Pi when wire camera.`
+:combo:`bg-blue x-large:You need shut down Raspberry Pi when wire camera.`
 
 Step 1
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_38.png
     :align: center
     :width: 50%
 
 Step 2
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_39.png
     :align: center
@@ -346,13 +354,13 @@ Step 2
 Connect one end of cable to camera. Please note the front and back of the cable.
 
 Step 3
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_40.png
     :align: center
 
 Step 4
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_41.png
     :align: center

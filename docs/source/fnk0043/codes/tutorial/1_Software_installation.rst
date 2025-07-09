@@ -12,9 +12,9 @@ In this chapter, we will make some necessary preparation: start your Pi Raspberr
     
     2.The installation of libraries takes much time. You can power Raspberry Pi with a power supply Cable. 
     
-    3.If you are using remote desktop to login Raspberry Pi, you need to use VNC viewer.
+    3.If you are using remote desktop to login Raspberry Pi, you need to use :ref:`VNC viewer <fnk0043/codes/tutorial/preparation:vnc viewer & vnc>`..
 
-You can refer to this video. https://youtu.be/3VexTFHZUSY
+You can refer to this video.
 
 .. raw:: html
 
@@ -23,7 +23,7 @@ You can refer to this video. https://youtu.be/3VexTFHZUSY
 Step 1 Obtain the Code and Set python3 as Default
 ****************************************************************
 
-To download the code, you can power Raspberry Pi with a power supply cable or switch on S1 (Power Switch). Then open the Raspberry Pi and the terminal. You can open the terminal by clicking as shown below, or you can press “CTRL + ALT + T” on the desktop.
+To download the code, you can power Raspberry Pi with a power supply cable or switch on S1 (Power Switch). Then open the Raspberry Pi and the terminal. You can open the terminal by clicking as shown below, or you can press "CTRL + ALT + T" on the desktop.
 
 .. image:: ../_static/imgs/Chapter_1_Software_installation/Chapter1_01.png
     :align: center
@@ -33,7 +33,9 @@ The terminal is shown below:
 .. image:: ../_static/imgs/Chapter_1_Software_installation/Chapter1_02.png
     :align: center
 
-Open the terminal and type the following commands to obtain the car code. And the code will be placed in the directory "Pi". (Note: Here are two commands. Please execute them in order.)
+Open the terminal and type the following commands to obtain the car code. And the code will be placed in the directory "Pi". 
+
+:red:`(Note: Here are two commands. Please execute them in order.)`
 
 .. code-block:: console
 
@@ -49,7 +51,7 @@ You can also find and download the code by visiting our official website (http:/
 
 .. note:: 
 
-    Please note that this tutorial is based on python3. If you want to use python2, please download another version of the tutorial.
+    :red:`Please note that this tutorial is based on python3. If you want to use python2, please download another version of the tutorial.`
 
 Set Python3 as default python (Necessary)
 ================================================================
@@ -57,6 +59,7 @@ Set Python3 as default python (Necessary)
 First, execute python to check the default python on your Raspberry Pi. Press Ctrl-Z to exit.
 
 .. image:: ../_static/imgs/Chapter_1_Software_installation/Chapter1_04.png
+    :align: center
 
 If it is python3, you can skip this section.
 
@@ -94,15 +97,15 @@ If you want to set python2 as default python in **other projects**, just repeat 
 Shortcut Key
 ----------------------------------------------------------------
 
-Now, we will introduce several shortcuts that are very useful and commonly used in terminal.
+Now, we will introduce several shortcuts that are very :red:`useful` and :red:`commonly used` in terminal.
 
-1. up and down arrow keys. History commands can be quickly brought back by using up and down arrow keys, which are very useful when you need to reuse certain commands.
+1. **up and down arrow keys.** History commands can be quickly brought back by using up and down arrow keys, which are very useful when you need to reuse certain commands.
 
-When you need to type commands, pressing “↑” will go backwards through the history of typed commands, and pressing “↓” will go forwards through the history of typed command.
+When you need to type commands, pressing "**↑**" will go backwards through the history of typed commands, and pressing "**↓**" will go forwards through the history of typed command.
 
-2. Tab key. The Tab key can automatically complete the command/path you want to type. When there are multiple commands/paths conforming to the already typed letter, pressing Tab key once won’t have any result. And pressing Tab key again will list all the eligible options. This command/path will be completely typed as soon as you press the Tab key when there is only one eligible option.
+2. **Tab key.** The Tab key can automatically complete the command/path you want to type. When there are multiple commands/paths conforming to the already typed letter, pressing Tab key once won’t have any result. And pressing Tab key again will list all the eligible options. This command/path will be completely typed as soon as you press the Tab key when there is only one eligible option.
 
-As shown below, under the '~'directory, enter the Documents directory with the “cd” command. After typing “cd D”, press Tab key, then there is no response. Press Tab key again, then all the files/folders that begin with “D” is listed. Continue to type the character "oc", then press the Tab key, and then “Documents” is completely typed automatically.
+As shown below, under the '~'directory, enter the Documents directory with the "cd" command. After typing "cd D", press Tab key, then there is no response. Press Tab key again, then all the files/folders that begin with "D" is listed. Continue to type the character "oc", then press the Tab key, and then "Documents" is completely typed automatically.
 
 .. image:: ../_static/imgs/Chapter_1_Software_installation/Chapter1_06.png
     :align: center
@@ -121,9 +124,14 @@ Enable I2C and VNC
 The I2C interface Raspberry Pi is disabled by default. You need to open it manually. 
 
 .. image:: ../_static/imgs/Chapter_1_Software_installation/Chapter1_08.png
+    :align: center
 
 .. image:: ../_static/imgs/Chapter_1_Software_installation/Chapter1_09.png
     :align: center
+
+.. note:: 
+    
+    :red:`If your connector version is V2.0, remember to turn on the SPI feature. If your connector version is V1.0, turn off the SPI feature.`
 
 Type a command to check whether the I2C module is enabled:
 
@@ -159,7 +167,7 @@ Type the following command to install python-smbus:
 Communication test
 ----------------------------------------------------------------
 
-The smart car board has two chips, PCF8591 and PCA9685. Their I2C addresses are 0X48 and 0X40 respectively. Command “i2cdetect –y 1” can detect whether the board is successfully connected to Raspberry Pi.
+The smart car board has two chips, PCF8591 and PCA9685. Their I2C addresses are 0X48 and 0X40 respectively. Command "i2cdetect –y 1" can detect whether the board is successfully connected to Raspberry Pi.
 
 .. code-block:: console
 
@@ -175,7 +183,7 @@ Additional supplement
 
 Raspbery Pi, other than 5, 4B and 400, needs to disable the audio module, othewise the LED will not work properly.
 
-1.	Create a new snd-blacklist.conf and open it for editing
+1. Create a new snd-blacklist.conf and open it for editing
 
 .. code-block:: console
 
@@ -190,7 +198,7 @@ Add following content: After adding the contents, you need to press Ctrl+O, Ente
 .. image:: ../_static/imgs/Chapter_1_Software_installation/Chapter1_12.png
     :align: center
 
-2.	We also need to edit config file.
+2. We also need to edit config file.
 
 .. code-block:: console
 
@@ -198,14 +206,14 @@ Add following content: After adding the contents, you need to press Ctrl+O, Ente
 
 Find the contents of the following two lines (with Ctrl + W you can search):
 
-.. code-block:: console
+.. code-block:: python
 
     # Enable audio (loads snd_bcm2835)
     dtparam=audio=on
 
 Add # to comment out the second line. Press Ctrl+O, Enter, Ctrl+X.
 
-.. code-block:: console
+.. code-block:: python
 
     # Enable audio (loads snd_bcm2835)
     # dtparam=audio=on
@@ -220,7 +228,7 @@ If you want to restart the audio module, just restore the content modified in th
 Step 3 Run the Libraries Installation Program
 ****************************************************************
 
-1.	Execute following commands to enter directory of “setup.py”.
+1.	Execute following commands to enter directory of "setup.py".
 
 .. code-block:: console
 
@@ -232,10 +240,46 @@ Step 3 Run the Libraries Installation Program
 
     $ sudo python setup.py
 
-This program will automatically install the pca9685, rpi_ws281x, PyQt5 library, etc. Please reboot the Raspberry Pi after the installation is completed, as shown below.
+This program will automatically install the rpi_ws281x, PyQt5 library, etc. Please reboot the Raspberry Pi after the installation is completed, as shown below.
+
+If it is your first time to run the script, it will ask you to input the camera type. At this point, input the content according to the camera you have. (The one included in this kit is of the type ov5647).
 
 .. image:: ../_static/imgs/Chapter_1_Software_installation/Chapter1_14.png
     :align: center
+
+.. table:: 
+    :align: center
+
+    +---------------+---------------+
+    | OV5647        | Imx219        |
+    |               |               |
+    | |Chapter1_15| | |Chapter1_16| |
+    +---------------+---------------+
+
+.. |Chapter1_15| image:: ../_static/imgs/Chapter_1_Software_installation/Chapter1_15.png
+.. |Chapter1_16| image:: ../_static/imgs/Chapter_1_Software_installation/Chapter1_16.png
+
+If your Rpi is a Pi 5, it will ask you which camera interface to use. You can type in cam0 or cam1 based on the interface you want to use.
+
+.. note::
+    
+    :red:`Make sure you connect the camera cable to the corresponding interface.`
+
+If it is not Raspberry Pi, this setting is not needed, as there is only camera interface available.
+
+.. image:: ../_static/imgs/Chapter_1_Software_installation/Chapter1_17.png
+    :align: center
+
+.. image:: ../_static/imgs/Chapter_1_Software_installation/Chapter1_18.png
+    :align: center
+
+Reboot your Raspberry Pi after installing the libraries.
+
+.. code-block:: console
+    
+    sudo reboot
+
+:red:`The reboot of the pi takes some time, please wait with patience.`
 
 If the installation fails, please rerun setup.py. After the installation is completed, restart the Raspberry Pi. Most installation failures are caused by network reasons.
 

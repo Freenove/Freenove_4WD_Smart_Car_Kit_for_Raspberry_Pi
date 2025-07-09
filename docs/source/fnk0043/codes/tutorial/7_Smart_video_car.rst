@@ -18,8 +18,11 @@ The smart video car integrates the previous functions of light tracing, obstacle
 Server
 ****************************************************************
 
+Open Server
+==============================
+
 Step 1 Login Raspberry Pi via VNC viewer 
-==================================================
+--------------------------------------------------
 
 :red:`Because server and client use GUI. You need use VNC viewer as remote desktop way.`
 
@@ -34,7 +37,7 @@ After installation is completed, open VNC Viewer. And click File -> New Connecti
 
 Enter IP address of your Raspberry Pi and fill in a Name. And click OK.
 
-Then on the VNC Viewer panel, double-click new connection you just created, and the following dialog box pops up. Enter username: pi and Password: raspberry. And click OK.  
+Then on the VNC Viewer panel, double-click new connection you just created, and the following dialog box pops up. Enter username: :blue:`pi` and Password: :blue:`raspberry`. And click OK.  
 
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_02.png
     :align: center
@@ -44,7 +47,7 @@ Then on the VNC Viewer panel, double-click new connection you just created, and 
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_03.png
     :align: center
 
-:red:`If the resolution ratio is not great or there is just a little window, you can set a proper resolution ratio via steps below.`
+:red:`If the resolution ratio is not great or there is just a` **little window** :red:`, you can set a proper resolution ratio via steps below.`
 
 .. code-block:: console
 
@@ -79,7 +82,7 @@ Enter the following command in the terminal.
 
     $ sudo python main.py
 
-.. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_07.png
+.. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_06.png
     :align: center
 
 The interface is as below:
@@ -90,20 +93,20 @@ The interface is as below:
 Sever Auto Start 
 ----------------------------------------------------------------
 
-1	Open the terminal and execute the following two commands respectively to create a “start.sh” file.
+1	Open the terminal and execute the following two commands respectively to create a "start.sh” file.
 
 .. code-block:: console
 
     $ cd ~
-    sudo touch start.sh
+    $ sudo touch start.sh
 
-2	Open “start.sh”.
+2	Open "start.sh”.
 
 .. code-block:: console
 
     $ sudo nano start.sh
 
-3	Add the following contents to “start.sh” file.
+3	Add the following contents to "start.sh” file.
 
 .. code-block:: shell
 
@@ -130,13 +133,13 @@ Press Ctrl + O and then press Enter to save it. Press Ctrl+X to exit.
 
     $ mkdir ~/.config/autostart/
 
-6	create and open “start.desktop” file
+6	create and open "start.desktop” file
 
 .. code-block:: console
 
     $ sudo nano .config/autostart/start.desktop
 
-7	Add the following content to “start.desktop” file.
+7	Add the following content to "start.desktop” file.
 
 .. code-block:: shell
 
@@ -160,7 +163,7 @@ Press Ctrl + O and then press Enter to save it. Press Ctrl+X to exit.
 
     $ sudo reboot
 
-Note: To cancel auto start, please delete the files “start.sh” and “start.desktop” created above.
+Note: To cancel auto start, please delete the files "start.sh” and "start.desktop” created above.
 
 .. code-block:: console
 
@@ -192,7 +195,7 @@ There are two ways to run Client on Windows.
 Option 1 Running executable file directly
 ------------------------------------------------
 
-Find the “Client.exe” file in the specified directory, double click it and the Client is opened.
+Find the "Client.exe” file in the specified directory, double click it and the Client is opened.
 
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_09.png
     :align: center
@@ -202,7 +205,7 @@ The client interface is shown as below:
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_10.png
     :align: center
 
-After the client opens successfully, you need open the Raspberry Pi and :red:`open server first` , then enter the IP address of the Raspberry Pi in the white IP edit box, and then click “Connect” to connect smart car to Raspberry Pi. After the connection is successful, you can click on the controls on the interface to operate the car.
+After the client opens successfully, you need open the Raspberry Pi and :ref:`Open Server first <fnk0043/codes/tutorial/7_smart_video_car:open server>` , then enter the IP address of the Raspberry Pi in the white IP edit box, and then click "Connect” to connect smart car to Raspberry Pi. After the connection is successful, you can click on the controls on the interface to operate the car.
 
 .. note:: 
     
@@ -215,7 +218,7 @@ Option 2 Install python3 and some related python libraries to run the client
 
 If you want to modify the client, please follow this section.
 
-This section will be completed in your computer with windows system, not Raspberry Pi.
+This section will be completed in your **computer with windows system,** :red:`not Raspberry Pi`.
 
 There are many relevant software and libraries needed to be installed in Windows system, which takes a long time. At this time, it does not need to run Server or use Raspberry Pi. You can shut down Raspberry Pi first. After the installation is completed, you need to open Raspberry Pi and server again.
 
@@ -239,7 +242,7 @@ Choose and download Windows x86 executable installer. After downloading successf
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_13.png
     :align: center
 
-Select “Add Python 3.8 to PATH”. You can choose other installation features.
+Select "**Add Python 3.8 to PATH**". You can choose other installation features.
 
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_14.png
     :align: center
@@ -249,7 +252,7 @@ Select all options and click "Next".
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_15.png
     :align: center
 
-Here, my install location is D. You can also choose other location. Then click “Install”.
+Here, my install location is D. You can also choose other location. Then click "Install”.
 
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_16.png
     :align: center
@@ -268,13 +271,13 @@ If have not download the zip file, do so via:
 
 https://github.com/Freenove/Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/archive/master.zip
 
-Then unzip it and delete “-master” to rename it to “Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi”.
+Then unzip it and delete "-master” to rename it to "Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi”.
 
 Then put it into D disk for example.
 
 You can also place it into other disks (like E), but the path in the following command should be modified accordingly (replace D: by E:).
 
-Press “win + R” and enter cmd, and click ok. Then enter following commands.
+Press "win + R” and enter cmd, and click ok. Then enter following commands.
 
 1.	Enter D disk. (If you put it into E, it should be E:)
 
@@ -286,7 +289,7 @@ Press “win + R” and enter cmd, and click ok. Then enter following commands.
 
 .. code-block:: console
 
-    cd D:\Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi\Code
+    cd D:\\Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi\\Code
 
 3.	Run setup_windows.py:
 
@@ -297,7 +300,7 @@ Press “win + R” and enter cmd, and click ok. Then enter following commands.
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_18.png
     :align: center
 
-Or enter the unzipped directory Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi\Code\Client. 
+Or enter the unzipped directory Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi\\Code\\Client. 
 
 And double-click **setup_client.py** or open it with python3.
 
@@ -311,7 +314,7 @@ If not all installations are successful, it will prompt "Some libraries have not
 Open client
 ----------------------------------------------------------------
 
-Press “win + R” and enter cmd, and click ok. Then enter following commands.
+Press "win + R” and enter cmd, and click ok. Then enter following commands.
 
 1.	Enter D disk. If you put it into E, it should be E:
 
@@ -323,7 +326,7 @@ Press “win + R” and enter cmd, and click ok. Then enter following commands.
 
 .. code-block:: console
 
-    cd D:\Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi\Code\Client
+    cd D:\\Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi\\Code\\Client
 
 3.	Run Main.py:
 
@@ -341,7 +344,7 @@ The client interface is shown as below:
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_20.png
     :align: center
 
-After the client opens successfully, you need open the Raspberry Pi and  :ref:`open server` first, then enter the IP address of the Raspberry Pi in the white IP edit box, and then click “Connect” to connect smart car to Raspberry Pi. After the connection is successful, you can click on the controls on the interface to operate the car.
+After the client opens successfully, you need open the Raspberry Pi and  :ref:`open server first <fnk0043/codes/tutorial/7_smart_video_car:open server>` first, then enter the IP address of the Raspberry Pi in the white IP edit box, and then click "Connect” to connect smart car to Raspberry Pi. After the connection is successful, you can click on the controls on the interface to operate the car.
 
 .. note::
     
@@ -459,7 +462,7 @@ The function of SliderBar is below:
     :widths: 20 50
     :align: center
     :header-rows: 1
-    :class: product-table
+    :class: zebra
 
     *   -   SliderBar
         -   Function
@@ -476,7 +479,7 @@ Other control information:
     :widths: 30 50
     :align: center
     :header-rows: 1
-    :class: product-table
+    :class: zebra
 
     *   -   Control
         -   Function
@@ -490,18 +493,18 @@ Other control information:
     *   -   R,G,B Edit box
         -   Control the color of LED selected.
 
-    *   -   Button “Ultrasonic“
+    *   -   Button "Ultrasonic"
         -   Show the distance from obstacle.
 
-    *   -   Button “Light “
+    *   -   Button "Light "
         -   Show voltage of two photoresistors.
 
-    *   -   Button “Tracing-On/Off “
+    *   -   Button "Tracing-On/Off "
         -   Open and close  face tracking
 
 If you don't want to enter IP address after open the client, you can make some modification as below:
 
-1.	Open “Client_Ui.py” under directory “Client”, then find code in the thirty-sixth line from the bottom.
+1.	Open "Client_Ui.py” under directory "Client”, then find code in the thirty-sixth line from the bottom.
 
 .. code-block:: python
 
@@ -531,9 +534,9 @@ Download installation package, link: https://www.python.org/downloads/
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_23.png
     :align: center
 
-:xx-large:`your macOS is 11. Like 11.0, please install python 3.9.`
+:combo:`x-large:your macOS is 11. Like 11.0, please install` :combo:`x-large red:python 3.9.`
 
-:xx-large:`If your macOS is NOT 11, like 10.15, please install python 3.8. If you have installed python 3.9. You need uninstall it first.`
+:combo:`x-large:If your macOS is NOT 11, like 10.15, please install` :combo:`x-large red:python 3.8.` :combo:`x-large purple:If you have installed python 3.9. You need uninstall it first.`
 
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_24.png
     :align: center
@@ -589,7 +592,7 @@ Open the Terminal.
 
 Type following commands in Terminal.
 
-1. Enter “Downloads“, (Where the Car code is located. If your location for it is different, please enter the location in your device.)
+1. Enter "Downloads", (Where the Car code is located. If your location for it is different, please enter the location in your device.)
 
 .. code-block:: console
 
@@ -617,9 +620,9 @@ Installation will take some time. Just wait patiently. For successful installati
 
 If not all installations are successful, it will prompt "Some libraries have not been installed yet. Please run 'python3 setup_macos.py' again", then you need to execute the python3 setup_macos.py command again. Most of the installation failures are caused by poor networks. You can check your network before installing.
 
-If you are using macOS under 11.0, like 10.15. Just skip to “Open client”. 
+If you are using :blue:`macOS under 11.0, like 10.15.` **Just skip to "Open client”.**
 
-If you are using macOS 11.0 or later version. Please run commands below:
+If you are using :blue:`macOS 11.0 or later version.` Please run commands below:
 
 .. code-block:: console
 
@@ -701,7 +704,7 @@ Troubleshooting
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_38.png
     :align: center
 
-**If the car works abnormally, it may be caused by following reasons: Raspberry Pi system is stuck or batteries have no power. **
+**If the car works abnormally, it may be caused by following reasons: Raspberry Pi system is stuck or batteries have no power.**
 
 You need check batteries power indicator or recharge batteries. Make sure batteries have enough power. When the batteries voltage is less than 7V, the buzzer will make regular sound.
 
@@ -734,7 +737,7 @@ You can download and install the Freenove iPhone ios app by searching freenove i
 
 Open the app and select the car.
 
-.. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_39.png
+.. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_54.png
     :align: center
 
 Open the server in Raspberry Pi car first. And enter your Pi IP.
@@ -813,9 +816,9 @@ Run test_Code.py:
 Code example
 ================================================================
 
-Following are code example for the parts. For more detail, please refer to Module test section.
+Following are code example for the parts. For more detail, please refer to :ref:`Module test section <fnk0043/codes/tutorial/2_assemble_smart_car:run program>`.
 
-For more details, please refer to :ref:`Motor`.
+For more details, please refer to :ref:`Motor <fnk0043/codes/tutorial/3_module_test:motor>`.
 
 .. code-block:: python
 
@@ -825,7 +828,7 @@ For more details, please refer to :ref:`Motor`.
     time.sleep(3)                             #waiting 3 second
     PWM.setMotorModel(0,0,0,0)                #Stop
 
-ADC. For more details, please refer to :ref:`ADC`.
+ADC. For more details, please refer to :ref:`ADC <fnk0043/codes/tutorial/3_module_test:adc module>`.
 
 .. code-block:: python
 
@@ -834,7 +837,7 @@ ADC. For more details, please refer to :ref:`ADC`.
     Left_IDR=adc.recvADC(0)       #get value
     print ("The photoresistor voltage on the left is "+str(Left_IDR)+"V")
 
-LED. For more details, please refer to :ref:`LED`.
+LED. For more details, please refer to :ref:`LED <fnk0043/codes/tutorial/3_module_test:led>`.
 
 .. code-block:: python
 
@@ -845,7 +848,7 @@ LED. For more details, please refer to :ref:`LED`.
     time.sleep(5)                           #wait 5s
     led.colorWipe(led.strip, Color(0,0,0))  #turn off
 
-Buzzer. For more details, please refer to :ref:`Buzzer`.
+Buzzer. For more details, please refer to :ref:`Buzzer <fnk0043/codes/tutorial/3_module_test:buzzer>`.
 
 .. code-block:: python
 
@@ -856,7 +859,7 @@ Buzzer. For more details, please refer to :ref:`Buzzer`.
     time.sleep(3)                       #wait 3s
     buzzer.run('0')            #Stop
 
-Servo. For more details, please refer to :ref:`Servo`.
+Servo. For more details, please refer to :ref:`Servo <fnk0043/codes/tutorial/3_module_test:servo>`.
 
 .. code-block:: python
 
@@ -871,7 +874,7 @@ Servo. For more details, please refer to :ref:`Servo`.
         pwm.setServoPwm('0', i)
         time.sleep(0.01)
     
-Ultrasonic module. For more details, please refer to :ref:`Ultrasonic module`.
+Ultrasonic module. For more details, please refer to :ref:`Ultrasonic module <fnk0043/codes/tutorial/2_assemble_smart_car:ultrasonic>`.
 
 .. code-block:: python
 

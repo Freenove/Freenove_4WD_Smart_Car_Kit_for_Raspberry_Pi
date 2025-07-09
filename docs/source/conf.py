@@ -6,6 +6,7 @@
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here.
 from datetime import datetime
+from docutils import nodes
 import os
 import pathlib
 import sys
@@ -134,9 +135,27 @@ intersphinx_mapping = {
 }
 intersphinx_disabled_reftypes = ["*"]
 
+def combined_class_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+    try:
+        #
+        class_names, content_text = text.split(':', 1)
+        # remove extra spaces and create a list of class
+        classes = class_names.strip().split()
+
+        # create a span node with these class
+        node = nodes.inline(text=content_text.strip(), classes=classes)
+
+        return [node], []
+    except ValueError:
+        # error handle
+        msg = inliner.reporter.error(
+            'The "combo" role requires a "class_names:text" format.',
+            line=lineno)
+        prb = inliner.problematic(rawtext, rawtext, msg)
+        return [prb], [msg]
 
 def setup(app):
-    pass
+    app.add_role("combo", combined_class_role)
     # app.add_css_file("")
     # app.add_css_file('https://cdn.jsdelivr.net/gh/Freenove/freenove-docs/docs/source/_static/css/custom.css')
 

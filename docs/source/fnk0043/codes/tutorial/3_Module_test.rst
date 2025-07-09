@@ -15,8 +15,6 @@ During the test, the motor will work. So you can disconnect the wheels or put it
 
 If you have never learned python before, you can learn some basic knowledge via the link below: https://python.swaroopch.com/basics.html
 
-.. _Motor:
-
 Motor
 ****************************************************************
 
@@ -51,16 +49,13 @@ The car moves forward for 1 seconds, then moves back for 1 seconds, then turns l
    
 Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Server/Motor.py
 
-Open Motor.py and add a “–“ before duty1,2,3,4 like below. 
+Open Motor.py and add a "–" before duty1,2,3,4 like below. 
 
-.. code-block:: python
-
-    def setMotorModel(self,duty1,duty2,duty3,duty4):
-        duty1,duty2,duty3,duty4=self.duty_range(duty1,duty2,duty3,duty4)
-        self.left_Upper_Wheel(-duty1)
-        self.left_Lower_Wheel(-duty2)
-        self.right_Upper_Wheel(-duty3)
-        self.right_Lower_Wheel(-duty4)
+.. literalinclude:: ../../../freenove_Kit/Code/Server/motor.py
+    :linenos:
+    :language: python
+    :lines: 66-71
+    :dedent:
 
 :red:`Then save the modification and try again.`
 
@@ -72,19 +67,17 @@ The code is as below:
 .. literalinclude:: ../../../freenove_Kit/Code/Server/test.py
     :linenos: 
     :language: python
-    :lines: 22-62
+    :lines: 22-44
 
 Reference
-================================================================
+------------------------------------------
 
-.. py:function:: setMotorModel(data1,data2,data3,data4)
+.. py:function:: set_motor_model(data1,data2,data3,data4)
 
     This function has four input parameters that control the left front motor, the left rear motor, the right front motor, and the right rear motor. When the input parameter is within 0~4096, the motor will rotate forward. If it is within -4096~0, the motor will rotate reversely. The larger the absolute value is, the faster the motor is. When the input is 0, the motor will stop. If the function is input as follows: setMotorModel(2000,2000, 2000, 2000), four motors will rotate forward and the car will move forward.
 
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_02.png
     :align: center
-
-.. _ADC:
 
 ADC Module
 ****************************************************************
@@ -97,6 +90,7 @@ Enter the following commands to test ADC module.
 If the terminal displays the directory as below (where test.py is located). You can directly execute the test.py command. 
 
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_03.png
+    :align: center
 
 1. If not, execute the cd command:
 
@@ -113,8 +107,7 @@ If the terminal displays the directory as below (where test.py is located). You 
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_04.png
     :align: center
 
-
-Result: 
+Result
 ----------------------------------------------------------------
 
 Every 1s, the voltage values of the two photoresistors and the battery are output. The value read for the first time is not stable and inaccurate when the chip just starts. It will be stable later. You can press "Ctrl + C" to end program.
@@ -127,7 +120,7 @@ The code is as below:
 .. literalinclude:: ../../../freenove_Kit/Code/Server/test.py
     :linenos: 
     :language: python
-    :lines: 115-129
+    :lines: 109-125
 
 Reference
 ================================================================
@@ -136,11 +129,11 @@ Reference
 
     This function has only one input parameter, which can be 0, 1 or 2. 
     
-    When the input is 0, the value of this function is the voltage value of the left photoresistor. 
+    When the input is **0**, the value of this function is the voltage value of the **left** photoresistor. 
     
-    When the input is 1, the value of this function is the voltage value of the right photoresistor. 
+    When the input is **1**, the value of this function is the voltage value of the **right** photoresistor. 
     
-    When the input is 2, the value of this function is the voltage value of each battery. After multiplying by 3, it is the actual battery voltage value
+    When the input is **2**, the value of this function is the voltage value of **each battery**. After multiplying by 3, it is the actual battery voltage value
 
 Infrared Line tracking module
 ****************************************************************
@@ -169,15 +162,14 @@ If the terminal displays the directory as below (where test.py is located), you 
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_06.png
     :align: center
 
-
 Result: 
 ----------------------------------------------------------------
 
-When the black line is on the left side of the module, the left LED will light up and the terminal will print “Left”; 
+When the black line is on the left side of the module, the left LED will light up and the terminal will print "Left”; 
 
-When the black line is in the middle of the module, the middle LED will light up and the terminal will print “Middle”.
+When the black line is in the middle of the module, the middle LED will light up and the terminal will print "Middle”.
 
-When the black line is on the right side of the module, right The LED will light up, the terminal will print “Right”, You can press “Ctrl + C” to end the program.
+When the black line is on the right side of the module, right The LED will light up, the terminal will print "Right”, You can press "Ctrl + C” to end the program.
 
 If there are issues with the test, the infrared device may need to be adjusted. The adjustment screw is on top of the sensor. 
 
@@ -192,19 +184,14 @@ The code is as below:
 .. literalinclude:: ../../../freenove_Kit/Code/Server/test.py
     :linenos: 
     :language: python
-    :lines: 83-89
-
-Reference
-================================================================
-
-.. py:function:: GPIO.input(IO)
-
-    This function has an input parameter. If the IO input is high level, GPIO.input(IO) returns True. If the IO input is low level, GPIO.input(IO) returns False. 
-
-.. _LED:
+    :lines: 63-82
 
 LED
 ****************************************************************
+
+.. note:: 
+
+    :red:`Raspberry PI 5 is temporarily unavailable because the Library rpi-ws281x-python does not support Raspberry PI 5. Please skip this section.`
 
 There are 8 RGB LEDs on the smart car board, as shownbelow. You can control them separately. 
 
@@ -258,12 +245,14 @@ In this example, PCB V2.0 is used. Enter 2 and press Enter.
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_11.png
     :align: center
 
+:red:`If your connection board version is V2.0 and you do not have the SPI feature turned on, the LedPixel will not show the color. Refer` :ref:`here <fnk0043/codes/tutorial/1_software_installation:step 2 configuration>` :red:`to turn on the SPI.`
+
 Result: 
 ----------------------------------------------------------------
 
 All LEDs will be turned on for 3 seconds, and colors from LED0 to LED7 are: red, orange, yellow, green, cyan, blue, purple, and white. You can end the program ahead of time by pressing "ctrl+c". 
 
-If the LED color display order is not correct, open the "Led.py" file in the current directory and modify the value of the "self.ORDER" variable on line 15.
+If the LED color display order is not correct, open the **"Led.py"** file in the current directory and modify the value of the "self.ORDER" variable on line 15.
 
 Code
 ================================================================
@@ -273,7 +262,7 @@ The code is as below:
 .. literalinclude:: ../../../freenove_Kit/Code/Server/test.py
     :linenos: 
     :language: python
-    :lines: 4-20
+    :lines: 1-20
 
 Reference
 ================================================================
@@ -288,11 +277,9 @@ Reference
     
     For example, ledindex(0x01,255,0,0) makes LED 0 light to red; ledeindex(0x40,0,255,0) makes LED 6 light green.
 
-.. py:function:: colorWipe(strip, color, wait_ms)
+.. py:function:: colorBlink(state, wait_ms)	
 
-    This function erases the color of one pixel at a time. It has three input parameters: strip represents the Neopixel object, color represents the color to be erased, and wait_ms represents the erasure interval. The default is 50ms. For example, colorWipe(strip, Color(255,0,0),20) means that the LED0 is red first, wait for 20ms, and then the LED1 is also red, until all eight LEDs are lit and red.
-
-.. _Buzzer:
+    When the state is 0, the lights will be turned off. When state is 1, the red, green, and blue colors are displayed in a non-blocking loop. wait_ms Indicates the time interval. The default value is 300ms.
 
 Buzzer
 ****************************************************************
@@ -334,16 +321,14 @@ The code is as below:
 .. literalinclude:: ../../../freenove_Kit/Code/Server/test.py
     :linenos: 
     :language: python
-    :lines: 131-146
+    :lines: 127-144
 
 Reference
 ================================================================
 
-.. py:function:: buzzer.run(cmd)
+.. py:function:: buzzer.set_state(bool)
 
-    This function has one input parameter. If the input is '1', the buzzer will be turned on. If the input is '0', the buzzer will be turned off. 
-
-.. _Servo:
+    This function has one input parameter. If the input is true, the buzzer will be turned on. If the input is false, the buzzer will be turned off. 
 
 Servo
 ****************************************************************
@@ -375,7 +360,7 @@ If the terminal displays the directory as below (where test.py is located), you 
 Result: 
 ----------------------------------------------------------------
 
-The servo 0 repeats rotating from left to right and then from right to left. The servo 1 repeats rotating from bottom to top and then from top to bottom. You can press “Ctrl + C” to end the program.
+The servo 0 repeats rotating from left to right and then from right to left. The servo 1 repeats rotating from bottom to top and then from top to bottom. You can press "Ctrl + C” to end the program.
 
 Code
 ================================================================
@@ -385,7 +370,7 @@ The code is as below:
 .. literalinclude:: ../../../freenove_Kit/Code/Server/test.py
     :linenos: 
     :language: python
-    :lines: 92-112
+    :lines: 84-107
 
 Reference
 ================================================================
@@ -393,13 +378,16 @@ Reference
 .. py:function:: setServoPwm(Servo,angle)
 
     There are 2 parameters.
+    
     The first one is related to servo index.
+    
     The second one is related to the angle of servos. 
+    
     For example,
+    
     setServoPwm('0',20) makes servo0 rotate to 20°.
+    
     setServoPwm('1',90) makes servo1 rotate to 90°.
-
-.. _Ultrasonic module:
 
 Ultrasonic module
 ****************************************************************
@@ -451,7 +439,7 @@ The code is as below:
 .. literalinclude:: ../../../freenove_Kit/Code/Server/test.py
     :linenos: 
     :language: python
-    :lines: 65-74
+    :lines: 46-61
 
 Reference
 ================================================================
@@ -465,8 +453,11 @@ Camera
 
 Next let us connect the camera to smart car board. First :red:`turn off S1` (Power Switch), :red:`shut down Raspberry Pi` and disconnect power cable. If the data cable is used to power the Raspberry Pi, disconnect the data cable and install the CSI camera to the Raspberry Pi camera interface when the Raspberry Pi is powered off. :red:`(The CSI camera must be connected or disconnected under no power and when Raspberry Pi is shut down, or the camera may be burned.)`
 
+Camera for Pi3/4
+===========================
+
 Step1
-================================================================
+----------------------------
 
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_19.png
     :align: center
@@ -476,7 +467,7 @@ The :blue:`Blue side` of cable should be toward to Servo.
 Connect one end of cable to camera. Please note the front and back of the cable. 
 
 Step2
-================================================================
+----------------------------
 
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_20.png
     :align: center
@@ -485,65 +476,77 @@ The :blue:`Blue side` of cable should be toward to Servo.
 
 Connect one end of cable to camera. Please note the front and back of the cable. 
 
+Camera for Pi5
+===========================
+
+:combo:`bg-blue:You need shut down Raspberry Pi when wire camera.`
+
+Step 1
+
+.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_35.png
+    :align: center
+
+Step 2
+
+.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_36.png
+    :align: center
+
+Connect one end of cable to camera. Please note the front and back of the cable. 
+
+Step 3
+
+.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_37.png
+    :align: center
+
+Step 4
+
+.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_38.png
+    :align: center
+
+Connect another end of cable to Raspberry Pi. Please note the front and back of the cable.
+
+There are two ways to drive the camera.
+
+First method, use the system's default camera detection function.
+
+1.	Open the config.txt file.
+
+.. code-block:: console
+    
+    sudo nano /boot/firmware/config.txt
+
+2.	Enable the automatic camera detection function.
+
+.. code-block:: python
+    
+    camera_auto_detect=1
+
+Second method, manually configure the camera.
+
+1.	Disable the automatic camera detection function.
+
+.. code-block:: python
+    
+    camera_auto_detect=0
+
+2.	Add the following instruction at the very bottom.
+
+If you are a Raspberry PI 5, add the following command.
+
+.. code-block:: python
+    
+    dtoverlay = ov5647,cam0
+
+If you are not a Raspberry PI 5, add the following command.
+
+.. code-block:: python
+    
+    dtoverlay = ov5647
+
+3.	Save the file and exit, then restart the Raspberry PI.
+
 Run program
 ================================================================
-
-To use the camera, you need to disable legacy camera, which is disabled by default on the latest Raspberry Pi OS. If it is not disabled, please do it as below.
-
-Enter the following command. Choose **Interface Options** -> **Legacy Camera** -> **No** -> **OK** -> **Finish** ,and then restart the Raspberry Pi.
-
-.. code-block:: console
-
-    $ sudo raspi-config
-
-.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_21.png
-
-|
-
-.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_22.png
-    :align: center
-
-|
-
-.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_23.png
-    :align: center
-
-|
-
-.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_24.png
-    :align: center
-
-|
-
-.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_25.png
-    :align: center
-
-libcamera-apps does not work properly on Pi 0 to 3 devices when running the latest Bullseye images.
-
-A workaround is to open a terminal, run "sudo raspi-config", navigate to "Advanced Options" and enable "Glamor" graphic acceleration. Then reboot your Pi.
-
-.. code-block:: console
-
-    $ sudo raspi-config
-
-.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_26.png
-
-|
-
-.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_27.png
-    :align: center
-
-|
-
-.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_28.png
-    :align: center
-
-|
-
-.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_29.png
-    :align: center
-
-Then reboot your Pi.
 
 1.	execute the cd command:
 
