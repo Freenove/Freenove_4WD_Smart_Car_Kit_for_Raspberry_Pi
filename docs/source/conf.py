@@ -18,6 +18,8 @@ os.system("git clone --depth 1 https://github.com/Freenove/Freenove_4WD_Smart_Ca
 
 project = "fnk0043-docs"
 # <!!!BEGIN!!!>
+from docutils import nodes
+
 copyright = '2016-2025, Freenove'
 author = 'Freenove'
 release = 'v1.0.0'
