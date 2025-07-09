@@ -299,7 +299,7 @@ Wiring Section
 Camera
 ----------------------------------------------------------------
 
-:blue:`You need shut down Raspberry Pi when wire camera.`
+:combo:`bg-blue x-large:You need shut down Raspberry Pi when wire camera.`
 
 Step 1
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -338,7 +338,7 @@ Connect one end of cable to camera. Please note the front and back of the cable.
 Camera for Pi5
 ----------------------------------------------------------------
 
-:blue:`You need shut down Raspberry Pi when wire camera.`
+:combo:`bg-blue x-large:You need shut down Raspberry Pi when wire camera.`
 
 Step 1
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -35,6 +35,7 @@ This robot also supports the following versions of the Raspberry Pi, but additio
 
 .. table:: 
     :class: zebra
+    :align: center
 
     +--------------------------------------------+------------------------------------------------------------------------+
     |  Raspberry                                 | Additional accessories                                                 |      
