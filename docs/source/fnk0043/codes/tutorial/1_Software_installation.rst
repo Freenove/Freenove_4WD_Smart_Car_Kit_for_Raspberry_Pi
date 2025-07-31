@@ -8,13 +8,13 @@ In this chapter, we will make some necessary preparation: start your Pi Raspberr
 
 .. note::   
 
-    1.Please use Raspberry Pi OS with Desktop
-    
-    2.The installation of libraries takes much time. You can power Raspberry Pi with a power supply Cable. 
-    
-    3.If you are using remote desktop to login Raspberry Pi, you need to use :ref:`VNC viewer <fnk0043/codes/tutorial/preparation:vnc viewer & vnc>`..
+    1. :combo:`red font-bolder:Please use Raspberry Pi OS with Desktop`
+     
+    2. The installation of libraries takes much time. :combo:`red font-bolder:You can power Raspberry Pi with a power supply Cable`. 
+     
+    3. If you are using **remote desktop** to login Raspberry Pi, you need to use :ref:`VNC viewer <fnk0043/codes/tutorial/preparation:vnc viewer & vnc>`.
 
-You can refer to this video.
+**You can refer to this video.**
 
 .. raw:: html
 
@@ -35,7 +35,7 @@ The terminal is shown below:
 
 Open the terminal and type the following commands to obtain the car code. And the code will be placed in the directory "Pi". 
 
-:red:`(Note: Here are two commands. Please execute them in order.)`
+:combo:`red font-bolder:(Note: Here are two commands. Please execute them in order.)`
 
 .. code-block:: console
 
@@ -65,25 +65,25 @@ If it is python3, you can skip this section.
 
 **If it is python2, you need execute the following commands to set default python to python3.**
 
-1.	Enter directory /usr/bin 
+1. Enter directory /usr/bin 
 
 .. code-block:: console
 
     $ cd /usr/bin
 
-2.	Delete the original python link.
+2. Delete the original python link.
 
 .. code-block:: console
 
     $ sudo rm python
 
-3.	Create new python links to python.
+3. Create new python links to python.
 
 .. code-block:: console
 
     $ sudo ln -s python3 python
 
-4.	Check python. Press Ctrl-Z to exit.
+4. Check python. Press Ctrl-Z to exit.
 
 .. code-block:: console
 
@@ -240,7 +240,7 @@ Step 3 Run the Libraries Installation Program
 
     $ sudo python setup.py
 
-This program will automatically install the rpi_ws281x, PyQt5 library, etc. Please reboot the Raspberry Pi after the installation is completed, as shown below.
+This program will automatically install the rpi_ws281x, PyQt5 library, etc. Please :combo:`blue font-bolder:reboot` the Raspberry Pi after the installation is completed, as shown below.
 
 If it is your first time to run the script, it will ask you to input the camera type. At this point, input the content according to the camera you have. (The one included in this kit is of the type ov5647).
 
@@ -249,6 +249,7 @@ If it is your first time to run the script, it will ask you to input the camera 
 
 .. table:: 
     :align: center
+    :class: table-line
 
     +---------------+---------------+
     | OV5647        | Imx219        |
@@ -279,7 +280,10 @@ Reboot your Raspberry Pi after installing the libraries.
     
     sudo reboot
 
-:red:`The reboot of the pi takes some time, please wait with patience.`
+.. image:: ../_static/imgs/Chapter_1_Software_installation/Chapter01_19.png
+    :align: center
+
+:combo:`red font-bolder:The reboot of the pi takes some time, please wait with patience.`
 
 If the installation fails, please rerun setup.py. After the installation is completed, restart the Raspberry Pi. Most installation failures are caused by network reasons.
 

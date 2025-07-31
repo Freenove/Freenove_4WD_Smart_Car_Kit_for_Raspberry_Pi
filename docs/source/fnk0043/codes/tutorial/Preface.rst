@@ -26,8 +26,9 @@ The A type and B type versions of the first generation products have been discon
 Below are the raspberry pi pictures and model pictures supported by this product. They have 40 pins.
 
 .. list-table:: 
-    :width: 100%
+    :width: 80%
     :align: center
+    :class: table-line
 
     *   -   Practicality picture of Raspberry Pi 5:
         -   Model diagram of Raspberry Pi 5:
@@ -135,7 +136,6 @@ Each pin's functional assignment is defined in the image below:
     .. image:: ../_static/imgs/Preface/Preface25.png
         :align: center
 
-
 .. seealso:: 
 
     For more details about pin definition of GPIO, please refer to `<http://pinout.xyz/>`_
@@ -156,18 +156,6 @@ Different from the previous two types of GPIO serial numbers, RPi GPIO serial nu
 .. image:: ../_static/imgs/Preface/Preface27.png
     :align: center
 
-.. seealso:: 
+.. seealso::
+    
     For more details, please refer to `<https://projects.drogon.net/raspberry-pi/wiringpi/pins/>`_ 
-
-You can also use the following command to view their correlation.
-
-.. code-block:: console
-
-    $ gpio readall
-
-.. image:: ../_static/imgs/Preface/Preface28.png
-    :align: center
-
-.. seealso:: 
-
-    For more details about pin definition of GPIO, please refer to `<https://github.com/WiringPi/WiringPi>`_

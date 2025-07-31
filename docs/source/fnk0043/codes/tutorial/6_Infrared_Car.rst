@@ -40,6 +40,7 @@ The code is as below:
     :linenos: 
     :language: python
     :lines: 1-9, 90-106, 150-158, 179-184, 186-187
+    :dedent:
 
 Result analysis
 ================================================================

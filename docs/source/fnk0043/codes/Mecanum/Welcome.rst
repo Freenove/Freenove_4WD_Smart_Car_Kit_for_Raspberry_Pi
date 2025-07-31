@@ -7,7 +7,7 @@ Thank you for choosing Freenove products!
 About Battery
 ****************************************************************
 
-First, read the document :blue:`About_Battery.pdf` in the unzipped folder.
+First, read the document :combo:`blue font-bolder:About_Battery.pdf` in the unzipped folder.
 
 If you did not download the zip file, please download it and unzip it via link below.
 

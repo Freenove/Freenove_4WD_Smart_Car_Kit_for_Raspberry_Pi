@@ -18,6 +18,7 @@ Machinery Parts
 
 .. list-table::
    :align: center
+   :class: table-line
 
    * - |List02|
      - |List03|
@@ -43,7 +44,7 @@ Machinery Parts
 
 .. note::
     
-    :red:`You may receive M1.4*4 or M1.4*5. Can be used normally`
+    :combo:`red font-bolder:You may receive M1.4*4 or M1.4*5. Can be used normally`
 
 Transmission Parts
 ****************************************************************
@@ -52,6 +53,7 @@ Transmission Parts
   :widths: 50 50
   :width: 80%
   :align: center
+  :class: table-line
 
   +-----------------------------------+-----------------------------------+
   | Servo package x2                  | Driven wheel x4                   |     
@@ -84,37 +86,42 @@ Electronic Parts
 
 .. note::
 
-  :red:`There are two models of connection boards, remember their version numbers.`
+  :combo:`red font-bolder:There are two models of connection boards, remember their version numbers.`
   
-+---------------------------+---------------------------------+-----------------------------+
-|  Line tracking module x1  |  Camera x1                      | HC-SR04 Ultrasonic Module x1|   
-|                           |                                 |                             |   
-|    |List16|               |   |List17|                      |   |List18|                  |   
-+---------------------------+----------------+----------------+-----------------------------+
-| Connection board (PCB_V1.0)                |  Connection board (PCB_V2.0)                 |   
-|                                            |                                              |   
-|    |List19|                                |    |List20|                                  |   
-+--------------------------------------------+----------------------------------------------+
-|  Jumper Wire F/F(4) x1                                                                    |   
-|                                                                                           |   
-|    |List21|                                                                               |   
-+-------------------------------------------------------------------------------------------+
-|  XH-2.54-5Pin cable x1                                                                    |   
-|                                                                                           |   
-|    |List22|                                                                               |   
-+-------------------------------------------------------------------------------------------+
-|  FPC soft line x1                                                                         |   
-|                                                                                           |   
-|    |List23|                                                                               |   
-+-------------------------------------------------------------------------------------------+
-|  FPC soft line x1                                                                         |   
-|                                                                                           |   
-|    |List24|                                                                               |   
-+-------------------------------------------------------------------------------------------+
+.. table:: 
+    :width: 80%
+    :align: center
+    :class: table-line
+  
+    +---------------------------+---------------------------------+-----------------------------+
+    |  Line tracking module x1  |  Camera x1                      | HC-SR04 Ultrasonic Module x1|   
+    |                           |                                 |                             |   
+    |    |List16|               |   |List17|                      |   |List18|                  |   
+    +---------------------------+----------------+----------------+-----------------------------+
+    | Connection board (PCB_V1.0)                |  Connection board (PCB_V2.0)                 |   
+    |                                            |                                              |   
+    |    |List19|                                |    |List20|                                  |   
+    +--------------------------------------------+----------------------------------------------+
+    |  Jumper Wire F/F(4) x1                                                                    |   
+    |                                                                                           |   
+    |    |List21|                                                                               |   
+    +-------------------------------------------------------------------------------------------+
+    |  XH-2.54-5Pin cable x1                                                                    |   
+    |                                                                                           |   
+    |    |List22|                                                                               |   
+    +-------------------------------------------------------------------------------------------+
+    |  FPC soft line x1                                                                         |   
+    |                                                                                           |   
+    |    |List23|                                                                               |   
+    +-------------------------------------------------------------------------------------------+
+    |  FPC soft line x1                                                                         |   
+    |                                                                                           |   
+    |    |List24|                                                                               |   
+    +-------------------------------------------------------------------------------------------+
 
 .. note:: 
 
-    :red:`Please note that this cable only come with the purchase of the Raspberry Pi 5 version.`
+    :combo:`red font-bolder:Please note that this cable only come with the purchase of the Raspberry Pi 5 version.`
 
 .. |List16| image:: ../_static/imgs/List/List16.png
 .. |List17| image:: ../_static/imgs/List/List17.png
@@ -132,6 +139,7 @@ Tools
 .. list-table::
    :align: center
    :widths: 60 50 50
+   :class: table-line
 
    * - Cross screwdriver (3mm) x1
      - Black tape x1
@@ -152,13 +160,14 @@ Self-prepared Parts
 .. table:: 
   :width: 80%
   :align: center
+  :class: table-line
 
   +-------------------------------------------------------------------------------------------+
   | Please refer to About_Battery.pdf in unzipped folder.                                     |   
   |                                                                                           |   
   |    |List28|                                                                               |   
   +-------------------------------------------------------------------------------------------+
-  | Raspberry Pi (:red:`Recommended model: Raspberry 5 / 4B / 3B+`) x1                        |   
+  | Raspberry Pi (:combo:`red font-bolder:Recommended model: Raspberry 5 / 4B / 3B+`) x1      |   
   |                                                                                           |   
   |    |List29|                                                                               |   
   +-------------------------------------------------------------------------------------------+

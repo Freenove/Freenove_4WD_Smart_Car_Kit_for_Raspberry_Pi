@@ -24,7 +24,7 @@ Open Server
 Step 1 Login Raspberry Pi via VNC viewer 
 ---------------------------------------------
 
-:red:`Because server and client use GUI. You need use VNC viewer as remote desktop way.`
+:combo:`red font-bolder:Because server and client use GUI. You need use VNC viewer as remote desktop way.`
 
 Download and install VNC Viewer according to your computer system by clicking following link:
 
@@ -47,7 +47,7 @@ Then on the VNC Viewer panel, double-click new connection you just created, and 
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_03.png
     :align: center
 
-:red:`If the resolution ratio is not great or there is just a` **little window** :red:`, you can set a proper resolution ratio via steps below.`
+:combo:`red font-bolder:If the resolution ratio is not great or there is just a` **little window** :combo:`red font-bolder:, you can set a proper resolution ratio via steps below.`
 
 .. code-block:: console
 
@@ -205,20 +205,20 @@ The client interface is shown as below:
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_10.png
     :align: center
 
-After the client opens successfully, you need open the Raspberry Pi and :red:`open server first` , then enter the IP address of the Raspberry Pi in the white IP edit box, and then click "Connect” to connect smart car to Raspberry Pi. After the connection is successful, you can click on the controls on the interface to operate the car.
+After the client opens successfully, you need open the Raspberry Pi and :combo:`red font-bolder:open server first` , then enter the IP address of the Raspberry Pi in the white IP edit box, and then click "Connect” to connect smart car to Raspberry Pi. After the connection is successful, you can click on the controls on the interface to operate the car.
 
 .. note:: 
     
-    :red:`when Raspberry Pi is shut down, server will be closed. You need open server again the next time.`
+    :combo:`red font-bolder:when Raspberry Pi is shut down, server will be closed. You need open server again the next time.`
 
-    :red:`If pressing forward but the car moves backward, please refer to page 51 to modify the code.`
+    :combo:`red font-bolder:If pressing forward but the car moves backward, please refer to page 51 to modify the code.`
 
 Option 2 Install python3 and some related python libraries to run the client 
 -----------------------------------------------------------------------------------------
 
 If you want to modify the client, please follow this section.
 
-This section will be completed in your **computer with windows system**, :red:`not Raspberry Pi`.
+This section will be completed in your **computer with windows system**, :combo:`red font-bolder:not Raspberry Pi`.
 
 There are many relevant software and libraries needed to be installed in Windows system, which takes a long time. At this time, it does not need to run Server or use Raspberry Pi. You can shut down Raspberry Pi first. After the installation is completed, you need to open Raspberry Pi and server again.
 
@@ -348,9 +348,9 @@ After the client opens successfully, you need open the Raspberry Pi and  :ref:`o
 
 .. note::
     
-    :red:`when Raspberry Pi is shut down, server will be closed. You need open server again the next time.`
+    :combo:`red font-bolder:when Raspberry Pi is shut down, server will be closed. You need open server again the next time.`
 
-    :red:`If pressing forward but the car moves backward, please refer to page 51 to modify the code.`
+    :combo:`red font-bolder:If pressing forward but the car moves backward, please refer to page 51 to modify the code.`
 
 Control
 ----------------------------------------------------------------
@@ -363,7 +363,6 @@ And you can also control the car with following blue keys.
 The car has four work modes:
 
 .. list-table:: 
-    :width: 100%
     :widths: 50 70
     :class: zebra
     :align: center
@@ -387,7 +386,6 @@ The car has four work modes:
 The following is the corresponding operation of the buttons and keys.
 
 .. list-table:: 
-    :width: 100%
     :widths: 50 30 50
     :class: zebra
     :align: center
@@ -488,7 +486,6 @@ The following is the corresponding operation of the buttons and keys.
 The function of SliderBar is below:
 
 .. list-table:: 
-    :width: 100%
     :widths: 20 50
     :align: center
     :header-rows: 1
@@ -505,7 +502,6 @@ The function of SliderBar is below:
 Other control information:
 
 .. list-table:: 
-    :width: 100%
     :widths: 30 50
     :align: center
     :header-rows: 1
@@ -760,13 +756,13 @@ A. The first string of each command serves to differentiate the primary category
 
 B. The "#" character acts as a delimiter between the command string and the parameter, used to separate the two elements.
 
-C. Each command concludes with "\n," which serves to terminate the command. It is utilized to distinguish between individual commands. For instance: "CMD_MODE #0\n."
+C. Each command concludes with "\\n," which serves to terminate the command. It is utilized to distinguish between individual commands. For instance: "CMD_MODE #0\n."
 
 2. Parse of Commands 0
 
-When parsing commands, first separate the commands with "\n", and then separate the command word 
+When parsing commands, first separate the commands with "\\n", and then separate the command word 
 
-and parameters of each command with“#”. The characters after "\n" are divided to the next command for 
+and parameters of each command with“#”. The characters after "\\n" are divided to the next command for 
 
 parsing. 
 
@@ -1054,7 +1050,7 @@ Then write code in test_Code.py, then click save.
 
 .. note:: 
     
-    :red:`The code and library are written by Python 3. You need execute the code with python 3.`
+    :combo:`red font-bolder:The code and library are written by Python 3. You need execute the code with python 3.`
 
 Open the terminal and use the following command to enter the directory where test_Code.py is located:
 
@@ -1079,6 +1075,7 @@ Following are code example for the parts. For more detail, please refer to :ref:
 For more details, please refer to :ref:`Motor <fnk0043/codes/mecanum/3_module_test:motor>`.
 
 .. code-block:: python
+    :linenos:
 
     from Motor import *                       #import Motor
     PWM=Motor()                               #create an object
@@ -1089,6 +1086,7 @@ For more details, please refer to :ref:`Motor <fnk0043/codes/mecanum/3_module_te
 ADC. For more details, please refer to :ref:`ADC <fnk0043/codes/mecanum/3_module_test:adc module>`.
 
 .. code-block:: python
+    :linenos:
 
     from ADC import *             # import ADC
     adc=Adc()                     # create an object
@@ -1098,6 +1096,7 @@ ADC. For more details, please refer to :ref:`ADC <fnk0043/codes/mecanum/3_module
 LED. For more details, please refer to :ref:`LED <fnk0043/codes/mecanum/3_module_test:led>`.
 
 .. code-block:: python
+    :linenos:
 
     from Led import *                       # import Led     
     led=Led()                               # create an object
@@ -1109,6 +1108,7 @@ LED. For more details, please refer to :ref:`LED <fnk0043/codes/mecanum/3_module
 Buzzer. For more details, please refer to :ref:`Buzzer <fnk0043/codes/mecanum/3_module_test:buzzer>`.
 
 .. code-block:: python
+    :linenos:
 
     from Buzzer import *                # import Led
     from Command import COMMAND as cmd  # import Led
@@ -1120,6 +1120,7 @@ Buzzer. For more details, please refer to :ref:`Buzzer <fnk0043/codes/mecanum/3_
 Servo. For more details, please refer to :ref:`Servo <fnk0043/codes/mecanum/3_module_test:servo>`.
 
 .. code-block:: python
+    :linenos:
 
     from servo import *   #import Led
     pwm = Servo()           #create an object
@@ -1135,6 +1136,7 @@ Servo. For more details, please refer to :ref:`Servo <fnk0043/codes/mecanum/3_mo
 Ultrasonic module. For more details, please refer to :ref:`Ultrasonic module <fnk0043/codes/mecanum/3_module_test:ultrasonic module>`.
 
 .. code-block:: python
+    :linenos:
 
     from Ultrasonic import *         #import Led 
     ultrasonic=Ultrasonic()          #create an object            

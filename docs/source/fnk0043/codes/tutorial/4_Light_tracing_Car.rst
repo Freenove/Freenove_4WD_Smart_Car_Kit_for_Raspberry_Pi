@@ -21,6 +21,7 @@ Run program
 If the terminal displays the directory as below, you can directly execute the Light.py command. 
  
 .. image:: ../_static/imgs/Chapter_4_Light_tracing_Car/Chapter4_00.png
+    :align: center
 
 1.	If not, execute the cd command:
 

@@ -30,9 +30,10 @@ If the terminal displays the directory as below, you can directly run the Ultras
     $ sudo python car.py Sonic
 
 .. literalinclude:: ../../../freenove_Kit/Code/Server/car.py
-    :linenos: 
+    :linenos:
     :language: python
     :lines: 1-9, 46-88, 141-149, 179-184, 184-185
+    :dedent:
 
 Result analysis
 ================================================================

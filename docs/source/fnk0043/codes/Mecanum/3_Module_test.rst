@@ -4,14 +4,14 @@ Chapter 3 Module test (necessary)
 
 **If you have any concerns, please feel free to contact us via support@freenove.com**
 
-In this section, the car must be equipped with **batteries**, and **Both S1** power switch and S2 motor switch need to be **preessed**. Then 5V, 3.3V, battery power indicators will be turned on. 
+In this section, the car must be equipped with **batteries**, and **Both S1** power switch and **S2** motor switch need to be **preessed**. Then 5V, 3.3V, battery power indicators will be turned on. 
 
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_00.png
     :align: center
 
 During the test, the motor will work. So you can disconnect the wheels or put it on the ground to avoid that it falls down and is damaged. Next, test RGB LED, motor, ultrasonic module, servo, etc. 
 
-:red:`You can still power Raspberry Pi with a power supply Cable when switches are pressed.`
+:combo:`red font-bolder:You can still power Raspberry Pi with a power supply Cable when switches are pressed.`
 
 If you have never learned python before, you can learn some basic knowledge via the link below: https://python.swaroopch.com/basics.html
 
@@ -41,15 +41,15 @@ Open the terminal of Raspberry Pi. Enter the following commands to test the moto
 Result: 
 ----------------------------------------------------------------
 
-The car moves forward for 1 seconds, then moves back for 1 seconds, then turns left for 1 seconds, turns right for 1 seconds, then stops. You can press "Ctrl + C" to end the program ahead of time. :red:`If the car doesn't work normally, please check if both switches are pressed.`
+The car moves forward for 1 seconds, then moves back for 1 seconds, then turns left for 1 seconds, turns right for 1 seconds, then stops. You can press "Ctrl + C" to end the program ahead of time. :combo:`red font-bolder:If the car doesn't work normally, please check if both switches are pressed.`
 
-:red:`If the direction is reversed, it moves back then move forward, please follow steps below.`
+:combo:`red font-bolder:If the direction is reversed, it moves back then move forward, please follow steps below.`
 
 1. Find Motor.py in the following path in your Raspberry Pi:
-   
+
 Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Server/Motor.py
 
-Open Motor.py and add a "–" before duty1,2,3,4 like below. 
+Open Motor.py and add a "-" before duty1,2,3,4 like below.
 
 .. literalinclude:: ../../../freenove_Kit/Code/Server/motor.py
     :linenos:
@@ -57,7 +57,7 @@ Open Motor.py and add a "–" before duty1,2,3,4 like below.
     :lines: 66-71
     :dedent:
 
-:red:`Then save the modification and try again.`
+:combo:`red font-bolder:Then save the modification and try again.`
 
 Code
 ================================================================
@@ -296,7 +296,7 @@ LED
 
 .. note:: 
 
-    :red:`Raspberry PI 5 is temporarily unavailable because the Library rpi-ws281x-python does not support Raspberry PI 5. Please skip this section.`
+    :combo:`red font-bolder:Raspberry PI 5 is temporarily unavailable because the Library rpi-ws281x-python does not support Raspberry PI 5. Please skip this section.`
 
 There are 8 RGB LEDs on the smart car board, as shownbelow. You can control them separately. 
 
@@ -311,6 +311,7 @@ Enter the following commands to test LEDs.
 If the terminal displays the directory as below (where test.py is located), you can directly execute the test.py command. 
 
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_09.png
+    :align: center
 
 1. If not, execute the cd command:
 
@@ -332,9 +333,10 @@ If you are using the Led feature for the first time, it will ask for the PCB ver
 Please enter 1 or 2 according to the version number of your connection board.
 
 .. list-table:: 
-    :width: 100%
+    :width: 50%
     :widths: 50 50
     :align: center
+    :class: table-line
 
     *   -   Connection board (PCB_V1.0)  
         -   Connection board (PCB_V2.0)
@@ -350,7 +352,7 @@ In this example, PCB V2.0 is used. Enter 2 and press Enter.
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_11.png
     :align: center
 
-:red:`If your connection board version is V2.0 and you do not have the SPI feature turned on, the LedPixel will not show the color. Refer here to turn on the SPI.`
+:combo:`red font-bolder:If your connection board version is V2.0 and you do not have the SPI feature turned on, the LedPixel will not show the color. Refer here to turn on the SPI.`
 
 Result: 
 ----------------------------------------------------------------
@@ -397,6 +399,7 @@ Enter the following command in the terminal to test buzzer.
 If the terminal displays the directory as below (where test.py is located). You can directly execute the test.py command. 
 
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_12.png
+    :align: center
 
 1. If not, execute the cd command:
 
@@ -446,6 +449,7 @@ Enter the following commands in the terminal to test servos.
 If the terminal displays the directory as below (where test.py is located), you can directly execute the test.py command. 
 
 .. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_14.png
+    :align: center
 
 1. If not, execute the cd command:
 
@@ -476,6 +480,7 @@ The code is as below:
     :linenos: 
     :language: python
     :lines: 84-107
+    :dedent:
 
 Reference
 ================================================================
@@ -545,6 +550,7 @@ The code is as below:
     :linenos: 
     :language: python
     :lines: 46-61
+    :dedent:
 
 Reference
 ================================================================
@@ -556,7 +562,7 @@ Reference
 Camera 
 ****************************************************************
 
-Next let us connect the camera to smart car board. First :red:`turn off S1` (Power Switch), :red:`shut down Raspberry Pi` and disconnect power cable. If the data cable is used to power the Raspberry Pi, disconnect the data cable and install the CSI camera to the Raspberry Pi camera interface when the Raspberry Pi is powered off. :red:`(The CSI camera must be connected or disconnected under no power and when Raspberry Pi is shut down, or the camera may be burned.)`
+Next let us connect the camera to smart car board. First :combo:`red font-bolder:turn off S1` (Power Switch), :combo:`red font-bolder:shut down Raspberry Pi` and disconnect power cable. If the data cable is used to power the Raspberry Pi, disconnect the data cable and install the CSI camera to the Raspberry Pi camera interface when the Raspberry Pi is powered off. :combo:`red font-bolder:(The CSI camera must be connected or disconnected under no power and when Raspberry Pi is shut down, or the camera may be burned.)`
 
 Camera for Pi3/4
 ===========================
@@ -584,7 +590,7 @@ Connect one end of cable to camera. Please note the front and back of the cable.
 Camera for Pi5
 ===========================
 
-:combo:`bg-blue:You need shut down Raspberry Pi when wire camera.`
+:combo:`bg-blue font-bolder x-large:You need shut down Raspberry Pi when wire camera.`
 
 Step 1
 
@@ -623,6 +629,7 @@ First method, use the system's default camera detection function.
 2.	Enable the automatic camera detection function.
 
 .. code-block:: python
+    :linenos:
     
     camera_auto_detect=1
 
@@ -631,6 +638,7 @@ Second method, manually configure the camera.
 1.	Disable the automatic camera detection function.
 
 .. code-block:: python
+    :linenos:
     
     camera_auto_detect=0
 
@@ -639,12 +647,14 @@ Second method, manually configure the camera.
 If you are a Raspberry PI 5, add the following command.
 
 .. code-block:: python
+    :linenos:
     
     dtoverlay = ov5647,cam0
 
 If you are not a Raspberry PI 5, add the following command.
 
 .. code-block:: python
+    :linenos:
     
     dtoverlay = ov5647
 

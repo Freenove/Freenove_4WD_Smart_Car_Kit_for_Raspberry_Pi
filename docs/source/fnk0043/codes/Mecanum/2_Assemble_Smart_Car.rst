@@ -12,7 +12,7 @@ You can refer to this video
 
 .. note:: 
     
-    :red:`The difference from the previous video is the installation of the wheels. Please follow STEP 4 of the Wheel installation guide.`
+    :combo:`red font-bolder:The difference from the previous video is the installation of the wheels. Please follow` :ref:`STEP 4 <STEP_4>` :combo:`red font-bolder:of the Wheel installation guide.`
 
 Motor, Wheel and Servo arm 
 ****************************************************************
@@ -48,7 +48,7 @@ There are 4 bracket packages to fix motors, each containg an aluminum bracket, t
 
 Install motor bracket with M3*8.
 
-:red:`You can also attach this bracket to motor first.`
+:combo:`red font-bolder:You can also attach this bracket to motor first.`
 
 Step 2
 ----------------------------------------------------------------
@@ -65,6 +65,8 @@ Step 3
     :align: center
 
 The installation of the rest 3 sets of motor is the same. Then connect motor wires to motor ports. If you think the wires are too long, you can tie a knot.
+
+.. _STEP_4:
 
 Step 4 Install the mecanum wheels
 ----------------------------------------------------------------
@@ -127,12 +129,14 @@ Install the connection board as shown in the figure above. Long female header co
 
 .. note:: 
     
-    We have two types of connection boards, but they are installed in the same way.
+    :combo:`red font-bolder:We have two types of connection boards, but they are installed in the same way.`
 
 .. list-table:: 
-    :width: 100%
+    :width: 50%
     :widths: 50 50
+    :header-rows: 1
     :align: center
+    :class: zebra
 
     *   -   Connection board (PCB_V1.0)  
         -   Connection board (PCB_V2.0)
@@ -164,7 +168,7 @@ Pan Tilt
 
 Finally, install two 18650 batteries. **Please refer to About_Battery.pdf in the unzipped folder.**
 
-:red:`Please push the battery to + ends of battery holder to make the connection good enough.`
+:combo:`red font-bolder:Please push the battery to + ends of battery holder to make the connection good enough.`
 
 Run program
 ================================================================
@@ -199,16 +203,17 @@ If the terminal displays the directory as below (where test.py is located). You 
 
 Then servos rotate to a proper angle. Please keep the connection between the servos and the smart car board.
 
-Installation steps: 
+Installation steps:
 
 .. note::
     
-    Do not disorder Servo0 and Servo1 during the installation.
+    :combo:`red font-bolder:Do not disorder Servo0 and Servo1 during the installation.`
 
 .. list-table:: 
     :width: 100%
     :widths: 50 50 50
     :align: center
+    :class: table-line
 
     *   -   Step 1  
         -   Step 2
@@ -250,6 +255,7 @@ Now please refer to :ref:`Wiring Section <fnk0043/codes/mecanum/2_assemble_smart
     :width: 100%
     :widths: 50 50 50
     :align: center
+    :class: table-line
 
     *   -   Step 10  
         -   Step 11
@@ -291,7 +297,7 @@ Pay attention to servo wiring.
 
 .. note:: 
 
-    :red:`wiring about the ultrasonic and camera module will be introduced later.`
+    :combo:`red font-bolder:wiring about the ultrasonic and camera module will be introduced later.`
 
 Wiring Section
 ================================================================
@@ -299,7 +305,7 @@ Wiring Section
 Camera
 ----------------------------------------------------------------
 
-:combo:`bg-blue x-large:You need shut down Raspberry Pi when wire camera.`
+:combo:`bg-blue x-large font-bolder:You need shut down Raspberry Pi when wire camera.`
 
 Step 1
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -313,7 +319,6 @@ Step 2
 
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_35.png
     :align: center
-
 
 The :blue:`Blue side` of cable should be toward to Servo. 
 
@@ -338,7 +343,7 @@ Connect one end of cable to camera. Please note the front and back of the cable.
 Camera for Pi5
 ----------------------------------------------------------------
 
-:combo:`bg-blue x-large:You need shut down Raspberry Pi when wire camera.`
+:combo:`bg-blue x-large font-bolder:You need shut down Raspberry Pi when wire camera.`
 
 Step 1
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

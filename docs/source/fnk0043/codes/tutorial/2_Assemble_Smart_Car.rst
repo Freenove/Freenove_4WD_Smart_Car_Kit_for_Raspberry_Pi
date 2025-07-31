@@ -128,9 +128,10 @@ Install the connection board as shown in the figure above. Long female header co
     We have two types of connection boards, but they are installed in the same way.
 
 .. list-table:: 
-    :width: 100%
-    :widths: 50 50
+    :width: 60%
+    :widths: 50 52
     :align: center
+    :class: table-line
 
     *   -   Connection board (PCB_V1.0)  
         -   Connection board (PCB_V2.0)
@@ -162,7 +163,7 @@ Pan Tilt
 
 Finally, install two 18650 batteries. **Please refer to About_Battery.pdf in the unzipped folder.**
 
-:red:`Please push the battery to + ends of battery holder` **to make the connection good enough.**
+:combo:`red font-bolder:Please push the battery to + ends of battery holder` **to make the connection good enough.**
 
 Run program
 ================================================================
@@ -201,11 +202,12 @@ Installation steps:
 
 .. note::
     
-    Do not disorder Servo0 and Servo1 during the installation.
+    :combo:`red font-bolder:Do not disorder Servo0 and Servo1 during the installation.`
 
 .. list-table:: 
     :width: 100%
     :widths: 50 50 50
+    :class: table-line
     :align: center
 
     *   -   Step 1  
@@ -242,12 +244,13 @@ Installation steps:
 .. |Chapter2_26| image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_26.png
 .. |Chapter2_27| image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_27.png
 
-Now please refer to :ref:`Wiring Section <fnk0043/codes/tutorial/2_assemble_smart_car:wiring section>` to wring ultrasonic sensor and camera frist.
+**Now please refer to** :ref:`Wiring Section <fnk0043/codes/tutorial/2_assemble_smart_car:wiring section>` **to wring ultrasonic sensor and camera frist.**
 
 .. list-table:: 
     :width: 100%
     :widths: 50 50 50
     :align: center
+    :class: table-line
 
     *   -   Step 10  
         -   Step 11
@@ -285,11 +288,11 @@ Step 3
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_33.png
     :align: center
 
-Pay attention to servo wiring.
+**Pay attention to servo wiring.**
 
 .. note:: 
 
-    :red:`Wiring about the ultrasonic and camera module will be introduced later.`
+    :combo:`red font-bolder:Wiring about the ultrasonic and camera module will be introduced later.`
 
 Wiring Section
 ================================================================
@@ -312,8 +315,7 @@ Step 2
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_35.png
     :align: center
 
-
-The :blue:`Blue side` of cable should be toward to Servo. 
+The :combo:`blue font-bolder:Blue side` of cable should be toward to Servo. 
 
 Connect one end of cable to camera. Please note the front and back of the cable. 
 
@@ -329,7 +331,7 @@ Step 4
 .. image:: ../_static/imgs/Chapter_2_Assemble_Smart_Car/Chapter2_37.png
     :align: center
 
-The :blue:`Blue side` of cable should be toward to Servo. 
+The :combo:`blue font-bolder:Blue side` of cable should be toward to Servo. 
 
 Connect one end of cable to camera. Please note the front and back of the cable. 
 

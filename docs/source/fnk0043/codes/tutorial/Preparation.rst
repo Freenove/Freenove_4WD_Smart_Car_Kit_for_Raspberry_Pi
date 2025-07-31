@@ -12,7 +12,7 @@ Required Components
     :width: 100%
     :widths: 50 50
     :align: center
-    :class: product-table
+    :class: table-line
 
     *   -   Raspberry Pi 5 / 4B / 3B+ (Recommended) 
         -   5V/3A Power Adapter. Different versions of  
@@ -165,7 +165,7 @@ Required Accessories for Remote Desktop
 ================================================================
 
 .. table:: 
-    :class: zebra
+    :class: zebra text-center
     :align: center
 
     +----------------------------------------------------------+---------+-----------+-------+--------+----------+----------------+
@@ -222,6 +222,7 @@ First, put your Micro **SD card** into card reader and connect it to USB port of
 
 .. image:: ../_static/imgs/Preparation/install-system-03.png
     :align: center
+    :width: 40%
 
 Then open imager toll. Clicked Choose Device.
 
@@ -255,14 +256,10 @@ You can configure the Raspberry PI according to your needs.
 
 Enable ssh and configure WiFi
 ================================================================
-On the GENERAL screen, configure your information based on your actual situation.
-Enable SSH on the SERVICES page.
+
+**On the GENERAL screen, configure your information based on your actual situation.**
 
 .. image:: ../_static/imgs/Preparation/install-system-10.png
-    :align: center
-    :width: 48%
-
-.. image:: ../_static/imgs/Preparation/install-system-11.png
     :align: center
     :width: 48%
 
@@ -298,6 +295,7 @@ Raspberry Pi 5, 4B, 3B+/3B integrates a Wi-Fi adaptor. You can use it to connect
 
 .. image:: ../_static/imgs/Preparation/install-system-15.png
     :align: center
+    :width: 50%
 
 Set Resolution
 ================================================================
@@ -338,7 +336,7 @@ If you don't have a spare display, mouse and keyboard for your RPi, you can use 
 MAC OS Remote Desktop
 ----------------------------------------------------------------
 
-Open the terminal and type following command. :red:`If this command doesn't work, please move to next page.`
+Open the terminal and type following command. :combo:`red font-bolder:If this command doesn't work, please move to next page.`
 
 .. code-block:: console
 
@@ -347,8 +345,10 @@ Open the terminal and type following command. :red:`If this command doesn't work
 The password is **raspberry** by default, case sensitive. You may need to type **yes** during the process.
 
 .. image:: ../_static/imgs/Preparation/install-system-16.png
+    :align: center
 
 .. image:: ../_static/imgs/Preparation/install-system-17.png
+    :align: center
 
 You can also use the IP address to log in Pi. 
 
@@ -360,25 +360,26 @@ Open the terminal and type following command.
 
     $ ssh pi@192.168.1.95
 
-When you see :red:`pi@raspberrypi:`:blue:`~ $`, you have logged in Pi successfully. Then you can skip to next section.
+When you see :combo:`green font-bolder:pi@raspberrypi:`:combo:`blue font-bolder:~ $`, you have logged in Pi successfully. Then you can skip to next section.
 
 .. image:: ../_static/imgs/Preparation/install-system-18.png
     :align: center
 
-Then you can skip to :ref:`VNC Viewer <fnk0043/codes/tutorial/preparation:vnc viewer & vnc>`
+Then you can skip to :ref:`VNC viewer <fnk0043/codes/tutorial/preparation:vnc viewer & vnc>`
 
 Windows OS Remote Desktop
 ----------------------------------------------------------------
 
 **If you are using win10, you can use follow way to login Raspberry Pi without desktop.**
 
-Press `Win+R`. Enter `cmd`. Then use this command to check IP:
+Press ``Win+R``. Enter ``cmd``. Then use this command to check IP:
 
 .. code-block:: console
 
     $ ping -4 raspberrypi.local
 
 .. image:: ../_static/imgs/Preparation/install-system-19.png
+    :align: center
 
 | Then 192.168.1.147 is my Raspberry Pi IP.
 | Or enter **router** client to **inquiry IP address** named **"raspberrypi”**. For example, I have inquired to **my RPi IP address, and it is "192.168.1.95".**
@@ -396,13 +397,10 @@ Enter the following command:
 .. image:: ../_static/imgs/Preparation/install-system-20.png
     :align: center
 
-VNC Viewer & VNC
+Enable VNC Viewer
 ----------------------------------------------------------------
 
-Enable VNC
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Type the following command. And select Interface Options -> P5 VNC -> Enter -> Yes -> OK. Here Raspberry Pi may need be restarted, and choose ok. Then open VNC interface. 
+Type the following command. And select Interface Options **->** P5 VNC **->** Enter **->** Yes **->** OK. Here Raspberry Pi may need be restarted, and choose ok. Then open VNC interface. 
 
 .. code-block:: console
     
@@ -422,7 +420,7 @@ Type the following command. And select Interface Options -> P5 VNC -> Enter -> Y
 
 | Then download and install VNC Viewer according to your computer system by click following link:
 | https://www.realvnc.com/en/connect/download/viewer/
-| After installation is completed, open VNC Viewer. And click File -> New Connection. Then the interface is shown below. 
+| After installation is completed, open VNC Viewer. And click File **->** New Connection. Then the interface is shown below. 
 
 .. image:: ../_static/imgs/Preparation/install-system-25.png
     :align: center
@@ -433,7 +431,7 @@ Type the following command. And select Interface Options -> P5 VNC -> Enter -> Y
 .. image:: ../_static/imgs/Preparation/install-system-26.png
     :align: center
 
-and the following dialog box pops up.  
+and the following dialog box pops up.
 
 .. image:: ../_static/imgs/Preparation/install-system-27.png
     :align: center
@@ -444,36 +442,3 @@ Enter username: **pi** and Password: **raspberry**. And click OK.
     :align: center
 
 Here, you have logged in to Raspberry Pi successfully by using VNC Viewer
-
-.. image:: ../_static/imgs/Preparation/install-system-29.png
-    :align: center
-
-If there is black window, please set resolution.
-
-set resolution
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-You can also set other resolutions. 
-
-.. image:: ../_static/imgs/Preparation/install-system-30.png
-    :align: center
-
-If you don't know what resolution to set properly, you can try 1920x1080.
-
-.. image:: ../_static/imgs/Preparation/install-system-31.png
-    :align: center
-
-In addition, your VNC Viewer window may zoom your Raspberry Pi desktop. You can change it. On your VNC View control panel, click right key. And select Properties->Options label->Scaling. Then set proper scaling. 
-
-.. image:: ../_static/imgs/Preparation/install-system-32.png
-    :align: center
-
-.. image:: ../_static/imgs/Preparation/install-system-33.png
-    :align: center
-
-Here, you have logged in to Raspberry Pi successfully by using VNC Viewer and operated proper setting.
-
-Raspberry Pi 5/4B/3B+/3B integrates a Wi-Fi adaptor.If you did not connect Pi to WiFi. You can connect it to wirelessly control the robot.
-
-.. image:: ../_static/imgs/Preparation/install-system-34.png
-    :align: center

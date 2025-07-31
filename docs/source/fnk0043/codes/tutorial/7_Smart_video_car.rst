@@ -24,13 +24,13 @@ Open Server
 Step 1 Login Raspberry Pi via VNC viewer 
 --------------------------------------------------
 
-:red:`Because server and client use GUI. You need use VNC viewer as remote desktop way.`
+:combo:`red font-bolder:Because server and client use GUI. You need use VNC viewer as remote desktop way.`
 
 Download and install VNC Viewer according to your computer system by clicking following link:
 
 https://www.realvnc.com/en/connect/download/viewer/
 
-After installation is completed, open VNC Viewer. And click File -> New Connection. Then the interface is shown below. 
+After installation is completed, open VNC Viewer. And click File **->** New Connection. Then the interface is shown below. 
 
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_01.png
     :align: center
@@ -47,7 +47,7 @@ Then on the VNC Viewer panel, double-click new connection you just created, and 
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_03.png
     :align: center
 
-:red:`If the resolution ratio is not great or there is just a` **little window** :red:`, you can set a proper resolution ratio via steps below.`
+:combo:`red font-bolder:If the resolution ratio is not great or there is just a` **little window** :combo:`red font-bolder:, you can set a proper resolution ratio via steps below.`
 
 .. code-block:: console
 
@@ -66,17 +66,17 @@ In addition, your VNC Viewer window may zoom your Raspberry Pi desktop. You can 
 Step 2 Run commands
 ----------------------------------------------------------------
 
-If you are using remote desktop mode to login Raspberry Pi, you need use VNC viewer.
+If you are using **remote desktop mode** to login Raspberry Pi, you need use VNC viewer.
 
 Enter the following command in the terminal.
 
-1.	Use cd command to enter directory where main.py is located:
+1. Use cd command to enter directory where main.py is located:
 
 .. code-block:: console
 
     $ cd ~/Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Server
 
-2.	Run main.py:
+2. Run main.py:
 
 .. code-block:: console
 
@@ -93,20 +93,20 @@ The interface is as below:
 Sever Auto Start 
 ----------------------------------------------------------------
 
-1	Open the terminal and execute the following two commands respectively to create a "start.sh” file.
+1 Open the terminal and execute the following two commands respectively to create a "start.sh” file.
 
 .. code-block:: console
 
     $ cd ~
     $ sudo touch start.sh
 
-2	Open "start.sh”.
+2 Open "start.sh”.
 
 .. code-block:: console
 
     $ sudo nano start.sh
 
-3	Add the following contents to "start.sh” file.
+3 Add the following contents to "start.sh” file.
 
 .. code-block:: shell
 
@@ -121,25 +121,25 @@ Press Ctrl + O and then press Enter to save it. Press Ctrl+X to exit.
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_08.png
     :align: center
 
-4	Modify permissions.  
+4 Modify permissions.  
 
 .. code-block:: console
 
     $ sudo chmod 777 start.sh
 
-5	Enter the following command to create a directory.
+5 Enter the following command to create a directory.
 
 .. code-block:: console
 
     $ mkdir ~/.config/autostart/
 
-6	create and open "start.desktop” file
+6 create and open "start.desktop” file
 
 .. code-block:: console
 
     $ sudo nano .config/autostart/start.desktop
 
-7	Add the following content to "start.desktop” file.
+7 Add the following content to "start.desktop” file.
 
 .. code-block:: shell
 
@@ -151,19 +151,21 @@ Press Ctrl + O and then press Enter to save it. Press Ctrl+X to exit.
 
 Press Ctrl + O and then press Enter to save it. Press Ctrl+X to exit.
 
-8	Modify permissions.  
+8 Modify permissions.  
 
 .. code-block:: console
 
     $ sudo chmod +x .config/autostart/start.desktop
 
-9	Finally enter the following content to reboot Raspberry Pi.
+9 Finally enter the following content to reboot Raspberry Pi.
 
 .. code-block:: console
 
     $ sudo reboot
 
-Note: To cancel auto start, please delete the files "start.sh” and "start.desktop” created above.
+.. note::
+    
+    To cancel auto start, please delete the files "start.sh” and "start.desktop” created above.
 
 .. code-block:: console
 
@@ -186,6 +188,7 @@ Part of client code is as below:
     :linenos: 
     :language: python
     :lines: 13-78
+    :dedent:
     
 Run client on windows system
 ===========================================
@@ -209,16 +212,16 @@ After the client opens successfully, you need open the Raspberry Pi and :ref:`Op
 
 .. note:: 
     
-    :red:`when Raspberry Pi is shut down, server will be closed. You need open server again the next time.`
+    :combo:`red font-bolder:when Raspberry Pi is shut down, server will be closed. You need open server again the next time.`
 
-:red:`If pressing forward but the car moves backward, please refer to page 51 to modify the code.`
+:combo:`red font-bolder:If pressing forward but the car moves backward, please refer to page 51 to modify the code.`
 
 Option 2 Install python3 and some related python libraries to run the client 
 -----------------------------------------------------------------------------------------
 
 If you want to modify the client, please follow this section.
 
-This section will be completed in your **computer with windows system,** :red:`not Raspberry Pi`.
+This section will be completed in your **computer with windows system,** :combo:`red font-bolder:not Raspberry Pi`.
 
 There are many relevant software and libraries needed to be installed in Windows system, which takes a long time. At this time, it does not need to run Server or use Raspberry Pi. You can shut down Raspberry Pi first. After the installation is completed, you need to open Raspberry Pi and server again.
 
@@ -337,7 +340,7 @@ Press "win + R” and enter cmd, and click ok. Then enter following commands.
 .. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_50.png
     :align: center
 
-Or enter the unzipped directory and enter following directory: Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi\Code\Client. And double-click Main.py or open it with python to open the client.
+Or enter the unzipped directory and enter following directory: Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi\\Code\\Client. And double-click Main.py or open it with python to open the client.
 
 The client interface is shown as below:
 
@@ -348,9 +351,9 @@ After the client opens successfully, you need open the Raspberry Pi and  :ref:`o
 
 .. note::
     
-    :red:`when Raspberry Pi is shut down, server will be closed. You need open server again the next time.`
+    :combo:`red font-bolder:when Raspberry Pi is shut down, server will be closed. You need open server again the next time.`
 
-:red:`If pressing forward but the car moves backward, please refer to page 51 to modify the code.`
+:combo:`red font-bolder:If pressing forward but the car moves backward, please refer to page 51 to modify the code.`
 
 Control
 ----------------------------------------------------------------
@@ -363,10 +366,10 @@ And you can also control the car with following blue keys.
 The car has four work modes:
 
 .. list-table:: 
-    :width: 100%
     :widths: 50 70
     :align: center
     :header-rows: 1
+    :class: zebra
 
     *   -   Mode  
         -   Function 
@@ -386,10 +389,10 @@ The car has four work modes:
 The following is the corresponding operation of the buttons and keys.
 
 .. list-table:: 
-    :width: 100%
     :widths: 50 30 50
     :align: center
     :header-rows: 1
+    :class: zebra
 
     *   -   Button on Client
         -   Key 
@@ -458,7 +461,6 @@ The following is the corresponding operation of the buttons and keys.
 The function of SliderBar is below:
 
 .. list-table:: 
-    :width: 100%
     :widths: 20 50
     :align: center
     :header-rows: 1
@@ -475,7 +477,6 @@ The function of SliderBar is below:
 Other control information:
 
 .. list-table:: 
-    :width: 100%
     :widths: 30 50
     :align: center
     :header-rows: 1
@@ -507,12 +508,14 @@ If you don't want to enter IP address after open the client, you can make some m
 1.	Open "Client_Ui.py” under directory "Client”, then find code in the thirty-sixth line from the bottom.
 
 .. code-block:: python
+    :linenos:
 
     self.IP.setText(_translate("Client", "IP address", None))
 
 2.	Modify IP address to IP address of your Raspberry Pi. For example, my rpi IP is 192.168.1.116. After modification, it should be as below:
 
 .. code-block:: python
+    :linenos:
 
     self.IP.setText(_translate("Client", "192.168.1.116", None))
 
@@ -620,9 +623,9 @@ Installation will take some time. Just wait patiently. For successful installati
 
 If not all installations are successful, it will prompt "Some libraries have not been installed yet. Please run 'python3 setup_macos.py' again", then you need to execute the python3 setup_macos.py command again. Most of the installation failures are caused by poor networks. You can check your network before installing.
 
-If you are using :blue:`macOS under 11.0, like 10.15.` **Just skip to "Open client”.**
+If you are using :combo:`blue font-bolder:macOS under 11.0, like 10.15.` **Just skip to "Open client”.**
 
-If you are using :blue:`macOS 11.0 or later version.` Please run commands below:
+If you are using :combo:`blue font-bolder:macOS 11.0 or later version.` Please run commands below:
 
 .. code-block:: console
 
@@ -821,6 +824,7 @@ Following are code example for the parts. For more detail, please refer to :ref:
 For more details, please refer to :ref:`Motor <fnk0043/codes/tutorial/3_module_test:motor>`.
 
 .. code-block:: python
+    :linenos:
 
     from Motor import *                       #import Motor
     PWM=Motor()                               #create an object
@@ -831,6 +835,7 @@ For more details, please refer to :ref:`Motor <fnk0043/codes/tutorial/3_module_t
 ADC. For more details, please refer to :ref:`ADC <fnk0043/codes/tutorial/3_module_test:adc module>`.
 
 .. code-block:: python
+    :linenos:
 
     from ADC import *             #import ADC
     adc=Adc()                     #create an object
@@ -840,6 +845,7 @@ ADC. For more details, please refer to :ref:`ADC <fnk0043/codes/tutorial/3_modul
 LED. For more details, please refer to :ref:`LED <fnk0043/codes/tutorial/3_module_test:led>`.
 
 .. code-block:: python
+    :linenos:
 
     from Led import *                       #import Led     
     led=Led()                               #create an object
@@ -851,6 +857,7 @@ LED. For more details, please refer to :ref:`LED <fnk0043/codes/tutorial/3_modul
 Buzzer. For more details, please refer to :ref:`Buzzer <fnk0043/codes/tutorial/3_module_test:buzzer>`.
 
 .. code-block:: python
+    :linenos:
 
     from Buzzer import *                #import Led
     from Command import COMMAND as cmd  #import Led
@@ -862,6 +869,7 @@ Buzzer. For more details, please refer to :ref:`Buzzer <fnk0043/codes/tutorial/3
 Servo. For more details, please refer to :ref:`Servo <fnk0043/codes/tutorial/3_module_test:servo>`.
 
 .. code-block:: python
+    :linenos:
 
     from servo import *   #import Led
     pwm = Servo()           #create an object
@@ -877,6 +885,7 @@ Servo. For more details, please refer to :ref:`Servo <fnk0043/codes/tutorial/3_m
 Ultrasonic module. For more details, please refer to :ref:`Ultrasonic module <fnk0043/codes/tutorial/2_assemble_smart_car:ultrasonic>`.
 
 .. code-block:: python
+    :linenos:
 
     from Ultrasonic import *         #import Led 
     ultrasonic=Ultrasonic()          #create an object            
