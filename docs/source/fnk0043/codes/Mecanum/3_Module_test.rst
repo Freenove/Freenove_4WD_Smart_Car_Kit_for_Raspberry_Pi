@@ -137,9 +137,6 @@ Open the terminal of Raspberry Pi. Enter the following commands to test the moto
     
     sudo python car.py Rotate
 
-.. image:: ../_static/imgs/Chapter_3_Module_test/Chapter3_33.png
-    :align: center
-
 **Result:**
 
 The car rotates while moving straight ahead, and the console continuously prints "rotating". If you find that the car isn't rotating as expected, access the "Motor.py" file and adjust the value of "time_propotion". Here are the detailed steps:
