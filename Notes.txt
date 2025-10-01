@@ -1,0 +1,13 @@
+This file lists out my initial notes on the project.
+
+10/01/2025
+- Questions to answer:
+    1. How does the application start?
+        
+    2. Is there existing remote control capability?
+        - There is the keyPressEvent class in mywindow
+    3. How are the exisiting class structures instantiated and used?
+    4. GPIO/Pin:
+        - How are the motors currently controlled?
+    5. Are there existing control interfaces?
+        - web server code or input methods?

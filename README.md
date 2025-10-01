@@ -1,17 +1,17 @@
 ## Freenove 4WD Smart Car Kit for Raspberry Pi
-
-### My personal changes:
-#### All changes are listed below and built on top of the Freenove 4WD Smart Car Kit for Raspberry Pi
-* **Keyboard integration**
-  Located at Code/Server/Keyboard
-
-
 > A 4WD smart car kit for Raspberry Pi.
 
 <div style="text-align: center;">
   <img src='Picture/icon.png' width='45%' style='display:inline-block; margin-right:5px;'/>
   <img src='Picture/icon1.png' width='40%' style='display:inline-block;'/>
 </div>
+
+### Grace's changes:
+#### All changes are listed below and built on top of the Freenove 4WD Smart Car Kit for Raspberry Pi
+* **Keyboard integration**
+  Located at Code/Server/Keyboard
+
+
 
 ### Connection Board Version
 <table>
