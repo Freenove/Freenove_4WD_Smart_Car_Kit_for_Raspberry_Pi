@@ -1,4 +1,5 @@
 import sys
+import argparse
 import struct
 import time
 import signal
@@ -189,7 +190,9 @@ class mywindow(QMainWindow, Ui_server_ui):
                             duty = [int(self.cmd_parse.int_parameter[i]) for i in range(4)]
                             if duty[0] == None or duty[1]== None or duty[2] == None or duty[3] == None:
                                 continue
-                            self.car.motor.set_motor_model(duty[0], duty[1], duty[2], duty[3])
+                            scale_factor = 0.8
+                            scaled_duty = [int(round(d * scale_factor)) for d in duty]
+                            self.car.motor.set_motor_model(scaled_duty[0], scaled_duty[1], scaled_duty[2], scaled_duty[3])
                         except:
                             pass
                     elif self.cmd_parse.command_string == self.command.CMD_M_MOTOR:
@@ -423,6 +426,35 @@ class mywindow(QMainWindow, Ui_server_ui):
             self.app.quit()
 
 if __name__ == '__main__':
-    myshow = mywindow()
-    myshow.show()
-    sys.exit(myshow.app.exec_())
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Freenove 4WD Smart Car Server')
+    parser.add_argument('-t', '--terminal', action='store_true', help='Run in terminal mode (no GUI)')
+    parser.add_argument('-n', '--no-gui', action='store_true', help='Run in terminal mode (no GUI)')
+    
+    args = parser.parse_args()
+    
+    # Check if either flag is set
+    headless_mode = args.terminal or args.no_gui
+    if headless_mode:
+        # Run in headless mode - only start server functionality
+        app = QApplication(sys.argv)
+        server_window = mywindow()
+        
+        # Start the server automatically
+        if server_window.label.text() == "Server Off":
+            server_window.on_pushButton_handle()
+        
+        # Handle Ctrl+C gracefully
+        signal.signal(signal.SIGINT, server_window.signal_handler)
+        
+        # Keep the application running
+        try:
+            sys.exit(app.exec_())
+        except KeyboardInterrupt:
+            server_window.close_application()
+            sys.exit(0)
+    else:
+        # Run with GUI (existing behavior)
+        myshow = mywindow()
+        myshow.show()
+        sys.exit(myshow.app.exec_())
