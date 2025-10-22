@@ -109,7 +109,7 @@ class Server:
 if __name__ == '__main__':
     print('Program is starting ... ')  # Print a message indicating the start of the program
     server = Server()              # Create an instance of the TankServer class
-    server.start_tcp_servers(5003, 8003)  # Start the TCP servers on specified ports
+    server.start_tcp_servers(5000, 8000)  # Start the TCP servers on specified ports
 
     try:
         while True:
