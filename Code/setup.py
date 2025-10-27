@@ -140,6 +140,7 @@ def config_file():
 def main():
     install_status = {
         "python3-dev python3-pyqt5": False,
+        "gpiozero": False,
         "numpy": False,
         "rpi-ws281x-python (custom install)": False
     }
