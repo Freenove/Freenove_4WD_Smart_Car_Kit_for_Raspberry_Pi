@@ -1,4 +1,17 @@
-# CONCEPT ARCHITECTURE
+# BEFORE YOU INSTALL/USE THE WebUI APP
+1. Clone the Repo "Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi" 
+2. Make sure you have built the car according to FNK0043 instructions: Tutorial(ordinary wheels).pdf, 
+   available at the https://docs.freenove.com/projects/fnk0066/en/latest/index.html#download), 
+3. You can launch successfully from the console the script "main.py located in the folder "Code/Server" (as described at page 95 of the tutorial)
+4. Note the local address oy the RaspberryPi, <URL_RASP_PI> (e.g. 192.164.168.30, assigned in your local WiFi network)
+
+# HOW TO USE THE WebUI APP
+1. From the console, navigate to the folder "Code/Server_WebUI"
+2. Launch the script "main_web.py"
+3. On your Tablet / PC / Handy open the browser and navigate to: <URL_RASP_PI>:8080
+4. the WebUI will be displayed.
+
+# WEB-UI CONCEPT ARCHITECTURE
 The FreeKap 4WD web controller is a browser-based control panel for a Raspberry Pi 4WD robot.
 The main idea:
 
@@ -41,3 +54,18 @@ All communication between the browser and the robot happens over HTTP (GET/POST)
 |   frames          |        | - sonar, light, IR     |
 +-------------------+        | - buzzer, LEDs         |
                              +------------------------+
+
+# REMOVED FEATURES
+- UI/CAR: Control of the Leds
+- UI/CAR: Control of the Line Follower sensor
+
+# NEW FEATURES
+- UI: WebUI removes the need of a Client running on a PC
+- UI: Use of "HOLD" + direction buttons (FWRD, REAR, RIGHT, LEFT) will hold the direction command until "STOP" is pressed
+- UI: Simpler & useful telemetry data
+- CAR: Automatic speed reduction based on distance from obstacle (as measured by the sonar)
+- CAR: Hard brake with automatic buzzer beeping when distance to obstacle <30 cm
+
+
+
+
