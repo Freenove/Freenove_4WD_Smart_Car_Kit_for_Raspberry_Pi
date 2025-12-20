@@ -328,7 +328,7 @@ body {
 .drive-pad {
   display: grid;
   grid-template-areas:
-    ".       front   ."
+    ".       fwrd   ."
     "left    hold    right"
     ".       stop    ."
     ".       rear    .";
@@ -338,7 +338,7 @@ body {
   padding: 10px 4px 4px;
 }
 
-.drive-front { grid-area: front; }
+.drive-fwrd { grid-area: fwrd; }
 .drive-left  { grid-area: left; }
 .drive-right { grid-area: right; }
 .drive-rear  { grid-area: rear; }
@@ -365,7 +365,7 @@ body {
 
 /* Directional buttons */
 
-.drive-front,
+.drive-fwrd,
 .drive-left,
 .drive-right,
 .drive-rear {
@@ -608,3 +608,4 @@ button.ghost {
     gap: 6px;
   }
 }
+
