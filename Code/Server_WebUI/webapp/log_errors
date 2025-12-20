@@ -1,0 +1,21 @@
+(AICar) raspberrypi@raspberrypi5:~/Desktop/Freenove_4WD/Code/Server $ python main.py 
+QStandardPaths: wrong permissions on runtime directory /run/user/1000, 0770 instead of 0700
+[7:39:42.848910643] [6204]  INFO Camera camera_manager.cpp:326 libcamera v0.5.0+59-d83ff0a4
+[7:39:42.856793882] [6226]  INFO RPI pisp.cpp:720 libpisp version v1.2.1 981977ff21f3 29-04-2025 (14:13:50)
+[7:39:42.866081108] [6226]  INFO RPI pisp.cpp:1179 Registered camera /base/axi/pcie@1000120000/rp1/i2c@80000/ov5647@36 to CFE device /dev/media3 and ISP device /dev/media1 using PiSP variant BCM2712_C0
+[7:39:42.868995583] [6204]  INFO Camera camera.cpp:1205 configuring streams: (0) 400x300-XBGR8888 (1) 640x480-GBRG_PISP_COMP1
+[7:39:42.869160418] [6226]  INFO RPI pisp.cpp:1483 Sensor: /base/axi/pcie@1000120000/rp1/i2c@80000/ov5647@36 - Selected sensor format: 640x480-SGBRG10_1X10 - Selected CFE format: 640x480-PC1g
+[WS] Telemetry WS server thread started on port 8091
+[WS] Starting telemetry WebSocket on ws://0.0.0.0:8091/ (path ignored)
+[GUI] Telemetry WS expected on port 8091
+[GUI] Web UI server started on HTTP port 8080
+[HTTP] Serving /home/raspberrypi/Desktop/Freenove_4WD/Code/Server/webapp on http://0.0.0.0:8080/
+[TCP] Starting command server on 192.168.178.64:5000
+Server started, listening on 192.168.178.64:5000
+[TCP] Starting video server on 192.168.178.64:8000
+Server started, listening on 192.168.178.64:8000
+[TCP] Stopping TCP servers...
+Closing accept_connections...
+Server stopped.
+Closing accept_connections...
+Server stopped.
