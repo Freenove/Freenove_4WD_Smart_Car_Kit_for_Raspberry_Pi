@@ -53,5 +53,11 @@ All communication between the browser and the robot happens over HTTP (GET/POST)
 | - provides JPEG   |        | - motors, servos       |
 |   frames          |        | - sonar, light, IR     |
 +-------------------+        | - buzzer, LEDs         |
-
                              +------------------------+
+
+# NEW FEATURES
+- UI: Use of "HOLD" + direction buttons (FWRD, REAR, RIGHT, LEFT) will hold the direction command until "STOP" is pressed
+- UI: Simpler & useful telemetry data
+- CAR: Automatic speed reduction based on distance from obstacle (as measured by the sonar)
+- CAR: Hard brake with automatic buzzer beeping when distance to obstacle <30 cm
+
