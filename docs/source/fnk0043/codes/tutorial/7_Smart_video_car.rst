@@ -657,50 +657,6 @@ Following the previous step, after the installation is completed, you are now in
 
 The control way of Raspberry Pi macOS System client is same with Windows (Control).
 
-Run client in Raspberry Pi (Linux system)
-===========================================================
-
-Install Opencv library
-------------------------------------------------------------
-
-Execute the following commands in the terminal to install Opencv library:
-
-1.	Install opencv development environment:
-
-.. code-block:: console
-
-    $ sudo apt-get install -y libopencv-dev python3-opencv
-
-2.	Install some tools:
-
-.. code-block:: console
-
-    $ sudo apt-get install -y  python3-pil python3-tk
-
-Run client
-------------------------------------------------------------
-
-Enter the following commands at the terminal.
-
-1.	Use the cd command to go to the directory where Main.py is located.
-
-.. code-block:: console
-
-    $ cd ~/Freenove_4WD_Smart_Car_Kit_for_Raspberry_Pi/Code/Client
-
-2.	Run Main.py:
-
-.. code-block:: console
-
-    $ sudo python Main.py
-
-The interface is shown below:
-
-.. image:: ../_static/imgs/Chapter_7_Smart_video_car/Chapter7_37.png
-    :align: center
-
-**Please check whether the camera protective film is torn off.**
-
 Troubleshooting
 ================================================================
 
