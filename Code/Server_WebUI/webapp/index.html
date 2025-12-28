@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreeKap 4WD Controller</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div class="brand">
+      <img src="logo_Mini.png" alt="FreeKap logo" />
+      <div>
+        <h1>FreeKap 4WD</h1>
+        <p>Web controller</p>
+      </div>
+    </div>
+
+    <div class="connection-panel">
+      <div class="connection-row">
+        <label for="telemetry-url">Robot API</label>
+        <input id="telemetry-url" type="text" placeholder="http://robot-ip:8080" />
+      </div>
+      <div class="connection-row">
+        <label for="video-url">Video (optional)</label>
+        <input id="video-url" type="text" placeholder="defaults to Robot API" />
+      </div>
+      <button id="connect-btn">Connect</button>
+    </div>
+  </header>
+
+  <main class="switch-layout">
+    <!-- LEFT PAD ----------------------------------------------------------- -->
+    <section class="pad pad-left">
+      <div class="pad-top">
+        <h2 class="pad-title">Telemetry</h2>
+        <div class="telemetry-panel">
+          <div class="telemetry-row">
+            <span class="telemetry-label">Power</span>
+            <span id="power">–</span>
+          </div>
+          <div class="telemetry-row">
+            <span class="telemetry-label">Ultrasonic</span>
+            <span id="sonic">–</span>
+          </div>
+          <div class="telemetry-row">
+            <span class="telemetry-label">Light</span>
+            <span id="light">–</span>
+          </div>
+          <div class="telemetry-row">
+            <span class="telemetry-label">Status</span>
+            <span id="status">Idle</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pad-bottom">
+        <h2 class="pad-title">Drive</h2>
+        <div class="drive-pad">
+          <button class="drive-btn drive-front" data-drive="front">FWRD</button>
+          <button class="drive-btn drive-left" data-drive="left">LEFT</button>
+          <button class="drive-btn drive-right" data-drive="right">RIGHT</button>
+          <button class="drive-btn drive-rear" data-drive="rear">REAR</button>
+          <button class="drive-btn drive-hold" data-drive="hold" id="hold-btn">HOLD</button>
+          <button class="drive-btn drive-stop" data-drive="stop">STOP</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENTER VIDEO + SERVO ------------------------------------------------ -->
+    <section class="video-center card">
+      <div class="video-header">
+        <h2 class="pad-title">Video</h2>
+        <label class="inline-checkbox">
+          <input type="checkbox" id="auto-reconnect" checked />
+          Auto-reconnect
+        </label>
+      </div>
+      <div class="video-frame">
+        <img id="video-feed" alt="video feed" />
+        <div class="overlay" id="video-overlay">Waiting for stream…</div>
+      </div>
+
+      <!-- Camera servos directly under the video -->
+      <div class="video-servos">
+        <h2 class="pad-title">Camera servos</h2>
+        <div class="servo-controls">
+          <div class="slider-row">
+            <label for="servo-pan">Heading</label>
+            <input type="range" id="servo-pan" min="0" max="180" value="90" />
+            <span class="value" id="servo-pan-value">90°</span>
+          </div>
+          <div class="slider-row">
+            <label for="servo-tilt">Pitch</label>
+            <input type="range" id="servo-tilt" min="0" max="180" value="90" />
+            <span class="value" id="servo-tilt-value">90°</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT PAD ---------------------------------------------------------- -->
+    <section class="pad pad-right">
+      <div class="pad-top">
+        <h2 class="pad-title">Status</h2>
+        <div class="status-grid">
+          <div class="status-block">
+            <span class="status-label">Battery</span>
+            <span id="battery-summary" class="status-value">–</span>
+          </div>
+          <div class="status-block">
+            <span class="status-label">API</span>
+            <span id="api-status" class="badge">offline</span>
+          </div>
+          <div class="status-block">
+            <span class="status-label">Telemetry</span>
+            <span id="ws-status" class="badge">offline</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pad-middle">
+        <h2 class="pad-title">Actions</h2>
+        <div class="action-buttons">
+          <button id="buzzer-toggle">BEEP</button>
+          <button id="cmd1-btn" class="ghost">RESET<br />SERVO</button>
+          <button id="cmd2-btn" class="ghost">CMD2</button>
+        </div>
+      </div>
+
+      <!-- Right pad bottom left empty for now (future widgets) -->
+      <div class="pad-bottom"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
