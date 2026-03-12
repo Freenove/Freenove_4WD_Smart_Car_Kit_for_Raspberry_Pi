@@ -6,7 +6,6 @@ import socket
 import os
 import io
 import time
-import imghdr
 import sys
 from threading import Timer
 from threading import Thread
