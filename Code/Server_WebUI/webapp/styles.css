@@ -1,0 +1,612 @@
+:root {
+  --bg: #020617;
+  --bg-elevated: #020617;
+  --panel: #020617;
+  --panel-soft: #050b16;
+  --panel-strong: #020617;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #3b82f6;
+  --accent-soft: rgba(59, 130, 246, 0.16);
+  --danger: #ef4444;
+  --border: #1f2937;
+  --border-soft: rgba(15, 23, 42, 0.8);
+  --shadow: 0 18px 45px rgba(0, 0, 0, 0.85);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;           /* unified base size */
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, #1e293b 0, transparent 45%),
+    radial-gradient(circle at top right, #020617 0, #020617 60%),
+    #020617;
+  display: flex;
+  flex-direction: column;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Top bar                                                                    */
+/* -------------------------------------------------------------------------- */
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: rgba(9, 14, 24, 0.96);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand img {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.95),
+    0 0 0 2px rgba(37, 99, 235, 0.45);
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.brand p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.connection-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px 14px;
+}
+
+.connection-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.connection-row label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.connection-row input {
+  min-width: 210px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  background: radial-gradient(circle at top, #020617, #020617);
+  color: var(--text);
+  font-size: 13px;
+}
+
+#connect-btn {
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #f9fafb;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.7);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+#connect-btn:hover {
+  filter: brightness(1.06);
+}
+
+#connect-btn:active {
+  transform: translateY(1px);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Main layout                                                                */
+/* -------------------------------------------------------------------------- */
+
+.switch-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(240px, 1.1fr) minmax(420px, 2.3fr) minmax(260px, 1.2fr);
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-areas: "left video right";
+  gap: 18px;
+  padding: 16px 18px 18px;
+}
+
+.pad-left {
+  grid-area: left;
+}
+
+.video-center {
+  grid-area: video;
+}
+
+.pad-right {
+  grid-area: right;
+}
+
+.pad,
+.card.video-center {
+  background: radial-gradient(circle at top, #020617, #020617);
+  border-radius: 26px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow);
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pad::before,
+.card.video-center::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(148, 163, 184, 0.07), transparent 55%),
+    radial-gradient(circle at bottom, rgba(15, 23, 42, 0.6), transparent 60%);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.pad > *,
+.card.video-center > * {
+  position: relative;
+  z-index: 1;
+}
+
+.pad-title {
+  margin: 0 0 6px;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.pad-top,
+.pad-middle,
+.pad-bottom {
+  padding: 6px 4px;
+}
+
+.pad-top {
+  margin-bottom: 4px;
+}
+
+.pad-bottom {
+  margin-top: 6px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Center video                                                               */
+/* -------------------------------------------------------------------------- */
+
+.card.video-center {
+  display: flex;
+  flex-direction: column;
+}
+
+.video-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.inline-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.video-frame {
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  background: radial-gradient(circle at center, #020617, #020617);
+  overflow: hidden;
+  min-height: 50vh;
+}
+
+#video-feed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 13px;
+  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.96));
+}
+
+/* Servo section under video */
+
+.video-servos {
+  margin-top: 10px;
+}
+
+.servo-controls {
+  border-radius: 18px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  background: linear-gradient(145deg, #020617, #020617);
+  padding: 8px 10px;
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.slider-row {
+  display: grid;
+  grid-template-columns: 70px 1fr 48px;
+  gap: 8px;
+  align-items: center;
+}
+
+.slider-row label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.slider-row input[type="range"] {
+  width: 100%;
+}
+
+.slider-row .value {
+  text-align: right;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Telemetry                                                                  */
+/* -------------------------------------------------------------------------- */
+
+.telemetry-panel {
+  border-radius: 18px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  background: linear-gradient(145deg, #020617, #020617);
+  padding: 10px 11px;
+  display: grid;
+  gap: 8px;             /* more vertical spacing */
+  font-size: 13px;
+}
+
+.telemetry-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  line-height: 1.4;     /* more breathing room */
+}
+
+.telemetry-label {
+  color: var(--muted);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Drive pad – wind-rose cross                                               */
+/* -------------------------------------------------------------------------- */
+
+.drive-pad {
+  display: grid;
+  grid-template-areas:
+    ".       front   ."
+    "left    hold    right"
+    ".       stop    ."
+    ".       rear    .";
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 44px;
+  gap: 10px;
+  padding: 10px 4px 4px;
+}
+
+.drive-front { grid-area: front; }
+.drive-left  { grid-area: left; }
+.drive-right { grid-area: right; }
+.drive-rear  { grid-area: rear; }
+.drive-hold  { grid-area: hold; }
+.drive-stop  { grid-area: stop; }
+
+.drive-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(31, 41, 55, 0.95);
+  background: radial-gradient(circle at top, #020617, #020617);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.85);
+  transition:
+    background 0.12s ease,
+    transform 0.08s ease,
+    box-shadow 0.12s ease,
+    border-color 0.12s ease;
+}
+
+/* Directional buttons */
+
+.drive-front,
+.drive-left,
+.drive-right,
+.drive-rear {
+  background: radial-gradient(circle at top, #111827, #020617);
+}
+
+/* Stop / Hold emphasis */
+
+.drive-stop {
+  background: #7f1d1d;
+  border-color: rgba(248, 113, 113, 0.9);
+  color: #fee2e2;
+}
+
+.drive-stop:hover {
+  background: #991b1b;
+}
+
+.drive-hold {
+  background: #1d4ed8;
+  border-color: #60a5fa;
+  color: #e5f0ff;
+}
+
+.drive-btn:hover {
+  transform: translateY(1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.85);
+}
+
+.drive-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.9);
+}
+
+.drive-hold.active {
+  box-shadow:
+    0 0 0 1px rgba(37, 99, 235, 0.9),
+    0 0 0 4px var(--accent-soft);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Status (right pad)                                                         */
+/* -------------------------------------------------------------------------- */
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  font-size: 13px;
+}
+
+.status-block {
+  border-radius: 18px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  background: linear-gradient(145deg, #020617, #020617);
+  padding: 7px 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.status-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.status-value {
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  min-height: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.badge.success {
+  border-color: #4ade80;
+  color: #bbf7d0;
+  background: rgba(22, 163, 74, 0.25);
+}
+
+.badge.error {
+  border-color: #f97373;
+  color: #fecaca;
+  background: rgba(153, 27, 27, 0.4);
+}
+
+.badge.warn {
+  border-color: #fb923c;
+  color: #fed7aa;
+  background: rgba(180, 83, 9, 0.35);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Actions (right middle)                                                     */
+/* -------------------------------------------------------------------------- */
+
+.pad-middle {
+  margin-top: 6px;
+}
+
+/* Make control text non-selectable and discourage long-press menus */
+button,
+.drive-pad,
+.action-buttons,
+.video-servos,
+.servo-controls {
+  -webkit-user-select: none;   /* Safari / iOS */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* old IE/Edge */
+  user-select: none;           /* standard */
+  -webkit-touch-callout: none; /* iOS long-press menu */
+  touch-action: manipulation;  /* hint: it's an interactive control */
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.action-buttons button {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  background: radial-gradient(circle at top, #020617, #020617);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 70px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.action-buttons button:hover {
+  transform: translateY(1px);
+}
+
+.action-buttons button:active {
+  transform: translateY(2px);
+}
+
+.action-buttons #buzzer-toggle {
+  background: #f97316;
+  border-color: #fed7aa;
+  color: #111827;
+}
+
+button.ghost {
+  background: transparent;
+  color: var(--muted);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Responsive – tablet & mobile                                               */
+/* -------------------------------------------------------------------------- */
+
+/* Tablet / small desktop: video full width on top, pads below side-by-side */
+@media (max-width: 1080px) {
+  .switch-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      "video video"
+      "left  right";
+    gap: 14px;
+    padding: 12px 14px 14px;
+  }
+
+  .video-frame {
+    min-height: 45vh;
+  }
+}
+
+/* Phone / portrait tablet: everything stacked in one column */
+@media (max-width: 720px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 12px;
+  }
+
+  .connection-panel {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .connection-row input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .switch-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "video"
+      "left"
+      "right";
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .video-frame {
+    min-height: 38vh;
+  }
+
+  /* Bigger buttons for thumbs */
+  .drive-pad {
+    grid-auto-rows: 56px;
+    gap: 12px;
+    padding: 10px 2px 6px;
+  }
+
+  .drive-btn {
+    font-size: 15px;
+    padding-inline: 16px;
+  }
+
+  .action-buttons button {
+    font-size: 14px;
+    padding: 9px 16px;
+    min-width: 90px;
+  }
+
+  .telemetry-panel {
+    padding: 10px;
+    gap: 6px;
+  }
+}
+
+
